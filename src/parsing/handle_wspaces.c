@@ -1,5 +1,5 @@
 
-#include "../minishell.h"
+#include "../inc/minishell.h"
 
 static void	clear_next_node(t_line *current)
 {

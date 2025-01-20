@@ -1,5 +1,5 @@
 
-#include "../minishell.h"
+#include "../inc/minishell.h"
 
 // t_builtin	*init_builtins_list(void)
 // {

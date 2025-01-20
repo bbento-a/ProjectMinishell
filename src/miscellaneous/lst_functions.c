@@ -1,5 +1,5 @@
 
-#include "../minishell.h"
+#include "../inc/minishell.h"
 
 // Auxiliar func. for the lexer
 

@@ -1,5 +1,5 @@
 
-#include "../minishell.h"
+#include "../inc/minishell.h"
 
 // This will add command nodes to the list of commands
 

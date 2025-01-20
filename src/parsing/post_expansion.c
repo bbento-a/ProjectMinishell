@@ -1,5 +1,5 @@
 
-#include "../minishell.h"
+#include "../inc/minishell.h"
 
 // Creates a node with the splitted content
 

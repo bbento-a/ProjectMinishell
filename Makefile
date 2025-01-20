@@ -12,11 +12,13 @@ NAME			= minishell
 LIBFT			= ./libft/libft.a
 SRC_DIR			= src/
 OBJ_DIR			= obj/
+INC_DIR			= inc/
 
 # Compiler and Flags
 
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -g
+IFLAGS			= -I $(INC_DIR)
 RM				= rm -f
 
 # Source Files
@@ -65,24 +67,31 @@ DEPS			= ./libft/libft.a -lreadline
 all:			$(NAME)
 
 $(LIBFT):	
-				make -C ./libft
-				make bonus -C ./libft
+				@echo "Compiling libft..."
+				@make -s -C ./libft
+				@make -s bonus -C ./libft
+				@echo "	libft compiled succefully"
 				
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.c
-				mkdir -p $(@D)
-				$(CC) $(CFLAGS) -c $< -o $@
+				@mkdir -p $(@D)
+				@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
-$(NAME):		$(OBJ) $(LIBFT) $(PRINTF)
-				$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(DEPS) -o $(NAME)
+$(NAME):		$(OBJ) $(LIBFT)
+				@echo "Compiling $(NAME)..."
+				@$(CC) $(CFLAGS) $(IFLAGS) $(OBJ) $(LIBFT) $(DEPS) -o $(NAME)
+				@echo "	$(NAME) compiled succefully"
 
 
 clean:			
-				$(RM) -r $(OBJ_DIR)
-				make clean -C ./libft
+				@$(RM) -r $(OBJ_DIR)
+				@make clean -s -C ./libft
+				@echo "	$(NAME)'s objects deleted succefully"
 				
-fclean:			clean
-				$(RM) $(NAME)
-				$(RM) $(LIBFT)
+fclean:			
+				@$(RM) -r $(OBJ_DIR)
+				@make fclean -s -C ./libft
+				@$(RM) $(NAME)
+				@echo "	$(NAME)'s objects and $(NAME)'s executable deleted succefully"
 
 re:				fclean all
 

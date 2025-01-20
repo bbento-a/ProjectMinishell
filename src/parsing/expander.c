@@ -1,5 +1,5 @@
 
-#include "../minishell.h"
+#include "../inc/minishell.h"
 
 // This is where the replacement of characters happens in the string of token
 // nodes. If there is value, $<name> will be replaced by value, else if there

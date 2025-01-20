@@ -1,5 +1,5 @@
 
-#include "../minishell.h"
+#include "../inc/minishell.h"
 
 void	remove_expanded_node(t_line **head, t_line *node)
 {

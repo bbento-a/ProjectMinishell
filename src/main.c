@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -11,12 +11,13 @@ int	main(int argc, char **argv, char **envp)
 		while (1)
 		{
 			environment_signals();
-			line = readline("minishell̶̶>");
+			line = readline("minishell--> ");
 			if (check_input(line))
 				continue ;
 			add_history(line);
 			if (parsing_input(line))
 				continue ;
+			test(data()->cmds);
 			// clear_memory(data()->cmds);
 		}
 	}

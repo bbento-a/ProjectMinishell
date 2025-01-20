@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:51:29 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/01/15 17:10:40 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:42:41 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include "get_next_line_bonus.h"
-# include "../src/minishell.h"
+# include "../inc/minishell.h"
 
 //Part 1
 int		ft_isalpha(int c);

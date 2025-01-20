@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 //	TEST PHARES
 // "This is a test" to see if the 'handle quotes' is working
@@ -14,7 +14,6 @@ void	ft_printmtx(char **mtx)
 	while (mtx[i])
 	{
 		ft_printf("string %d:", i);
-		printf("%s\n", mtx[i]);
 		ft_printf("%s\n", mtx[i]);
 		i++;
 	}

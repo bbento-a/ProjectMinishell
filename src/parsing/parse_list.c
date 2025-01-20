@@ -1,5 +1,5 @@
 
-#include "../minishell.h"
+#include "../inc/minishell.h"
 
 // Checks for any syntax errors before parsing into lists and creating command
 // nodes. If there is an error, then the list won't be created in parse_list()

@@ -6,7 +6,7 @@
 #    By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/10 14:48:22 by bbento-a          #+#    #+#              #
-#    Updated: 2024/12/05 19:10:42 by bbento-a         ###   ########.fr        #
+#    Updated: 2025/01/20 18:42:45 by bbento-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = ft_isalpha.c ft_isdigit.c ft_strlcpy.c ft_isalnum.c ft_isascii.c\
 	  ft_strtrim.c ft_split.c ft_strmapi.c ft_striteri.c ft_itoa.c\
 	  ft_printf.c ft_printf_c.c ft_printf_p.c ft_printf_s.c ft_putnbr_base.c\
 	  get_next_line.c get_next_line_utils.c get_next_line_bonus.c
-#	  ft_putstr_fd.c ft_printf.c
+#	  ft_putstr_fd.c
 
 BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c\
 		ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
@@ -43,10 +43,14 @@ bonus: $(BONUS_OBJECTS)
 		@ar rcs  $(NAME) $(BONUS_OBJECTS)
 
 clean:
-	rm -f *.o
+		@rm -f *.o
+		@echo "	libft's objects deleted succefully"
 
-fclean: clean
-	rm -f $(NAME)
+fclean:
+		@rm -f *.o
+		@rm -f $(NAME)
+		@echo "	libft's objects and libft's library deleted succefully"
+
 re: fclean all
 
 .PHONY: all bonus clean fclean re

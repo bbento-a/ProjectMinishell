@@ -1,5 +1,5 @@
 
-#include "../minishell.h"
+#include "../inc/minishell.h"
 
 int	parse_line(char *line, t_line **prompt, t_command **cmds)
 {
