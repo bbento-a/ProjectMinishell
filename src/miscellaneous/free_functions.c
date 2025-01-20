@@ -51,14 +51,14 @@ void	free_builtin_list(t_builtin *builtin_list)
 	free(builtin_list);
 }
 
-int	finish_environment(void)
-{
-	// free_envp();
-	free_builtin_list(data()->builtin_list);
-	return (0);
-}
+// int	finish_environment(void)
+// {
+// 	// free_envp();
+// 	free_builtin_list(data()->builtin_list);
+// 	return (0);
+// }
 
-void	clear_memory(t_command *commands)
+void	clear_memory(t_command **commands)
 {
 	free_cmds(commands);
 }

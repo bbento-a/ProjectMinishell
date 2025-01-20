@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(line);
 			if (parsing_input(line))
 				continue ;
-			clear_memory(data()->cmds);
+			// clear_memory(data()->cmds);
 		}
 	}
 	return (0);

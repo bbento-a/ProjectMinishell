@@ -127,6 +127,6 @@ int	builtin_exit(t_command *command)
 		}
 	}
 	ft_printf("exit\n");
-	clear_memory(data()->cmds);
+	// clear_memory(data()->cmds);
 	exit(data()->exit_code);
 }

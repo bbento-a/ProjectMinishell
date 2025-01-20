@@ -45,6 +45,7 @@ SRC				=	\
 					$(MS_SRCS)miscellaneous/lst_functions.c \
 					$(MS_SRCS)miscellaneous/exit_functions.c \
 					$(MS_SRCS)miscellaneous/free_functions.c \
+					$(MS_SRCS)miscellaneous/get_env.c \
 					\
 					$(MS_SRCS)signals/child_signals.c \
 					$(MS_SRCS)signals/disable_signals.c \

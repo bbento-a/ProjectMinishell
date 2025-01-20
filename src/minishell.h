@@ -98,7 +98,6 @@ typedef struct s_minishell
 {
 	char		**env;
 	char		hld_flag; // hold flag for quotes
-	int			value_sts; // don't know if it will be needed
 	int			exit_code;
 	int			last_exit_status;
 	bool		prompt_flag; // signals flag
@@ -156,6 +155,9 @@ t_files		*make_cmd_files(t_line *bgn, t_line *last, char flg);
 
 int			builtin_exit(t_command *command);
 
+char		*get_env(char *var);
+
+
 //
 //	MISCELLANEOUS
 //
@@ -173,7 +175,7 @@ void		free_cmds(t_command **cmds);
 void		free_builtin_list(t_builtin *builtin_list);
 void		free_list(t_line *prompt);
 void		clear_linelst(t_line **lst);
-void		clear_memory(t_command *commands);
+void		clear_memory(t_command **commands);
 
 // ft_functions.c
 bool		symbol_cmp(char *sign, char c);
