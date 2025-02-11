@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mde-maga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:01:40 by mde-maga          #+#    #+#             */
-/*   Updated: 2024/08/26 13:05:45 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/10 19:00:15 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*read_line(int fd, char *buffer, char *hold)
 		hold = ft_strjoin(temp, buffer);
 		free(temp);
 		temp = NULL;
-		if (ft_strchr(buffer, '\n'))
+		if (gnl_strchr(buffer, '\n'))
 			break ;
 	}
 	return (hold);

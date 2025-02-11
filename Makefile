@@ -6,7 +6,7 @@
 #    By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/30 11:14:44 by mde-maga          #+#    #+#              #
-#    Updated: 2025/01/27 11:12:54 by mde-maga         ###   ########.fr        #
+#    Updated: 2025/02/10 19:22:31 by mde-maga         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,17 +23,20 @@ SRCS = execute/builtins/cd.c \
 		execute/executor/bin.c \
 		execute/executor/cmd.c \
 		execute/executor/start.c \
+		execute/executor/utils.c \
+		execute/executor/more_utils.c \
+		execute/executor/main.c \
 
-		
-		
 OBJS = $(SRCS:.c=.o)
 
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -Iheaders
- 
+
 LIBFT_DIR = utils/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
+# Libraries
+LIBS = -lreadline -lhistory
 
 # Reset
 Color_Off='\033[0m'       # Text Reset
@@ -117,7 +120,7 @@ HOWTO = @echo ${BIGreen}"To run the program write:"${BIWhite}"./${NAME}"${Color_
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBS) -o $(NAME)
 	$(MSG1)
 	$(HOWTO)
 
@@ -137,5 +140,5 @@ fclean: clean
 	@make fclean -C $(LIBFT_DIR)
 	$(MSG3)
 
-
 re: fclean all
+

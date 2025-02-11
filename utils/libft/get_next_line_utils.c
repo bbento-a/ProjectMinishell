@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mde-maga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 09:57:59 by mde-maga          #+#    #+#             */
-/*   Updated: 2024/09/27 16:53:15 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/10 18:59:34 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	*ft_strchr(const char *s, int i)
+char	*gnl_strchr(const char *s, int i)
 {
 	while (*s != '\0' && (unsigned char)i != *s)
 		s++;

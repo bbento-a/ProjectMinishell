@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mde-maga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:28:54 by mde-maga          #+#    #+#             */
-/*   Updated: 2024/09/17 12:58:28 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/10 19:00:30 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*read_line(int fd, char *buffer, char *hold);
 char	*protects(char *get_line);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strchr(const char *s, int i);
+char	*gnl_strchr(const char *s, int i);
 char	*gnl_strdup(const char *s);
 
 #endif

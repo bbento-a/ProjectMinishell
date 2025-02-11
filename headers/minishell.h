@@ -6,7 +6,7 @@
 /*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:18:11 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/01/27 11:27:59 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:21:22 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,21 @@ int		exec_builtin(char **args, t_mini *mini);
 char	**cmd_tab(t_token *start);
 void	exec_cmd(t_mini *mini, t_token *token);
 
+char 	*env_to_str(t_env *env);
+void free_tab(char **array);
+void free_token(t_token *token);
+int handle_error(char *path, DIR *folder, int fd);
+
+void	mini_exit(t_mini *mini, char **cmd);
+void	ft_close(int fd);
+int	has_pipe(t_token *token);
+char	*expansions(char *cmd, t_env *env, int ret);
+char	*expand_variable(char *str, t_env *env);
+
+void handle_signal(int sig);
+int main(int argc, char **argv, char **envp);
+void parse_envp(char **envp, t_mini *mini);
+t_token *token_parser(char *line);
 
 
 #endif
