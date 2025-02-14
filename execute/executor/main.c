@@ -6,19 +6,18 @@
 /*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:23:41 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/11 12:21:13 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:40:51 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 t_sig g_sig = {0}; 
-
 t_token *token_parser(char *line)
 {
     t_token *head = NULL, *current = NULL;
     char *token_str;
-    char *delim = " \t|><";  // Tokenize by spaces, tabs, pipes, and redirection
+    char *delim = " \t|><";
     char *line_copy = strdup(line);
     char *saveptr;
 
@@ -26,25 +25,33 @@ t_token *token_parser(char *line)
     while (token_str)
     {
         t_token *new_token = malloc(sizeof(t_token));
+        if (!new_token)
+            return NULL;
+
+        // Allocate a fresh copy so we don't rely on line_copy memory
         new_token->str = strdup(token_str);
-        new_token->type = CMD;  // Simplified, you can categorize token types here
+        if (!new_token->str) {
+            free(new_token);
+            break;
+        }
+
+        new_token->type = CMD;
         new_token->next = NULL;
 
-        if (!head)
-        {
+        if (!head) {
             head = new_token;
             current = head;
-        }
-        else
-        {
+        } else {
             current->next = new_token;
             current = new_token;
         }
+
         token_str = strtok_r(NULL, delim, &saveptr);
     }
-    free(line_copy);
+    free(line_copy); // Safe to free now
     return head;
 }
+
 
 void parse_envp(char **envp, t_mini *mini)
 {

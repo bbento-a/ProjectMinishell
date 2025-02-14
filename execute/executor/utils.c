@@ -6,7 +6,7 @@
 /*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:49:24 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/10 19:27:05 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:44:37 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,11 @@ char *env_to_str(t_env *env)
 
 void free_tab(char **array)
 {
-    int i = 0;
     if (!array)
         return;
-    while (array[i])
-    {
-        free(array[i]);
-        i++;
-    }
-    free(array);
+    free(array);  // Only free the array container, not the strings
 }
+
 
 void free_token(t_token *token)
 {
