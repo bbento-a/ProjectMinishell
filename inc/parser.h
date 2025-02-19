@@ -32,13 +32,12 @@ typedef struct s_line
 typedef struct s_command
 {
 	char			**args;
-	char			*path;
 
 	int				fd_in;
 	int				fd_out;
 	t_files			*files;
 
-	int				exit_status;
+//	int				exit_status;
 	pid_t			pid;
 
 	t_command		*next;

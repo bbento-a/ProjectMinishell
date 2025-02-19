@@ -57,20 +57,6 @@ static char	*get_var_name(char *str, int i)
 	return (name);
 }
 
-static char	*replace_dollar(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == 17)
-			str[i] = '$';
-		i++;
-	}
-	return (str);
-}
-
 char	*expand_var(char *str, int *i)
 {
 	char	*var_name;
@@ -96,7 +82,6 @@ char	*expand_var(char *str, int *i)
 
 // Main function that takes an expansion and replaces for
 // its (existent or non-existent) value
-// 021   17    11    DC1 (device control 1) = fk dollar flag
 
 char	*expand_token(char *str)
 {
@@ -109,14 +94,15 @@ char	*expand_token(char *str)
 		{
 			if (str[i + 1] == '?')
 				str = replace_var(str, ft_itoa(data()->exit_code), i, 1);
-			else
+			else if (ft_isalnum(str[i + 1]) || str[i + 1] == '_')
 				str = expand_var(str, &i);
+			else
+				i++;
 			if (!str[i])
 				break ;
 		}
 		else
 			i++;
 	}
-	replace_dollar(str);
 	return (str);
 }

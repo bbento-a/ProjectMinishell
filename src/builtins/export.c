@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:23:13 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/01/27 11:18:43 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:42:57 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../inc/minishell.h"
 
 static int print_error(char *arg, char *msg)
 {

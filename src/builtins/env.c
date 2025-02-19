@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:54:39 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/01/27 11:10:15 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:41:54 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../inc/minishell.h"
 
 void ms_env(t_env *env)
 {

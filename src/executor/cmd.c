@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:37:59 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/01/24 15:45:23 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:42:50 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
-
+#include "../../inc/minishell.h"
 int		is_builtin(char *command)
 {
 	if (ft_strcmp(command, "echo") == 0)

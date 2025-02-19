@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:38:32 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/01/27 11:23:38 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:43:09 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../inc/minishell.h"
 
 static int	print_error(const char *arg, const char *msg)
 {

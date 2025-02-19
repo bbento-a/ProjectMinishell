@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:23:41 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/14 12:40:51 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:43:55 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../inc/minishell.h"
 
-t_sig g_sig = {0}; 
+t_sig g_sig = {0};
 t_token *token_parser(char *line)
 {
     t_token *head = NULL, *current = NULL;

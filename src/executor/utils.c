@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:49:24 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/14 12:44:37 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:42:50 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
-
+#include "../../inc/minishell.h"
 char *env_to_str(t_env *env)
 {
     char *str;

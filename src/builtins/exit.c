@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:18:14 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/01/20 16:10:39 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:42:01 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../../headers/minishell.h"
+#include "../../inc/minishell.h"
 
 static bool is_digit(const char *s)
 {

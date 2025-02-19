@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell2.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:18:11 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/11 12:21:22 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:28:55 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef MINISHELL2_H
+# define MINISHELL2_H
 
-#ifndef PATH_MAX
-# define PATH_MAX 4096
+// # ifndef PATH_MAX
+// #  define PATH_MAX 4096
+// # endif
 
-# include "../utils/libft/libft.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <stdio.h>
@@ -104,18 +104,6 @@ typedef struct	s_mini
 
 
 
-int ms_cd(char **args, t_env *env);
-int	ms_echo(char **args);
-void ms_env(t_env *env);
-void ms_exit(t_mini *mini, char **cmd);
-void	ms_export(t_mini *mini, char **cmd);
-int	ms_pwd(void);
-void	ms_unset(t_mini *mini, char **cmd);
-char *get_env_path(t_env *env, const char *var, size_t len);
-int update_oldpwd(t_env *env);
-void ft_memdel(void **ap);
-void env_add(char *var, t_env *env);
-int is_in_env(t_env *env, const char *var);
 
 int			error_message(char *path);
 int			magic_box(char *path, char **args, t_env *env, t_mini *mini);
@@ -146,5 +134,4 @@ void parse_envp(char **envp, t_mini *mini);
 t_token *token_parser(char *line);
 
 
-#endif
 #endif

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:42:40 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/17 16:04:10 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:42:50 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
-
+#include "../../inc/minishell.h"
 char	**cmd_tab(t_token *start)
 {
 	t_token	*token;

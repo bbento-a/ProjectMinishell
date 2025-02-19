@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:09:00 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/17 16:01:05 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:42:50 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
-
+#include "../../inc/minishell.h"
 char	*expand_variable(char *str, t_env *env)
 {
 	t_env	*tmp;

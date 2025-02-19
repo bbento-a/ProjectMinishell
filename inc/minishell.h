@@ -24,6 +24,7 @@
 # include "parser.h"
 # include "executor.h"
 # include "signals.h"
+# include "minishell2.h"
 
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -184,7 +185,7 @@ bool		symbol_cmp(char *sign, char c);
 void		define_flg(char c);
 int			ft_mtxlen(char **mtx);
 void		ft_freemtx(char **mtx);
-int			ft_close(int *fd);
+// int			ft_close(int *fd);
 void		define_white_space(t_line *node, char *line, int bgn);
 t_type		define_type(t_line *node);
 int			is_builtin(char *command_name);

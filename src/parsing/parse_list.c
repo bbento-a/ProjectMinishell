@@ -55,7 +55,7 @@ static int	create_cmd_node(t_command **cmds, t_line *bgn, t_line *last)
 	node = malloc(sizeof(t_command));
 	if (!node)
 		return (display_err(NULL, NULL, "Error allocating command node", 1));
-	node->path = NULL;
+	// node->path = NULL;
 	node->args = NULL;
 	n_args = handle_node_args(bgn, last);
 	node->args = malloc(sizeof(char *) * (n_args + 1));
@@ -65,7 +65,7 @@ static int	create_cmd_node(t_command **cmds, t_line *bgn, t_line *last)
 	node->fd_in = STDIN_FILENO;
 	node->fd_out = STDOUT_FILENO;
 	node->files = make_cmd_files(bgn, last);
-	node->exit_status = -1;
+	// node->exit_status = -1;
 	node->pid = -1;
 	add_cmds_last(cmds, node);
 	return (0);
