@@ -6,7 +6,7 @@
 /*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:09:00 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/10 18:14:26 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:01:05 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	has_pipe(t_token *token)
 /* Closes a file descriptor safely */
 void	ft_close(int fd)
 {
-	if (fd >= 0)
-		close(fd);
+    if (fd >= 0 && fcntl(fd, F_GETFD) != -1)
+        close(fd);
 }
 
 /* Handles the built-in exit command */

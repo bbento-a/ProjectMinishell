@@ -6,7 +6,7 @@
 /*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:42:40 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/01/20 16:05:22 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:04:10 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	exec_cmd(t_mini *mini, t_token *token)
 	char	**cmd;
 	int		i;
 
-	if (mini->charge == 0)
-		return ;
 	cmd = cmd_tab(token);
 	i = 0;
 	while (cmd && cmd[i])
@@ -62,9 +60,9 @@ void	exec_cmd(t_mini *mini, t_token *token)
 	else if (cmd)
 		mini->ret = exec_bin(cmd, mini->env, mini);
 	free_tab(cmd);
-	ft_close(mini->pipein);
+/* 	ft_close(mini->pipein);
 	ft_close(mini->pipeout);
 	mini->pipein = -1;
-	mini->pipeout = -1;
+	mini->pipeout = -1; */
 	mini->charge = 0;
 }

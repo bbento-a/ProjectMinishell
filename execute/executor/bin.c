@@ -6,7 +6,7 @@
 /*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/10 17:51:47 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:38:47 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,33 +39,59 @@ int magic_box(char *path, char **args, t_env *env, t_mini *mini)
 {
     char **env_array;
     char *ptr;
-    int ret;
+    int ret = ERROR;  // Initialize ret with a default value
 
     if (!path || !args)
     {
         ft_putendl_fd("minishell: Invalid arguments provided to magic_box", STDERR);
         return (ERROR);
     }
+
     g_sig.pid = fork();
     if (g_sig.pid == 0)
     {
         ptr = env_to_str(env);
         if (!ptr)
             exit(ERROR);
+
         env_array = ft_split(ptr, '\n');
         free(ptr);
-        if (env_array && ft_strchr(path, '/') != NULL)
-            execve(path, args, env_array);
-        ret = error_message(path);
+
+        if (env_array)
+        {
+            if (ft_strchr(path, '/') != NULL)
+            {
+                execve(path, args, env_array);
+                // If execve fails, we will return the error from error_message
+                ret = error_message(path);
+            }
+            else
+                ret = error_message(path);
+        }
+
         free_tab(env_array);
         free_token(mini->start);
-        exit(ret);
+        exit(ret);  // Now, ret will always have a value when passed to exit()
     }
+
     waitpid(g_sig.pid, &ret, 0);
+
     if (g_sig.sigint == 1 || g_sig.sigquit == 1)
+    {
         return (g_sig.exit_status);
-    return (WIFEXITED(ret) ? WEXITSTATUS(ret) : ERROR);
+    }
+
+    if (WIFEXITED(ret))
+    {
+        return WEXITSTATUS(ret);
+    }
+    else
+    {
+        return ERROR;
+    }
 }
+
+
 
 char *path_join(const char *s1, const char *s2)
 {
