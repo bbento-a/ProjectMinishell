@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+<<<<<<< HEAD
+        "libft.h": "c",
+        "minishell.h": "c",
+        "typeinfo": "c",
+        "readline.h": "c"
+    }
+=======
+		"libft.h": "c",
+		"minishell.h": "c",
+		"typeinfo": "c",
+		"readline.h": "c",
+		"stdbool.h": "c",
+		"history.h": "c",
+		"unistd.h": "c"
+	}
+>>>>>>> main
+}
