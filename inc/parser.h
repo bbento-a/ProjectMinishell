@@ -31,18 +31,13 @@ typedef struct s_line
 
 typedef struct s_command
 {
-	char			*path;
 	char			**args;
+	char			*path;
 
 	int				fd_in;
 	int				fd_out;
-	t_files			*in_file;
-	t_files			*out_file;
+	t_files			*files;
 
-	int				pipe_fd[2];
-	bool			pipe_is_active;
-
-	int				is_builtin; //stores index in builtin array
 	int				exit_status;
 	pid_t			pid;
 
@@ -82,7 +77,7 @@ int			handle_wspaces(t_line *prompt);
 
 // parse_list.c
 void		check_token_syntax(t_line *tokens);
-t_command	*parse_list(t_line *tokens);
+int			parse_list(t_line *tokens, t_command **cmds);
 
 // handle_cmd_args.c
 int			handle_node_args(t_line *bgn, t_line *last);
@@ -90,6 +85,6 @@ void		make_cmd_args(char **args, t_line *bgn, t_line *last, int size);
 
 // handle_list_nodes.c
 void		add_cmds_last(t_command **cmds, t_command *node);
-t_files		*make_cmd_files(t_line *bgn, t_line *last, char flg);
+t_files		*make_cmd_files(t_line *bgn, t_line *last);
 
 #endif

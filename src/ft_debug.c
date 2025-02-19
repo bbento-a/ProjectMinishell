@@ -85,11 +85,8 @@ void	test(t_command *cmds)
 		ft_printf("\nArguments:\n");
 		ft_printmtx(cmds->args);
 		ft_printf("\n---------------\n");
-		ft_printf("\nIn_files:\n");
-		print_filenodes(cmds->in_file);
-		ft_printf("\n---------------\n");
-		ft_printf("\nOut_files:\n");
-		print_filenodes(cmds->out_file);
+		ft_printf("\nfiles:\n");
+		print_filenodes(cmds->files);
 		cmds = cmds->next;
 	}
 	ft_printf("\n###################\n");

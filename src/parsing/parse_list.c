@@ -1,5 +1,5 @@
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 // Checks for any syntax errors before parsing into lists and creating command
 // nodes. If there is an error, then the list won't be created in parse_list()
@@ -64,12 +64,7 @@ static int	create_cmd_node(t_command **cmds, t_line *bgn, t_line *last)
 	node->next = NULL;
 	node->fd_in = STDIN_FILENO;
 	node->fd_out = STDOUT_FILENO;
-	node->pipe_fd[PIPE_READ] = -1;
-	node->pipe_fd[PIPE_WRITE] = -1;
-	node->pipe_is_active = false;
-	node->in_file = make_cmd_files(bgn, last, 'i');
-	node->out_file = make_cmd_files(bgn, last, 'o');
-	node->is_builtin = false;
+	node->files = make_cmd_files(bgn, last);
 	node->exit_status = -1;
 	node->pid = -1;
 	add_cmds_last(cmds, node);
@@ -77,12 +72,10 @@ static int	create_cmd_node(t_command **cmds, t_line *bgn, t_line *last)
 }
 // Creates a list with nodes based on pipes in the line
 
-t_command	*create_cmd_list(t_line *tokens)
+int	create_cmd_list(t_line *tokens, t_command **cmds)
 {
-	t_command	*cmds;
 	t_line		*last_token;
 
-	cmds = NULL;
 	while (tokens)
 	{
 		last_token = tokens;
@@ -90,22 +83,21 @@ t_command	*create_cmd_list(t_line *tokens)
 		{
 			last_token = last_token->next;
 		}
-		if (create_cmd_node(&cmds, tokens, last_token))
-			return (NULL);
+		if (create_cmd_node(cmds, tokens, last_token))
+			return (1);
 		tokens = last_token->next;
 	}
-	return (cmds);
+	return (0);
 }
-// Main function of the parsing for commands lists. It will check for syntax
-// errors and if not it will proceed to creating a list of commands for the
-// executor.
+// Main function of the parsing for commands lists.
 
-t_command	*parse_list(t_line *tokens)
+int	parse_list(t_line *tokens, t_command **cmds)
 {
-	t_command	*cmds_list;
-
-	cmds_list = NULL;
-	if (!data()->error_parse)
-		cmds_list = create_cmd_list(tokens);
-	return (cmds_list);
+	if (create_cmd_list(tokens, cmds))
+	{
+		clear_linelst(&tokens);
+		return (1);
+	}
+	clear_linelst(&tokens);
+	return (0);
 }

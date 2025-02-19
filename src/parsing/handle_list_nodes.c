@@ -1,5 +1,5 @@
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 // This will add command nodes to the list of commands
 
@@ -63,7 +63,7 @@ void	add_files_to_list(t_files **lst, t_files *file)
 }
 // Loops that creates and adds exitent redirections in in/out files lists
 
-t_files	*make_cmd_files(t_line *bgn, t_line *last, char flg)
+t_files	*make_cmd_files(t_line *bgn, t_line *last)
 {
 	t_files	*files;
 	t_files	*node;
@@ -72,13 +72,7 @@ t_files	*make_cmd_files(t_line *bgn, t_line *last, char flg)
 	while (bgn != last)
 	{
 		node = NULL;
-		if (flg == 'i' && (bgn->type_n == E_REDIN || bgn->type_n == E_HERDOC))
-		{
-			node = create_file_node(bgn->next, bgn->type_n);
-			add_files_to_list(&files, node);
-		}
-		else if (flg == 'o'
-			&& (bgn->type_n == E_REDOUT || bgn->type_n == E_APPEND))
+		if (bgn->type_n < E_PIPE)
 		{
 			node = create_file_node(bgn->next, bgn->type_n);
 			add_files_to_list(&files, node);

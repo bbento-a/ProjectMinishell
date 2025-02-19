@@ -1,41 +1,45 @@
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
-int	parse_line(char *line, t_line **prompt, t_command **cmds)
+int	parse_line(char *line, t_command **cmds)
 {
-	if (syntax_checker(line, prompt))
+	t_line *prompt;
+
+	prompt = NULL;
+	if (syntax_checker(line, &prompt))
 	{
 		free(line);
 		return (1);
 	}
 	free(line);
-	if (search_expansion(prompt))
+	if (search_expansion(&prompt))
+	{
+		clear_linelst(&prompt);
 		return (1);
-	if (handle_wspaces(*prompt))
+	}
+	if (handle_wspaces(prompt))
+	{
+		clear_linelst(&prompt);
 		return (1);
-	*cmds = parse_list(*prompt);
-	if (!*cmds)
+	}
+	if (parse_list(prompt, cmds))
 		return (1);
-	clear_linelst(prompt);
 	return (0);
 }
 
 int	parsing_input(char *line)
 {
-	t_line		*prompt;
 	t_command	*cmds;
 
-	prompt = NULL;
 	cmds = NULL;
 	data()->error_parse = false;
-	if (parse_line(line, &prompt, &cmds))
+	if (parse_line(line, &cmds))
 	{
-		if (prompt)
-			clear_linelst(&prompt);
 		if (cmds)
 			free_cmds(&cmds);
 		return (1);
 	}
 	data()->cmds = cmds;
+	// clean_up(data()->cmds);
 	return (0);
 }

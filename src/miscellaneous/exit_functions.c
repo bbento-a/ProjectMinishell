@@ -1,5 +1,5 @@
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 // Prints an error message to the stderr and takes/returns its error code
 

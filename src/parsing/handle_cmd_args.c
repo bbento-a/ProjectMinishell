@@ -1,5 +1,5 @@
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 // This function returns the number of arguments that will be given
 // to a command, ignoring files names (everything that is followed

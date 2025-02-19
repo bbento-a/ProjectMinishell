@@ -1,5 +1,5 @@
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 // Creates nodes for the token list
 
@@ -125,6 +125,6 @@ int	syntax_checker(char *line, t_line **prompt)
 	}
 	check_token_syntax(*prompt);
 	if (data()->error_parse)
-		return (2);
+		return (1);
 	return (0);
 }

@@ -1,5 +1,5 @@
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 void	free_files(t_files *files)
 {
@@ -30,8 +30,7 @@ void	free_cmds(t_command **cmds)
 		tmp = (*cmds)->next;
 		if ((*cmds)->args)
 			free((*cmds)->args);
-		free_files((*cmds)->in_file);
-		free_files((*cmds)->out_file);
+		free_files((*cmds)->files);
 		free(*cmds);
 		*cmds = tmp;
 	}
