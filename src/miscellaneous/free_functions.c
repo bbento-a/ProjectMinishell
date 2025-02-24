@@ -37,6 +37,22 @@ void	free_cmds(t_command **cmds)
 	cmds = NULL;
 }
 
+void	free_array(char **mtx)
+{
+	int	i;
+
+	i = 0;
+	if (!mtx || !mtx[i])
+		return ;
+	while (mtx[i])
+	{
+		free(mtx[i]);
+		i++;
+	}
+	free(mtx);
+	mtx = NULL;
+}
+
 void	free_builtin_list(t_builtin *builtin_list)
 {
 	int	i;
@@ -57,7 +73,3 @@ void	free_builtin_list(t_builtin *builtin_list)
 // 	return (0);
 // }
 
-void	clear_memory(t_command **commands)
-{
-	free_cmds(commands);
-}

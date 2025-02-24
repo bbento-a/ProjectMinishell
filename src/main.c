@@ -18,8 +18,7 @@ int	main(int argc, char **argv, char **envp)
 			if (parsing_input(line))
 				continue ;
 			check_and_execute(data()->cmds);
-			// test(data()->cmds);
-			// clear_memory(data()->cmds);
+			clear_memory(data()->cmds);
 		}
 	}
 	return (0);

@@ -174,9 +174,12 @@ int			display_err(char *local, char *arg, char *error_msg, int err_code);
 void		free_files(t_files	*files);
 void		free_cmds(t_command **cmds);
 void		free_builtin_list(t_builtin *builtin_list);
+void		free_array(char **mtx);
 void		free_list(t_line *prompt);
 void		clear_linelst(t_line **lst);
-void		clear_memory(t_command **commands);
+void		clear_fork(char *path, char **env_array);
+void		clear_env(t_env *env);
+void		clear_memory(t_command *commands);
 
 // ft_functions.c
 bool		symbol_cmp(char *sign, char c);

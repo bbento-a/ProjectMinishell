@@ -8,7 +8,7 @@ int	check_input(char *line)
 	if (line == NULL)
 	{
 		rl_clear_history();
-		// finish_environment();
+		clear_env(data()->env);
 		ft_printf("exit\n");
 		exit(0);
 	}

@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/24 15:08:31 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:44:26 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int magic_box(char *path, t_command *cmd, t_env *env)
 	int		pid;
     int		ret = ERROR;  // Initialize ret with a default value
 
+	env_array = NULL;
     if (!path || !cmd->args)
     {
         ft_putendl_fd("minishell: Invalid arguments provided to magic_box", STDERR);
@@ -103,7 +104,6 @@ int magic_box(char *path, t_command *cmd, t_env *env)
         if (!ptr)
             exit(ERROR);
         env_array = ft_split(ptr, '\n');
-		// ft_printmtx(env_array);
         free(ptr);
 
         if (env_array)
@@ -111,20 +111,25 @@ int magic_box(char *path, t_command *cmd, t_env *env)
             if (ft_strchr(path, '/') != NULL)
             {
 				dup_fds(cmd);
-                execve(path, cmd->args, env_array);
-                // If execve fails, we will return the error from error_message
-                ret = error_message(path);
+                if (execve(path, cmd->args, env_array) != 0)
+            	{
+               		ret = error_message(path);
+					clear_fork(path, env_array);
+				}	// If execve fails, we will return the error from error_message
             }
             else
-                ret = error_message(path);
+            {
+			    ret = error_message(path);
+				clear_fork(path, env_array);
+			}
         }
-
-        free_tab(env_array);
         exit(ret);  // Now, ret will always have a value when passed to exit()
     }
 
     waitpid(pid, &ret, 0);
-
+	free(path);
+	if (env_array)
+		free_array(env_array);
     if (WIFSIGNALED(ret)) /// if the process gets terminated by a signal, it returns the value of that signal
     {
         return (WIFSIGNALED(ret));
@@ -201,15 +206,15 @@ int exec_bin(t_command *cmd, t_env *env)
         return (ERROR);
     i = 0;
     path = check_dir(bin[i], cmd->args[0]);
-    while (!path && bin[++i])
-        path = check_dir(bin[i], cmd->args[0]);
+	while (!path && bin[++i])
+		path = check_dir(bin[i], cmd->args[0]);
+	free_array(bin);
     if (path)
+		ret = magic_box(path, cmd, env);
+    else
     {
+		path = ft_strdup(cmd->args[0]);
 		ret = magic_box(path, cmd, env);
 	}
-    else
-        ret = magic_box(cmd->args[0], cmd, env);
-    free_tab(bin);
-    free(path);
     return (ret);
 }
