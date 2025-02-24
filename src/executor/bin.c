@@ -6,11 +6,12 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/24 11:42:55 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:24:50 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
 int error_message(char *path)
 {
     DIR *folder;
@@ -57,8 +58,8 @@ int magic_box(char *path, char **args, t_env *env)
         ptr = env_to_str(env);
         if (!ptr)
             exit(ERROR);
-
         env_array = ft_split(ptr, '\n');
+		// ft_printmtx(env_array);
         free(ptr);
 
         if (env_array)
@@ -123,7 +124,7 @@ char *check_dir(char *bin, char *command)
     path = NULL;
     while ((item = readdir(folder)))
     {
-        if (ft_strncmp(item->d_name, command, ft_strlen(command)) == 0)
+        if (ft_strncmp(item->d_name, command, ft_strlen(item->d_name)) == 0)
         {
             path = path_join(bin, item->d_name);
             break;
@@ -133,20 +134,24 @@ char *check_dir(char *bin, char *command)
     return (path);
 }
 
+/// Added a tmp to iterate env so the original doesn't get modified
+
 int exec_bin(char **args, t_env *env)
 {
     int i;
     char **bin;
     char *path;
     int ret;
-
+	t_env	*tmp;
+	
+	tmp = env;
     if (!args || !args[0])
         return (ERROR);
-    while (env && env->value && ft_strncmp(env->value, "PATH=", 5) != 0)
-        env = env->next;
-    if (!env || !env->value)
+    while (tmp && tmp->value && ft_strncmp(tmp->value, "PATH=", 5) != 0)
+        tmp = tmp->next;
+    if (!tmp || !tmp->value)
         return (magic_box(args[0], args, env));
-    bin = ft_split(env->value + 5, ':');
+    bin = ft_split(tmp->value + 5, ':');
     if (!bin)
         return (ERROR);
     i = 0;
@@ -154,7 +159,9 @@ int exec_bin(char **args, t_env *env)
     while (!path && bin[++i])
         path = check_dir(bin[i], args[0]);
     if (path)
-        ret = magic_box(path, args, env);
+    {
+		ret = magic_box(path, args, env);
+	}
     else
         ret = magic_box(args[0], args, env);
     free_tab(bin);
