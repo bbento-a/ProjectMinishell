@@ -6,6 +6,12 @@
 #  define PATH_MAX 4096
 # endif
 
+# include <string.h>
+# include <syscall.h>
+# include <sys/ioctl.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
+
 # include "minishell.h"
 # include "minishell2.h"
 # include "builtins.h"
@@ -14,10 +20,10 @@ int		check_and_execute(t_command *commands);
 int		check_redirections(t_command *cmds);
 
 int		is_builtin(char *command);
-int		exec_builtin(char **args, t_mini *mini);
+int		exec_builtin(char **args);
 
 char	**cmd_tab(t_token *start);
-void	exec_cmd(t_mini *mini, t_token *token);
+int		exec_cmd(t_command *commnad);
 
 char 	*env_to_str(t_env *env);
 void	free_tab(char **array);

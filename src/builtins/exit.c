@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:18:14 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/19 16:42:01 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:25:56 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static bool is_digit(const char *s)
     return true;
 }
 
-void ms_exit(t_mini *mini, char **cmd)
+int ms_exit(t_mini *mini, char **cmd)
 {
     mini->exit = 1; // Indicate that the shell should exit
     ft_putstr_fd("exit\n", STDERR);

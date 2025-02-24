@@ -11,14 +11,12 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <limits.h>
-// # include <signal.h>
 # include <fcntl.h>
-# include <string.h>
-# include <syscall.h>
-# include <sys/ioctl.h>
-# include <sys/wait.h>
-# include <sys/stat.h>
-// # include <termios.h>
+// # include <string.h>
+// # include <syscall.h>
+// # include <sys/ioctl.h>
+// # include <sys/wait.h>
+// # include <sys/stat.h>
 
 # include "../libft/libft.h"
 # include "parser.h"
@@ -100,7 +98,6 @@
 
 typedef struct s_minishell
 {
-	char		**env;
 	char		hld_flag; // hold flag for quotes
 	int			exit_code;
 	int			last_exit_status;
@@ -110,6 +107,7 @@ typedef struct s_minishell
 	t_builtin	*builtin_list;
 	t_line		*prompt;
 	t_command	*cmds;
+	t_env		*env;
 
 }	t_minishell;
 
@@ -156,7 +154,7 @@ typedef struct s_minishell
 //	EXECUTOR
 //
 
-int			builtin_exit(t_command *command);
+// int			builtin_exit(t_command *command);
 
 char		*get_env(char *var);
 
@@ -192,15 +190,6 @@ int			is_builtin(char *command_name);
 
 // lst_functions.c
 t_line		*find_lastnode(t_line *lst);
-
-// // signals.c
-// int			check_input(char *line);
-
-// // new_signals.c
-// void		environment_signals(void);
-// void		child_signals(void);
-// void		heredoc_signals(void);
-// void		disable_signals(void);
 
 // ft_debug.c
 void		ft_printmtx(char **mtx);

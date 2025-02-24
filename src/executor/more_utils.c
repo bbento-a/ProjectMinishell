@@ -6,45 +6,45 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:09:00 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/19 16:42:50 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:43:33 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-char	*expand_variable(char *str, t_env *env)
-{
-	t_env	*tmp;
-	size_t	len;
+// char	*expand_variable(char *str, t_env *env)
+// {
+// 	t_env	*tmp;
+// 	size_t	len;
 
-	if (!str || str[0] != '$' || str[1] == '\0')
-		return (str);
-	if (str[1] == '?')
-	{
-		free(str);
-		return (ft_itoa(g_sig.exit_status));
-	}
-	str++;
-	len = ft_strlen(str);
-	tmp = env;
-	while (tmp)
-	{
-		if (ft_strncmp(tmp->value, str, len) == 0 && tmp->value[len] == '=')
-		{
-			free(str - 1);
-			return (ft_strdup(tmp->value + len + 1));
-		}
-		tmp = tmp->next;
-	}
-	return (str - 1);
-}
+// 	if (!str || str[0] != '$' || str[1] == '\0')
+// 		return (str);
+// 	if (str[1] == '?')
+// 	{
+// 		free(str);
+// 		return (ft_itoa(g_sig.exit_status));
+// 	}
+// 	str++;
+// 	len = ft_strlen(str);
+// 	tmp = env;
+// 	while (tmp)
+// 	{
+// 		if (ft_strncmp(tmp->value, str, len) == 0 && tmp->value[len] == '=')
+// 		{
+// 			free(str - 1);
+// 			return (ft_strdup(tmp->value + len + 1));
+// 		}
+// 		tmp = tmp->next;
+// 	}
+// 	return (str - 1);
+// }
 
-char	*expansions(char *cmd, t_env *env, int ret)
-{
-	(void)ret;
-	if (!cmd)
-		return (NULL);
-	return (expand_variable(ft_strdup(cmd), env));
-}
+// char	*expansions(char *cmd, t_env *env, int ret)
+// {
+// 	(void)ret;
+// 	if (!cmd)
+// 		return (NULL);
+// 	return (expand_variable(ft_strdup(cmd), env));
+// }
 
 /* Checks if the token list contains a pipe (|) */
 int	has_pipe(t_token *token)

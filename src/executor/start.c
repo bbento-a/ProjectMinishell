@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:42:40 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/19 16:42:50 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:34:53 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,26 @@ char	**cmd_tab(t_token *start)
 	return (tab);
 }
 
-void	exec_cmd(t_mini *mini, t_token *token)
+/// Replacing mini struct again, also commented the first if condition
+/// because we can execute exit just like the other builtins.
+/// Removed expansions
+
+int	exec_cmd(t_command *command)
 {
 	char	**cmd;
-	int		i;
+	int		ret_val;
 
-	cmd = cmd_tab(token);
-	i = 0;
-	while (cmd && cmd[i])
-	{
-		cmd[i] = expansions(cmd[i], mini->env, mini->ret);
-		i++;
-	}
-	if (cmd && ft_strcmp(cmd[0], "exit") == 0 && has_pipe(token) == 0)
-		mini_exit(mini, cmd);
-	else if (cmd && is_builtin(cmd[0]))
-		mini->ret = exec_builtin(cmd, mini);
+	cmd = command->args;
+	// if (cmd && ft_strcmp(cmd[0], "exit") == 0 && has_pipe(token) == 0)
+	// 	mini_exit(mini, cmd);
+	if (cmd && is_builtin(cmd[0]))
+		ret_val = exec_builtin(cmd);
 	else if (cmd)
-		mini->ret = exec_bin(cmd, mini->env, mini);
+		ret_val = exec_bin(cmd, data()->env);
 	free_tab(cmd);
 /* 	ft_close(mini->pipein);
 	ft_close(mini->pipeout);
 	mini->pipein = -1;
 	mini->pipeout = -1; */
-	mini->charge = 0;
+	return (ret_val);
 }

@@ -1,5 +1,5 @@
 
-#include "../../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 long	ft_atol(char *n)
 {
@@ -108,21 +108,21 @@ int	check_exit_arg(char *str)
 	return (0);
 }
 
-int	builtin_exit(t_command *command)
+int	builtin_exit(char **args)
 {
 	long	exit_code;
 
 	exit_code = 0;
-	if (command->args[1])
+	if (args[1])
 	{
-		if (!check_exit_arg(command->args[1]))
+		if (!check_exit_arg(args[1]))
 		{
-			exit_code = ft_atol(command->args[1]);
+			exit_code = ft_atol(args[1]);
 			if (exit_code > 255)
 				data()->exit_code = exit_code % 256;
 			else
 				data()->exit_code = (int)exit_code;
-			if (command->args[2])
+			if (args[2])
 				return (display_err("exit", NULL, "too many arguments", 1));
 		}
 	}

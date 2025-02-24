@@ -6,13 +6,13 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:54:39 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/19 16:41:54 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:06:24 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void ms_env(t_env *env)
+int ms_env(t_env *env)
 {
     while (env)
     {
@@ -23,6 +23,7 @@ void ms_env(t_env *env)
         }
         env = env->next; // Move to the next node
     }
+	return (0);
 }
 
 /* t_env	*create_env_node(char *value)

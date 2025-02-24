@@ -1,18 +1,18 @@
 
 #include "../../inc/minishell.h"
 
-int	ft_close(int *fd)
-{
-	int	close_return;
+// int	ft_close(int *fd)
+// {
+// 	int	close_return;
 
-	close_return = 0;
-	if (*fd > 2)
-	{
-		close_return = close(*fd);
-		*fd = -1;
-	}
-	return (close_return);
-}
+// 	close_return = 0;
+// 	if (*fd > 2)
+// 	{
+// 		close_return = close(*fd);
+// 		*fd = -1;
+// 	}
+// 	return (close_return);
+// }
 // Compares a char c to a str of other chars
 // (if it finds c in *sign, it returns true)
 

@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:38:32 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/19 16:43:09 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:32:42 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,18 @@ static bool	is_valid_identifier(char *s)
 	return (true);
 }
 
-static void	free_node(t_mini *mini, t_env *env)
+/// Changed variables to be with the env on data
+
+static void	free_node(t_env *env)
 {
 	t_env	*tmp;
 
 	// If it's the only node in the list
-	if (mini->env == env && env->next == NULL)
+	if (data()->env == env && env->next == NULL)
 	{
-		ft_memdel((void **)&mini->env->value); // Pass the address of the pointer
-		mini->env->value = NULL;
-		mini->env->next = NULL;
+		ft_memdel((void **)&data()->env->value); // Pass the address of the pointer
+		data()->env->value = NULL;
+		data()->env->next = NULL;
 		free(env);
 		return;
 	}
@@ -56,47 +58,50 @@ static void	free_node(t_mini *mini, t_env *env)
 	ft_memdel((void **)&env->value); // Pass the address of the pointer
 	tmp = env->next;
 	free(env);
-	if (env == mini->env)
-		mini->env = tmp; // Adjust the head of the list if needed
+	if (env == data()->env)
+		data()->env = tmp; // Adjust the head of the list if needed
 }
 
+/// Changed return values
+/// According to bash, unset does not have error messages/codes
+/// (!is_valid_identifier(*cmd)) condition
 
-void	ms_unset(t_mini *mini, char **cmd)
+int	ms_unset(char **cmd)
 {
 	t_env	*env;
 	t_env	*prev;
 
 	// If no argument is passed, do nothing
 	if (!cmd[1])
-		return;
-	env = mini->env;
+		return (0);
+	env = data()->env;
 	prev = NULL;
 	// Iterate through each argument (environment variable to unset)
 	while (*++cmd)
 	{
 		if (!is_valid_identifier(*cmd)) // Ensure the variable is valid
 		{
-			print_error(*cmd, ": not a valid identifier");
-			mini->ret = 1;
+			print_error(*cmd, ": not a valid identifier"); ///
+			// mini->ret = 1; ///
 			continue;
 		}
 		// Traverse the environment linked list
 		while (env)
 		{
 			// If we find the matching variable, we delete it
-			if (ft_strcmp(env->value, *cmd) == 0)
+			if (ft_strncmp(env->value, *cmd, ft_strlen(*cmd)) == 0)
 			{
 				// If previous is null, we're deleting the first node
 				if (!prev)
 				{
-					mini->env = env->next; // Update head if it's the first node
+					data()->env = env->next; // Update head if it's the first node
 				}
 				else
 				{
 					// If not, just link previous to the next node
 					prev->next = env->next;
 				}
-				free_node(mini, env); // Free the node
+				free_node(env); // Free the node
 				break; // Stop searching as we found and deleted it
 			}
 			prev = env;
@@ -104,5 +109,5 @@ void	ms_unset(t_mini *mini, char **cmd)
 		}
 	}
 	// If no errors, set the return status to 0 (successful)
-	mini->ret = 0;
+	return (0);
 }

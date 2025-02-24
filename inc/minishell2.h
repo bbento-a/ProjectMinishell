@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:18:11 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/19 18:28:55 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:30:21 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,32 +106,32 @@ typedef struct	s_mini
 
 
 int			error_message(char *path);
-int			magic_box(char *path, char **args, t_env *env, t_mini *mini);
+int			magic_box(char *path, char **args, t_env *env);
 char		*path_join(const char *s1, const char *s2);
 char		*check_dir(char *bin, char *command);
-int			exec_bin(char **args, t_env *env, t_mini *mini);
+int			exec_bin(char **args, t_env *env);
 
-int		is_builtin(char *command);
-int		exec_builtin(char **args, t_mini *mini);
+int			is_builtin(char *command);
+int			exec_builtin(char **args);
 
-char	**cmd_tab(t_token *start);
-void	exec_cmd(t_mini *mini, t_token *token);
+char		**cmd_tab(t_token *start);
+int			exec_cmd(t_command *command);
 
-char 	*env_to_str(t_env *env);
-void free_tab(char **array);
-void free_token(t_token *token);
-int handle_error(char *path, DIR *folder, int fd);
+char		*env_to_str(t_env *env);
+void		free_tab(char **array);
+void		free_token(t_token *token);
+int			handle_error(char *path, DIR *folder, int fd);
 
-void	mini_exit(t_mini *mini, char **cmd);
-void	ft_close(int fd);
-int	has_pipe(t_token *token);
-char	*expansions(char *cmd, t_env *env, int ret);
-char	*expand_variable(char *str, t_env *env);
+void		mini_exit(t_mini *mini, char **cmd);
+void		ft_close(int fd);
+int			has_pipe(t_token *token);
+char		*expansions(char *cmd, t_env *env, int ret);
+char		*expand_variable(char *str, t_env *env);
 
-void handle_signal(int sig);
-int main(int argc, char **argv, char **envp);
-void parse_envp(char **envp, t_mini *mini);
-t_token *token_parser(char *line);
+void		handle_signal(int sig);
+int			main(int argc, char **argv, char **envp);
+t_env		*parse_envp(char **envp);
+t_token		*token_parser(char *line);
 
 
 #endif

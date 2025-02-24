@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:23:13 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/19 16:42:57 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:46:56 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,17 @@ static void	print_env(t_env *env)
 		env = env->next;
 	}
 }
+/// Changed return values
+/// mini->env is now from the data so it doesn't depend on mini structure
 
-void	ms_export(t_mini *mini, char **cmd)
+int 	ms_export(char **cmd)
 {
 	int i;
 	// If no arguments, print the sorted environment
 	if (!cmd[1])
 	{
-		print_env(mini->env);
-		return;
+		print_env(data()->env);
+		return (0);
 	}
 	// Iterate through arguments and process them
 	for (i = 1; cmd[i]; i++)
@@ -97,16 +99,12 @@ void	ms_export(t_mini *mini, char **cmd)
 		if (!is_valid_env(cmd[i])) // Check if the variable is valid
 		{
 			print_error(cmd[i], ": not a valid identifier");
-			mini->ret = 1;
-			return;
+			return (1);
 		}
 		// Add or update the environment variable
-		if (update_env(mini->env, cmd[i]) == -1)
-		{
-			mini->ret = 1;
-			return;
-		}
+		if (update_env(data()->env, cmd[i]) == -1)
+			return (1);
 	}
-	mini->ret = 0; // Set successful return status
+	return (0);
 }
 

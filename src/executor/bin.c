@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/19 16:42:50 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:42:55 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,15 @@ int error_message(char *path)
     return (ret);
 }
 
-int magic_box(char *path, char **args, t_env *env, t_mini *mini)
+///Removed mini
+///Removed the g_sig global struct for signals and changed its pid to int
+///Signals now will be caught with WIFSIGNALED()
+
+int magic_box(char *path, char **args, t_env *env)
 {
     char **env_array;
     char *ptr;
+	int	pid;
     int ret = ERROR;  // Initialize ret with a default value
 
     if (!path || !args)
@@ -46,8 +51,8 @@ int magic_box(char *path, char **args, t_env *env, t_mini *mini)
         return (ERROR);
     }
 
-    g_sig.pid = fork();
-    if (g_sig.pid == 0)
+	pid = fork();
+    if (pid == 0)
     {
         ptr = env_to_str(env);
         if (!ptr)
@@ -69,28 +74,25 @@ int magic_box(char *path, char **args, t_env *env, t_mini *mini)
         }
 
         free_tab(env_array);
-        free_token(mini->start);
         exit(ret);  // Now, ret will always have a value when passed to exit()
     }
 
-    waitpid(g_sig.pid, &ret, 0);
+    waitpid(pid, &ret, 0);
 
-    if (g_sig.sigint == 1 || g_sig.sigquit == 1)
+    if (WIFSIGNALED(ret)) /// if the process gets terminated by a signal, it returns the value of that signal
     {
-        return (g_sig.exit_status);
+        return (WIFSIGNALED(ret));
     }
 
     if (WIFEXITED(ret))
     {
-        return WEXITSTATUS(ret);
+        return (WEXITSTATUS(ret));
     }
     else
     {
         return ERROR;
     }
 }
-
-
 
 char *path_join(const char *s1, const char *s2)
 {
@@ -121,7 +123,7 @@ char *check_dir(char *bin, char *command)
     path = NULL;
     while ((item = readdir(folder)))
     {
-        if (ft_strcmp(item->d_name, command) == 0)
+        if (ft_strncmp(item->d_name, command, ft_strlen(command)) == 0)
         {
             path = path_join(bin, item->d_name);
             break;
@@ -131,7 +133,7 @@ char *check_dir(char *bin, char *command)
     return (path);
 }
 
-int exec_bin(char **args, t_env *env, t_mini *mini)
+int exec_bin(char **args, t_env *env)
 {
     int i;
     char **bin;
@@ -143,7 +145,7 @@ int exec_bin(char **args, t_env *env, t_mini *mini)
     while (env && env->value && ft_strncmp(env->value, "PATH=", 5) != 0)
         env = env->next;
     if (!env || !env->value)
-        return (magic_box(args[0], args, env, mini));
+        return (magic_box(args[0], args, env));
     bin = ft_split(env->value + 5, ':');
     if (!bin)
         return (ERROR);
@@ -152,9 +154,9 @@ int exec_bin(char **args, t_env *env, t_mini *mini)
     while (!path && bin[++i])
         path = check_dir(bin[i], args[0]);
     if (path)
-        ret = magic_box(path, args, env, mini);
+        ret = magic_box(path, args, env);
     else
-        ret = magic_box(args[0], args, env, mini);
+        ret = magic_box(args[0], args, env);
     free_tab(bin);
     free(path);
     return (ret);

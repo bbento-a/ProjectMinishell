@@ -6,11 +6,25 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:30:06 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/02/19 15:10:45 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:27:39 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+// After checking redirections, we start executing here
+
+int executor(t_command *command)
+{
+	if (is_builtin(command->args[0])) 
+	{
+		return (exec_builtin(command->args));  // Execute built-in command
+	}
+	else
+	{
+		return (exec_cmd(command));  // Execute non-built-in commands (external binaries)
+	}
+}
 
 int	check_and_execute(t_command *commands)
 {
@@ -21,6 +35,6 @@ int	check_and_execute(t_command *commands)
 		//clean_up close_fds
 		return (1);
 	}
-	
+	data()->exit_code = executor(commands);
 	return (0);
 }

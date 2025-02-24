@@ -51,6 +51,7 @@ MS_SRCS			=	$(SRC_DIR)
 
 SRC				=	\
 					$(MS_SRCS)main.c \
+					$(MS_SRCS)executor/main2.c \
 					\
 					$(MS_SRCS)parsing/parser.c \
 					$(MS_SRCS)parsing/lexer.c \
