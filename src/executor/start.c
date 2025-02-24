@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:42:40 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/24 11:34:53 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:37:13 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	exec_cmd(t_command *command)
 	if (cmd && is_builtin(cmd[0]))
 		ret_val = exec_builtin(cmd);
 	else if (cmd)
-		ret_val = exec_bin(cmd, data()->env);
+		ret_val = exec_bin(command, data()->env);
 	free_tab(cmd);
 /* 	ft_close(mini->pipein);
 	ft_close(mini->pipeout);

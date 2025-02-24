@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:18:11 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/24 11:30:21 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:39:26 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ typedef struct	s_mini
 
 
 int			error_message(char *path);
-int			magic_box(char *path, char **args, t_env *env);
+int			magic_box(char *path, t_command *cmd, t_env *env);
 char		*path_join(const char *s1, const char *s2);
 char		*check_dir(char *bin, char *command);
-int			exec_bin(char **args, t_env *env);
+int			exec_bin(t_command *cmd, t_env *env);
 
 int			is_builtin(char *command);
 int			exec_builtin(char **args);
