@@ -17,7 +17,8 @@ char	*get_env(char *var)
 			// printf("tmp - size of tmp: %ld\n", ft_strlen(envp[i]) - ft_strlen(tmp));
 			if (!tmp || ft_strlen(envp->value) - ft_strlen(tmp) != ft_strlen(var))
 				break ;
-			return (tmp++);
+			tmp++;
+			return (tmp);
 		}
 		envp = envp->next;
 	}
