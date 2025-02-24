@@ -59,19 +59,43 @@ t_env *parse_envp(char **envp)
 {
     t_env *new_env;
     t_env *tmp;
+    t_env *last_node;
     int i = 0;
 
     while (envp[i])
     {
-        new_env = malloc(sizeof(t_env));
-        new_env->value = strdup(envp[i]);
-        new_env->envp = &envp[i];
-        new_env->next = tmp;
-        tmp = new_env;
+        tmp = malloc(sizeof(t_env));
+        tmp->value = ft_strdup(envp[i]);
+        tmp->envp = &envp[i];
+		tmp->next = NULL;
+		if (i == 0)
+			new_env = tmp;
+		else
+			last_node->next = tmp;
+		last_node = tmp;
         i++;
     }
-	return (tmp);
+	// ft_print_env(new_env);
+	return (new_env);
 }
+
+// t_env *parse_envp(char **envp)
+// {
+//     t_env *new_env;
+//     t_env *tmp;
+//     int i = 0;
+
+//     while (envp[i])
+//     {
+//         new_env = malloc(sizeof(t_env));
+//         new_env->value = strdup(envp[i]);
+//         new_env->envp = &envp[i];
+//         new_env->next = tmp;
+//         tmp = new_env;
+//         i++;
+//     }
+// 	return (tmp);
+// }
 
 
 // void handle_signal(int sig)

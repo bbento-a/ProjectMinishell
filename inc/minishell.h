@@ -197,5 +197,6 @@ void		ft_printlist(t_line *lst);
 void		test(t_command *cmds);
 void		print_filenodes(t_files *files);
 void		ft_printfiles(t_files *files);
+void		ft_print_env(t_env *env);
 
 #endif

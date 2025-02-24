@@ -71,6 +71,16 @@ void	ft_printfiles(t_files *files)
 	}
 }
 
+void	ft_print_env(t_env *env)
+{
+	ft_printf("Printing Env:\n");
+	while (env)
+	{
+		ft_printf("%s\n", env->value);
+		env = env->next;
+	}
+}
+
 void	test(t_command *cmds)
 {
 	int	i;
