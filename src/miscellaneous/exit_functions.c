@@ -32,27 +32,34 @@ void	clear_env(t_env *env)
 	env = NULL;
 }
 
+void	clear_cmd_files(t_files **files)
+{
+	t_files	*tmp;
+
+	if (!files || !*files)
+		return ;
+	while (*files)
+	{
+		if ((*files)->type == E_HERDOC)
+			close((*files)->fd);
+		free((*files)->file_name);
+		(*files)->file_name = NULL;
+		tmp = *files;
+		*files = (*files)->next;
+		free(tmp);
+	}
+	files = NULL;
+}
+
 void	clear_memory(t_command *cmds)
 {
 	t_command 	*temp;
-	t_files		*tmp;
 
 	while (cmds)
 	{
 		if (cmds->args)
 			free_array(cmds->args);
-		if (cmds->files)
-		{
-			tmp = cmds->files;
-			while (tmp)
-			{
-				if (tmp->type == E_HERDOC)
-					close (tmp->fd);
-				free(tmp->file_name);
-				free(tmp);
-				tmp = tmp->next;
-			}
-		}
+		clear_cmd_files(&cmds->files);
 		temp = cmds;
 		cmds = cmds->next;
 		free(temp);

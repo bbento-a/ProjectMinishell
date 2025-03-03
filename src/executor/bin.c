@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/03 11:34:39 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:03:38 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,8 +254,10 @@ int handle_pipes(t_command *cmds, t_env *env)
                 close(pipefd[1]);
                 close(pipefd[0]);
             }
-            dup_fds(cmds); // Handle redirections
+            // dup_fds(cmds); // Handle redirections
             exec_bin(cmds, env);
+			clear_memory(data()->cmds);
+			clear_env(data()->env);
             exit(EXIT_FAILURE);
         }
         else // Parent process
