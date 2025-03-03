@@ -127,6 +127,7 @@ int	builtin_exit(char **args)
 		}
 	}
 	ft_printf("exit\n");
-	// clear_memory(data()->cmds);
+	clear_memory(data()->cmds);
+	clear_env(data()->env);
 	exit(data()->exit_code);
 }
