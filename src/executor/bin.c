@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/24 17:44:26 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/03 11:34:39 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,3 +218,65 @@ int exec_bin(t_command *cmd, t_env *env)
 	}
     return (ret);
 }
+
+int handle_pipes(t_command *cmds, t_env *env)
+{
+    int pipefd[2];
+    int prev_fd = -1;
+    int i = 0;
+    pid_t pid;
+
+    while (cmds)
+    {
+        if (cmds->next && pipe(pipefd) == -1)
+        {
+            perror("minishell: pipe error");
+            return ERROR;
+        }
+
+        pid = fork();
+        if (pid == -1)
+        {
+            fprintf(stderr, "minishell: fork error: %s\n", strerror(errno));
+            return ERROR;
+        }
+
+        if (pid == 0) // Child process
+        {
+            if (prev_fd != -1)
+            {
+                dup2(prev_fd, STDIN_FILENO);
+                close(prev_fd);
+            }
+            if (cmds->next)
+            {
+                dup2(pipefd[1], STDOUT_FILENO);
+                close(pipefd[1]);
+                close(pipefd[0]);
+            }
+            dup_fds(cmds); // Handle redirections
+            exec_bin(cmds, env);
+            exit(EXIT_FAILURE);
+        }
+        else // Parent process
+        {
+            if (prev_fd != -1)
+                close(prev_fd);
+            if (cmds->next)
+            {
+                close(pipefd[1]);
+                prev_fd = pipefd[0];
+            }
+            else
+                close(pipefd[0]);
+            cmds = cmds->next;
+            i++;
+        }
+    }
+    while (i-- > 0)
+        wait(NULL);
+    return SUCCESS;
+}
+
+// valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=all --suppressions=readline.supp --track-fds=yes ./minishell 
+

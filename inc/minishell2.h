@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell2.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:18:11 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/24 13:39:26 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/03 11:36:59 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ int			magic_box(char *path, t_command *cmd, t_env *env);
 char		*path_join(const char *s1, const char *s2);
 char		*check_dir(char *bin, char *command);
 int			exec_bin(t_command *cmd, t_env *env);
+int 		handle_pipes(t_command *cmds, t_env *env);
+
 
 int			is_builtin(char *command);
 int			exec_builtin(char **args);
