@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:09:00 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/04 16:50:03 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/04 19:27:43 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,5 @@ t_env *parse_envp(char **envp)
 		last_node = tmp;
         i++;
     }
-	// ft_print_env(new_env);
 	return (new_env);
 }

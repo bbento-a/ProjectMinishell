@@ -46,7 +46,8 @@ void	free_array(char **mtx)
 		return ;
 	while (mtx[i])
 	{
-		free(mtx[i]);
+		if (*mtx[i])
+			free(mtx[i]);
 		i++;
 	}
 	free(mtx);
