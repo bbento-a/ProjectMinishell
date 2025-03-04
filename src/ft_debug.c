@@ -14,7 +14,7 @@ void	ft_printmtx(char **mtx)
 	while (mtx[i])
 	{
 		ft_printf("string %d:", i);
-		ft_printf("%s\n", mtx[i]);
+		ft_printf("%s«\n", mtx[i]);
 		i++;
 	}
 }
