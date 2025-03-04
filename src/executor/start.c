@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:42:40 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/03 11:36:28 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:29:06 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,17 @@ int exec_cmd(t_command *command)
 
     cmd = command->args;
     if (cmd && is_builtin(cmd[0]))
-        ret_val = exec_builtin(cmd);
+    {
+		ret_val = exec_builtin(cmd);
+	}
     else if (cmd)
     {
         if (command->next) // If there's a next command, handle pipes
             ret_val = handle_pipes(command, data()->env);
         else
-            ret_val = exec_bin(command, data()->env);
+        {
+		    ret_val = exec_bin(command, data()->env);
+		}
     }
     return (ret_val);
 }

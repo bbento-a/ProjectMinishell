@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/03 17:03:38 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:29:54 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int magic_box(char *path, t_command *cmd, t_env *env)
 				dup_fds(cmd);
                 if (execve(path, cmd->args, env_array) != 0)
             	{
-               		ret = error_message(path);
+               		ret = error_message(cmd->args[0]);
 					clear_fork(path, env_array);
 				}	// If execve fails, we will return the error from error_message
             }
@@ -176,7 +176,7 @@ char *check_dir(char *bin, char *command)
     {
         if (ft_strncmp(item->d_name, command, ft_strlen(item->d_name)) == 0)
         {
-            path = path_join(bin, item->d_name);
+            path = path_join(bin, command);
             break;
         }
     }
