@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:38:32 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/24 11:32:42 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:34:16 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static int	print_error(const char *arg, const char *msg)
 
 static bool	is_valid_identifier(char *s)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	// Check that the first character is valid (letter or underscore)
 	if (!(ft_isalpha(s[i]) || s[i] == '_'))
 		return (false);
-
 	// Ensure all other characters are alphanumeric or underscores
 	while (s[++i])
 	{
@@ -47,13 +47,13 @@ static void	free_node(t_env *env)
 	// If it's the only node in the list
 	if (data()->env == env && env->next == NULL)
 	{
-		ft_memdel((void **)&data()->env->value); // Pass the address of the pointer
+		ft_memdel((void **)&data()->env->value);
+			// Pass the address of the pointer
 		data()->env->value = NULL;
 		data()->env->next = NULL;
 		free(env);
-		return;
+		return ;
 	}
-
 	// If it's not the first node, free and adjust links
 	ft_memdel((void **)&env->value); // Pass the address of the pointer
 	tmp = env->next;
@@ -83,7 +83,7 @@ int	ms_unset(char **cmd)
 		{
 			print_error(*cmd, ": not a valid identifier"); ///
 			// mini->ret = 1; ///
-			continue;
+			continue ;
 		}
 		// Traverse the environment linked list
 		while (env)
@@ -94,7 +94,8 @@ int	ms_unset(char **cmd)
 				// If previous is null, we're deleting the first node
 				if (!prev)
 				{
-					data()->env = env->next; // Update head if it's the first node
+					data()->env = env->next;
+						// Update head if it's the first node
 				}
 				else
 				{
@@ -102,7 +103,7 @@ int	ms_unset(char **cmd)
 					prev->next = env->next;
 				}
 				free_node(env); // Free the node
-				break; // Stop searching as we found and deleted it
+				break ;          // Stop searching as we found and deleted it
 			}
 			prev = env;
 			env = env->next;

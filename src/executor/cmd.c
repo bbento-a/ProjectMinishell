@@ -6,13 +6,13 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:37:59 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/04 14:31:01 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:33:21 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;
 
@@ -27,7 +27,7 @@ int		ft_strcmp(const char *s1, const char *s2)
 	}
 	return (s1[i] - s2[i]);
 }
-int		is_builtin(char *command)
+int	is_builtin(char *command)
 {
 	if (ft_strcmp(command, "echo") == 0)
 	{
@@ -49,7 +49,7 @@ int		is_builtin(char *command)
 		return (0);
 }
 
-int exec_builtin(char **args)
+int	exec_builtin(char **args)
 {
 	if (ft_strcmp(args[0], "echo") == 0)
 		return (ms_echo(args));
@@ -57,13 +57,13 @@ int exec_builtin(char **args)
 		return (ms_cd(args, data()->env));
 	else if (ft_strcmp(args[0], "pwd") == 0)
 		return (ms_pwd());
-    else if (ft_strcmp(args[0], "env") == 0)
-        return (ms_env(data()->env));
-    else if (ft_strcmp(args[0], "export") == 0)
-        return (ms_export(args));
-    else if (ft_strcmp(args[0], "unset") == 0)
-        return (ms_unset(args)); 
+	else if (ft_strcmp(args[0], "env") == 0)
+		return (ms_env(data()->env));
+	else if (ft_strcmp(args[0], "export") == 0)
+		return (ms_export(args));
+	else if (ft_strcmp(args[0], "unset") == 0)
+		return (ms_unset(args));
 	else if (ft_strcmp(args[0], "exit") == 0)
-		return(builtin_exit(args));
+		return (builtin_exit(args));
 	return (0);
 }

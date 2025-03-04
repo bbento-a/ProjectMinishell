@@ -6,11 +6,12 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:09:00 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/24 11:43:33 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:33:06 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
 // char	*expand_variable(char *str, t_env *env)
 // {
 // 	t_env	*tmp;
@@ -61,14 +62,14 @@ int	has_pipe(t_token *token)
 /* Closes a file descriptor safely */
 void	ft_close(int fd)
 {
-    if (fd >= 0 && fcntl(fd, F_GETFD) != -1)
-        close(fd);
+	if (fd >= 0 && fcntl(fd, F_GETFD) != -1)
+		close(fd);
 }
 
 /* Handles the built-in exit command */
 void	mini_exit(t_mini *mini, char **cmd)
 {
-	int	exit_code;
+	int exit_code;
 
 	exit_code = mini->ret;
 	if (cmd[1])
@@ -77,7 +78,8 @@ void	mini_exit(t_mini *mini, char **cmd)
 			exit_code = ft_atoi(cmd[1]);
 		else
 		{
-			ft_putstr_fd("minishell: exit: numeric argument required\n", STDERR);
+			ft_putstr_fd("minishell: exit: numeric argument required\n",
+				STDERR);
 			exit_code = 255;
 		}
 	}

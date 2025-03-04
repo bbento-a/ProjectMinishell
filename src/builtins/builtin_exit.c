@@ -83,8 +83,8 @@ int	check_valid_number(char *str, int spc, int j)
 
 int	check_exit_arg(char *str)
 {
-	int		spaces;
-	int		i;
+	int	spaces;
+	int	i;
 
 	i = 0;
 	spaces = 0;

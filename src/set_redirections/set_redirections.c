@@ -2,7 +2,7 @@
 
 void	heredocument_loop(int write_fd, char *limit, bool quotes)
 {
-	char *line;
+	char	*line;
 
 	line = NULL;
 	while (1)
@@ -18,8 +18,8 @@ void	heredocument_loop(int write_fd, char *limit, bool quotes)
 			display_err("\nMinishell: heredoc", NULL, "Expecting delimiter", 0);
 			break ;
 		}
-		else if (ft_strlen(limit) == ft_strlen(line) && ft_strncmp(line,
-				limit, ft_strlen(limit)) == 0 && !line[ft_strlen(limit)])
+		else if (ft_strlen(limit) == ft_strlen(line) && ft_strncmp(line, limit,
+				ft_strlen(limit)) == 0 && !line[ft_strlen(limit)])
 		{
 			free(line);
 			break ;
@@ -47,8 +47,10 @@ int	heredocument(char *limiter, bool quotes)
 	else if (pid == 0)
 	{
 		close(fd[0]);
+		heredoc_signals();
 		heredocument_loop(fd[1], limiter, quotes);
-		//clean_up(cmds);
+		clear_memory(data()->cmds);
+		clear_env(data()->env);
 		exit(0);
 	}
 	else
@@ -58,9 +60,9 @@ int	heredocument(char *limiter, bool quotes)
 		if (WIFSIGNALED(status))
 			data()->exit_code = status;
 	}
-		// child needs condition to catch signal (global)
-		// child clears all memo from cmds
-		// main waits from child (heredoc) to finish
+	// child needs condition to catch signal (global)
+	// child clears all memo from cmds
+	// main waits from child (heredoc) to finish
 	// return(the read part of the pipe);
 	return (fd[0]);
 }
@@ -79,16 +81,15 @@ int	redirection_validation(t_files *file)
 		fd = open(file->file_name, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd == -1)
 		return (display_err("minishell", file->file_name,
-					"No such file or directory", 1));
+				"No such file or directory", 1));
 	close(fd);
 	return (0);
 }
 int	heredoc_validation(t_files *file)
 {
-	int fd;
-	
-	fd = heredocument(file->file_name, file->hq_limiter);
+	int	fd;
 
+	fd = heredocument(file->file_name, file->hq_limiter);
 	if (data()->error_parse)
 	{
 		close(fd);
@@ -100,10 +101,10 @@ int	heredoc_validation(t_files *file)
 
 int	check_heredocs(t_files *files)
 {
-	t_files *tmp;
+	t_files	*tmp;
 
 	tmp = files;
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp->type == E_HERDOC && heredoc_validation(tmp))
 			return (1); // turns command invalid, it doesn't even need to build it's path
@@ -114,10 +115,10 @@ int	check_heredocs(t_files *files)
 
 int	check_command_redirections(t_files *files)
 {
-	t_files *tmp;
+	t_files	*tmp;
 
 	tmp = files;
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp->type != E_HERDOC && redirection_validation(tmp))
 			return (1); // turns command invalid, it doesn't even need to build it's path
@@ -128,7 +129,7 @@ int	check_command_redirections(t_files *files)
 
 int	check_redirections(t_command *cmds)
 {
-	t_command *cmd;
+	t_command	*cmd;
 
 	cmd = cmds;
 	while (cmd)

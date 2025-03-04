@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:54:21 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/02/24 11:30:54 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:35:00 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	nb_args(char **args)
 {
-	int		size;
+	int	size;
 
 	size = 0;
 	while (args[size])
@@ -22,11 +22,10 @@ static int	nb_args(char **args)
 	return (size);
 }
 
-
 int	ms_echo(char **args)
 {
-	int		i;
-	int		n_option;
+	int	i;
+	int	n_option;
 
 	i = 1;
 	n_option = 0;
@@ -77,4 +76,3 @@ int	main(int argc, char **argv)
 
 	return (SUCCESS);
 } */
-
