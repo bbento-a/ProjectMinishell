@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/04 15:33:58 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:56:15 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int	magic_box(char *path, t_command *cmd, t_env *env)
 			if (ft_strchr(path, '/') != NULL)
 			{
 				dup_fds(cmd);
+				// printf("executing %s\n", path);
 				if (execve(path, cmd->args, env_array) != 0)
 				{
 					ret = error_message(cmd->args[0]);
@@ -195,6 +196,11 @@ int	exec_bin(t_command *cmd, t_env *env)
 	tmp = env;
 	if (!cmd->args || !cmd->args[0])
 		return (ERROR);
+	if (cmd->args[0][0] == '.' || cmd->args[0][0] == '/')
+	{
+		path = ft_strdup(cmd->args[0]);
+		return (magic_box(path, cmd, env));
+	}	
 	while (tmp && tmp->value && ft_strncmp(tmp->value, "PATH=", 5) != 0)
 		tmp = tmp->next;
 	if (!tmp || !tmp->value)

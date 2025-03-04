@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:09:00 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/04 15:33:06 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:50:03 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,28 @@ void	mini_exit(t_mini *mini, char **cmd)
 	free_token(mini->start);
 	ft_putstr_fd("exit\n", STDOUT);
 	exit(exit_code);
+}
+
+t_env *parse_envp(char **envp)
+{
+    t_env *new_env;
+    t_env *tmp;
+    t_env *last_node;
+    int i = 0;
+
+    while (envp[i])
+    {
+        tmp = malloc(sizeof(t_env));
+        tmp->value = ft_strdup(envp[i]);
+        tmp->envp = &envp[i];
+		tmp->next = NULL;
+		if (i == 0)
+			new_env = tmp;
+		else
+			last_node->next = tmp;
+		last_node = tmp;
+        i++;
+    }
+	// ft_print_env(new_env);
+	return (new_env);
 }
