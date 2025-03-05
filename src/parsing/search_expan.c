@@ -31,11 +31,13 @@ int	expansion_analyzer(t_line **input, t_line *prompt)
 				|| prompt->content[i + 1] == '?'))
 		{
 			prompt->content = expand_token(prompt->content);
+			break ;
 		}
 		else if (prompt->content[i] == '$' && prompt->next
 			&& (prompt->next->type_q == '\"' || prompt->next->type_q == '\''))
 		{
 			prompt->content = replace_var(prompt->content, ft_strdup(""), i, 0);
+			break ;
 		}
 		if (!prompt->content[i])
 			break ;
