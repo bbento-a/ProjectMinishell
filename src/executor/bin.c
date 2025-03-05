@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/04 19:20:24 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:28:15 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ int	exec_bin(t_command *cmd, t_env *env)
 
 	tmp = env;
 	if (!cmd->args || !cmd->args[0])
-		return (ERROR);
+		return (0);
 	if (cmd->args[0][0] == '.' || cmd->args[0][0] == '/')
 	{
 		path = ft_strdup(cmd->args[0]);

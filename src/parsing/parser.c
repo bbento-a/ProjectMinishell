@@ -40,6 +40,5 @@ int	parsing_input(char *line)
 		return (1);
 	}
 	data()->cmds = cmds;
-	// clean_up(data()->cmds);
 	return (0);
 }

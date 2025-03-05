@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:37:59 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/04 15:33:21 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:27:54 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int	ft_strcmp(const char *s1, const char *s2)
 }
 int	is_builtin(char *command)
 {
+	if (!command)
+		return (0);
 	if (ft_strcmp(command, "echo") == 0)
-	{
 		return (1);
-	}
 	else if (ft_strcmp(command, "cd") == 0)
 		return (1);
 	else if (ft_strcmp(command, "pwd") == 0)
