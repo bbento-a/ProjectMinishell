@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/05 15:28:15 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:50:47 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ int	magic_box(char *path, t_command *cmd, t_env *env)
 		{
 			if (ft_strchr(path, '/') != NULL)
 			{
-				write(1, "a", 1);
 				dup_fds(cmd);
 				// printf("executing %s\n", path);
 				if (execve(path, cmd->args, env_array) != 0)
@@ -133,6 +132,7 @@ int	magic_box(char *path, t_command *cmd, t_env *env)
 		free_array(env_array);
 	if (WIFSIGNALED(ret)) /// if the process gets terminated by a signal, it returns the value of that signal
 	{
+		write(1, "\n", 1);
 		return (WIFSIGNALED(ret));
 	}
 	if (WIFEXITED(ret))
