@@ -51,6 +51,8 @@ int	heredocument(char *limiter, bool quotes)
 		heredocument_loop(fd[1], limiter, quotes);
 		clear_memory(data()->cmds);
 		clear_env(data()->env);
+		close(fd[1]);
+		// ft_close()
 		exit(0);
 	}
 	else

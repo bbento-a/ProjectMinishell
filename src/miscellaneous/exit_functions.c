@@ -40,7 +40,7 @@ void	clear_cmd_files(t_files **files)
 		return ;
 	while (*files)
 	{
-		if ((*files)->type == E_HERDOC)
+		if ((*files)->type == E_HERDOC && (*files)->fd > 2)
 			close((*files)->fd);
 		free((*files)->file_name);
 		(*files)->file_name = NULL;
