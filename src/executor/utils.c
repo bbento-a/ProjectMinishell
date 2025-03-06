@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:49:24 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/04 15:32:50 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:36:42 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,30 @@ int	handle_error(char *path, DIR *folder, int fd)
 	if (ft_strchr(path, '/') == NULL || (fd == -1 && folder == NULL))
 		return (UNKNOWN_COMMAND);
 	return (IS_DIRECTORY);
+}
+
+int	look_for_fds(t_command *cmd)
+{
+	t_files	*file;
+	t_files	*tmp;
+	int 	fd;
+
+	file = NULL;
+	tmp = cmd->files;
+	while (tmp)
+	{
+		if (tmp->type == E_REDOUT || tmp->type == E_APPEND)
+			file = tmp;
+		tmp = tmp->next;
+	}
+	if (!file)
+		return (STDOUT);
+	else
+	{
+		if (file->type == E_APPEND)
+			fd = open(file->file_name, O_RDWR | O_APPEND);
+		else
+			fd = open(file->file_name, O_RDWR);
+		return (fd);
+	}
 }

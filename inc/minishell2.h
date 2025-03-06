@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell2.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:18:11 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/03 11:36:59 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:18:06 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int 		handle_pipes(t_command *cmds, t_env *env);
 
 
 int			is_builtin(char *command);
-int			exec_builtin(char **args);
+int			exec_builtin(t_command *cmd);
 
 char		**cmd_tab(t_token *start);
 int			exec_cmd(t_command *command);

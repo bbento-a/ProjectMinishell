@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:30:06 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/04 19:25:48 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:17:02 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	executor(t_command *command)
 	disable_signals();
 	if (!command->next && is_builtin(command->args[0]))
 	{
-		return (exec_builtin(command->args)); // Execute built-in command
+		return (exec_builtin(command)); // Execute built-in command
 	}
 	else
 	{

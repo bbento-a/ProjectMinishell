@@ -20,7 +20,7 @@ int		check_and_execute(t_command *commands);
 int		check_redirections(t_command *cmds);
 
 int		is_builtin(char *command);
-int		exec_builtin(char **args);
+int		exec_builtin(t_command *cmd);
 
 char	**cmd_tab(t_token *start);
 int		exec_cmd(t_command *commnad);
@@ -33,5 +33,6 @@ int		handle_error(char *path, DIR *folder, int fd);
 void	mini_exit(t_mini *mini, char **cmd);
 void	ft_close(int fd);
 int		has_pipe(t_token *token);
+int		look_for_fds(t_command *cmd);
 
 #endif

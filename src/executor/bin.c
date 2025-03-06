@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/05 15:50:47 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:37:56 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void	dup_fds(t_command *cmd)
 			dup2(fd_in->fd, STDIN_FILENO);
 		else
 		{
-			fd = open(fd_in->file_name, STDIN_FILENO);
+			fd = open(fd_in->file_name, STDIN_FILENO); // WIP
 			dup2(fd, STDIN_FILENO);
 		}
 	}
 	if (fd_out)
 	{
-		fd = open(fd_out->file_name, STDOUT_FILENO);
+		fd = open(fd_out->file_name, STDOUT_FILENO); // WIP
 		dup2(fd, STDOUT_FILENO);
 	}
 }
@@ -260,7 +260,7 @@ int	handle_pipes(t_command *cmds, t_env *env)
 			}
 			// dup_fds(cmds); // Handle redirections
 			if (is_builtin(cmds->args[0]))
-				exec_builtin(cmds->args);
+				exec_builtin(cmds);
 			else
 				exec_bin(cmds, env);
 			clear_memory(data()->cmds);

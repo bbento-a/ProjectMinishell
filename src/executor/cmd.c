@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:37:59 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/05 15:27:54 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:16:32 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,21 @@ int	is_builtin(char *command)
 		return (0);
 }
 
-int	exec_builtin(char **args)
+int	exec_builtin(t_command *cmd)
 {
+	char **args;
+
+	args = cmd->args;
 	if (ft_strcmp(args[0], "echo") == 0)
-		return (ms_echo(args));
+		return (ms_echo(cmd, args));
 	else if (ft_strcmp(args[0], "cd") == 0)
 		return (ms_cd(args, data()->env));
 	else if (ft_strcmp(args[0], "pwd") == 0)
-		return (ms_pwd());
+		return (ms_pwd(cmd));
 	else if (ft_strcmp(args[0], "env") == 0)
-		return (ms_env(data()->env));
+		return (ms_env(cmd, data()->env));
 	else if (ft_strcmp(args[0], "export") == 0)
-		return (ms_export(args));
+		return (ms_export(cmd, args));
 	else if (ft_strcmp(args[0], "unset") == 0)
 		return (ms_unset(args));
 	else if (ft_strcmp(args[0], "exit") == 0)
