@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:11:18 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/06 17:47:45 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:38:32 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
+// update
 int	ms_pwd(t_command *cmd)
 {
 	char cwd[PATH_MAX];

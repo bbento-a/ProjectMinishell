@@ -6,7 +6,7 @@
 /*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:49:24 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/10 16:16:19 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:47:14 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,35 @@
 	free(current_lvl);
 	return (final_lvl);
 } */
-
 char	*env_to_str(t_env *env)
 {
 	char	*str;
-	/* char	*shlvl; */
 	size_t	len;
 	t_env	*tmp;
-	
 	len = 0;
 	tmp = env;
-/* 	shlvl = get_shlvl();
-	update_env(&data()->env, shlvl);
-	free(shlvl); */
-	
+
 	while (tmp)
 	{
-		len += ft_strlen(tmp->value) + 1;
+		if (tmp->value)
+			len += ft_strlen(tmp->value) + 1;
 		tmp = tmp->next;
 	}
 	str = malloc(len + 1);
 	if (!str)
-	{
 		return (NULL);
-		str[0] = '\0';
-	}
+	str[0] = '\0'; /// mudei a indent (podia nunca executar e dava o erro)
+
 	while (env)
 	{
-		ft_strlcat(str, env->value, len + 1);
+		if (env->value)
+			ft_strlcat(str, env->value, len + 1);
 		ft_strlcat(str, "\n", len + 1);
 		env = env->next;
 	}
 	return (str);
 }
+
 
 void	free_tab(char **array)
 {
