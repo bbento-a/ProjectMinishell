@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:33:04 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/04 16:50:35 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:58:12 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,28 @@ int	update_oldpwd(t_env *env)
 {
 	char	cwd[PATH_MAX];
 	char	*oldpwd;
+	char	*oldpwd_copy;
 
 	if (!getcwd(cwd, PATH_MAX))
 		return (ERROR);
 	oldpwd = ft_strjoin("OLDPWD=", cwd);
 	if (!oldpwd)
 		return (ERROR);
-	if (!is_in_env(env, oldpwd))
-		env_add(oldpwd, env);
-	ft_memdel((void **)&oldpwd);
+	// Duplicar o oldpwd antes de ir para o env
+	if (!is_in_env(env, "OLDPWD"))
+	{
+		oldpwd_copy = ft_strdup(oldpwd);
+		if (!oldpwd_copy)
+		{
+			free(oldpwd);
+			return (ERROR);
+		}
+		env_add(oldpwd_copy, env);
+	}
+	free(oldpwd);
 	return (SUCCESS);
 }
+
 
 void	ft_memdel(void **ap)
 {
