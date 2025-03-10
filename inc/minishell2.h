@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell2.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:18:11 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/06 16:18:06 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:07:39 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,6 @@ int			main(int argc, char **argv, char **envp);
 t_env		*parse_envp(char **envp);
 t_token		*token_parser(char *line);
 
+char	*get_shlvl();
 
 #endif

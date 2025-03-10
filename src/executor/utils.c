@@ -3,39 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:49:24 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/10 13:09:32 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:16:19 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*get_shlvl()
+/* char	*get_shlvl()
 {
 	char	*final_lvl;
 	char	*current_lvl;
 	int		lvl_nbr;
 
 	current_lvl = data()->shlvl;
+	printf ("Current Shell Level: %s\n", current_lvl);
 	lvl_nbr = atoi(current_lvl);
-	lvl_nbr++;
+	lvl_nbr += 1;
 	current_lvl = ft_itoa(lvl_nbr);
 	final_lvl = ft_strjoin("SHLVL=", current_lvl);
+	printf ("New shell level: %s\n", current_lvl);
 	free(current_lvl);
 	return (final_lvl);
-}
+} */
 
 char	*env_to_str(t_env *env)
 {
 	char	*str;
-	char	*shlvl;
+	/* char	*shlvl; */
 	size_t	len;
 	t_env	*tmp;
-
+	
 	len = 0;
 	tmp = env;
+/* 	shlvl = get_shlvl();
+	update_env(&data()->env, shlvl);
+	free(shlvl); */
+	
 	while (tmp)
 	{
 		len += ft_strlen(tmp->value) + 1;
@@ -43,17 +49,16 @@ char	*env_to_str(t_env *env)
 	}
 	str = malloc(len + 1);
 	if (!str)
+	{
 		return (NULL);
-	str[0] = '\0';
+		str[0] = '\0';
+	}
 	while (env)
 	{
 		ft_strlcat(str, env->value, len + 1);
 		ft_strlcat(str, "\n", len + 1);
 		env = env->next;
 	}
-	shlvl = get_shlvl();
-	update_env(&data()->env, shlvl);
-	free(shlvl);
 	return (str);
 }
 

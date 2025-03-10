@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/06 16:37:56 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:16:49 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@ int	magic_box(char *path, t_command *cmd, t_env *env)
 	char	**env_array;
 	char	*ptr;
 	int		pid;
+/* 	char *shlvl; */
+
+/* 	shlvl = get_shlvl();
+	update_env(&data()->env, shlvl);
+	free(shlvl); */
 
 	int ret = ERROR; // Initialize ret with a default value
 	env_array = NULL;

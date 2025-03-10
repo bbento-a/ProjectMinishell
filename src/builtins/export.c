@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:23:13 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/10 11:39:50 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:57:50 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	update_env(t_env **env, const char *var)
 	t_env	*tmp;
 
 	// If there is no env to begin with
-	if(!(*env))
+	if (!(*env))
 	{
 		*env = malloc(sizeof(t_env));
 		if (!*env)
@@ -64,27 +64,35 @@ int	update_env(t_env **env, const char *var)
 		(*env)->value = ft_strdup(var);
 		return (SUCCESS);
 	}
+
 	tmp = *env;
 	// Search for the variable in the environment
 	while (tmp)
 	{
-		// Check if the variable already exists, update if found
-		if (ft_strncmp(tmp->value, var, ft_strlen_equal(var)) == 0) // WIP
+		/// Check if the variable already exists
+		if (ft_strncmp(tmp->value, var, ft_strlen_equal(var)) == 0)
 		{
-			ft_memdel((void **)&tmp);
+			/// Free the old value
+			free(tmp->value);
 			tmp->value = ft_strdup(var);
+			if (!tmp->value)
+				return (-1);
 			return (SUCCESS);
 		}
 		tmp = tmp->next;
 	}
-	// If not found, add a new entry to the environment list
+
+	/// If not found, add a new entry to the environment list
 	tmp = *env;
 	while (tmp->next)
 		tmp = tmp->next;
+
 	tmp->next = malloc(sizeof(t_env));
 	if (!tmp->next)
 		return (-1);
 	tmp->next->value = ft_strdup(var);
+	if (!tmp->next->value)
+		return (-1);
 	tmp->next->next = NULL;
 	return (SUCCESS);
 }
