@@ -99,6 +99,7 @@
 typedef struct s_minishell
 {
 	char		hld_flag; // hold flag for quotes
+	char		*shlvl;
 	int			exit_code;
 	int			last_exit_status;
 	bool		prompt_flag; // signals flag

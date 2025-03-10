@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:23:13 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/06 17:44:50 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:39:50 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ size_t ft_strlen_equal(const char *str)
 	return (i);
 }
 
-static int	update_env(t_env **env, const char *var)
+int	update_env(t_env **env, const char *var)
 {
 	t_env	*tmp;
 

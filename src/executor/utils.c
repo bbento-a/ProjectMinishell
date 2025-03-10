@@ -6,15 +6,31 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:49:24 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/06 17:36:42 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/10 13:09:32 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+char	*get_shlvl()
+{
+	char	*final_lvl;
+	char	*current_lvl;
+	int		lvl_nbr;
+
+	current_lvl = data()->shlvl;
+	lvl_nbr = atoi(current_lvl);
+	lvl_nbr++;
+	current_lvl = ft_itoa(lvl_nbr);
+	final_lvl = ft_strjoin("SHLVL=", current_lvl);
+	free(current_lvl);
+	return (final_lvl);
+}
+
 char	*env_to_str(t_env *env)
 {
 	char	*str;
+	char	*shlvl;
 	size_t	len;
 	t_env	*tmp;
 
@@ -35,6 +51,9 @@ char	*env_to_str(t_env *env)
 		ft_strlcat(str, "\n", len + 1);
 		env = env->next;
 	}
+	shlvl = get_shlvl();
+	update_env(&data()->env, shlvl);
+	free(shlvl);
 	return (str);
 }
 

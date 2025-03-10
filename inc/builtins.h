@@ -17,6 +17,7 @@ int		ms_env(t_command *cmd, t_env *env);
 int		ms_pwd(t_command *cmd);
 int		ms_export(t_command *cmd, char **args);
 int		ms_unset(char **cmd);
+int		update_env(t_env **env, const char *var);
 char	*get_env_path(t_env *env, const char *var, size_t len);
 int		update_oldpwd(t_env *env);
 void	ft_memdel(void **ap);

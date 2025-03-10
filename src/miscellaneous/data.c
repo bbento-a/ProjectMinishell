@@ -38,6 +38,7 @@ void	init_data(char **envp)
 	data()->exit_code = 0;
 	data()->last_exit_status = 0;
 	data()->env = parse_envp(envp);
+	data()->shlvl = expand_token("SHLVL");
 	// data()->builtin_list = init_builtins_list();
 	// if (!data()->builtin_list)
 	// 	display_err(NULL, NULL, "Failed to allocate builtin list", 1);
