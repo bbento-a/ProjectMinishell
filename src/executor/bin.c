@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/11 17:33:21 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/11 18:14:00 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,16 @@ void	dup_fds(t_command *cmd)
 			dup2(fd_in->fd, STDIN_FILENO);
 		else
 		{
-			fd = open(fd_in->file_name, STDIN_FILENO); // WIP
+			fd = open(fd_in->file_name, O_RDONLY);
 			dup2(fd, STDIN_FILENO);
 		}
 	}
 	if (fd_out)
 	{
-		fd = open(fd_out->file_name, STDOUT_FILENO); // WIP
+		if (fd_out->type == E_REDOUT)
+			fd = open(fd_out->file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		else if (fd_out->type == E_APPEND)
+			fd = open(fd_out->file_name, O_CREAT | O_RDWR | O_APPEND, 0644);
 		dup2(fd, STDOUT_FILENO);
 	}
 }
@@ -63,10 +66,7 @@ int	error_message(char *path)
 	int	ret;
 
 	if (!path)
-	{
-		ft_putendl_fd("minishell: NULL path provided", STDERR);
-		return (ERROR);
-	}
+		return (display_err("minishell: ", NULL, "NULL path provided", 1));
 	fd = open(path, O_WRONLY);
 	folder = opendir(path);
 	ft_putstr_fd("minishell: ", STDERR);
@@ -97,11 +97,8 @@ int	magic_box(char *path, t_command *cmd, t_env *env)
 	int ret = ERROR; // Initialize ret with a default value
 	env_array = NULL;
 	if (!path || !cmd->args)
-	{
-		ft_putendl_fd("minishell: Invalid arguments provided to magic_box",
-			STDERR);
-		return (ERROR);
-	}
+		return (display_err("minishell: ", NULL, \
+			"Invalid arguments provided to magic_box", 1));
 	pid = fork();
 	if (pid == 0)
 	{
@@ -116,7 +113,6 @@ int	magic_box(char *path, t_command *cmd, t_env *env)
 			if (ft_strchr(path, '/') != NULL)
 			{
 				dup_fds(cmd);
-				// printf("executing %s\n", path);
 				if (execve(path, cmd->args, env_array) != 0)
 				{
 					ret = error_message(cmd->args[0]);
@@ -141,14 +137,11 @@ int	magic_box(char *path, t_command *cmd, t_env *env)
 		return (WIFSIGNALED(ret));
 	}
 	if (WIFEXITED(ret))
-	{
 		return (WEXITSTATUS(ret));
-	}
 	else
-	{
 		return (ERROR);
-	}
 }
+
 char	*path_join(const char *s1, const char *s2)
 {
 	char	*tmp;
@@ -202,17 +195,14 @@ int	exec_bin(t_command *cmd, t_env *env)
 	if (!cmd->args || !cmd->args[0])
 		return (0);
 	if (cmd->args[0][0] == '.' || cmd->args[0][0] == '/')
-	{
-		path = ft_strdup(cmd->args[0]);
-		return (magic_box(path, cmd, env));
-	}	
+		return (magic_box(ft_strdup(cmd->args[0]), cmd, env));
 	while (tmp && tmp->value && ft_strncmp(tmp->value, "PATH=", 5) != 0)
 		tmp = tmp->next;
 	if (!tmp || !tmp->value)
 		return (magic_box(ft_strdup(cmd->args[0]), cmd, env));
 	bin = ft_split(tmp->value + 5, ':');
 	if (!bin)
-		return (ERROR);
+		return (display_err(NULL, NULL, "Failed to create bin", 1));
 	i = 0;
 	path = check_dir(bin[i], cmd->args[0]);
 	while (!path && bin[++i])
@@ -221,10 +211,7 @@ int	exec_bin(t_command *cmd, t_env *env)
 	if (path)
 		ret = magic_box(path, cmd, env);
 	else
-	{
-		path = ft_strdup(cmd->args[0]);
-		ret = magic_box(path, cmd, env);
-	}
+		ret = magic_box(ft_strdup(cmd->args[0]), cmd, env);
 	return (ret);
 }
 
