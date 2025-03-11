@@ -22,7 +22,7 @@ char	*get_env_path(t_env *env, const char *var, size_t len);
 int		update_oldpwd(t_env **env);
 int		update_pwd(t_env **env);
 void	ft_memdel(void **ap);
-void	env_add(char *var, t_env *env);
+// void	env_add(char *var, t_env *env);
 int 	is_in_env(t_env *env, const char *var);
 
 // int		ms_exit(t_mini *mini, char **cmd);

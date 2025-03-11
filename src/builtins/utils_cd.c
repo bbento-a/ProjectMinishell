@@ -6,12 +6,39 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:33:04 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/11 15:32:33 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:03:06 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+void	env_add(char *var, t_env **env)
+{
+	t_env	*new_env;
+	t_env	*tmp;
+
+	tmp = *env;
+	while (tmp && tmp->next)
+		tmp = tmp->next;
+	new_env = malloc(sizeof(t_env));
+	if (!new_env)
+		return ; // Allocation failed
+	new_env->value = ft_strdup(var); // Assuming ft_strdup is your custom strdup
+	if (!new_env->value)
+	{
+		free(new_env); // If strdup fails, free the new env node
+		return ;
+	}
+	if (!env)
+		env = &new_env;
+	else
+	{
+		tmp->next = new_env;
+		new_env->next = NULL;
+	}
+	// new_env->next = env;
+	// env = new_env; // Add the new node at the front of the list
+}
 char	*get_env_path(t_env *env, const char *var, size_t len)
 {
 	while (env)
@@ -46,7 +73,8 @@ int	update_pwd(t_env **env)
 		tmp = tmp->next;
 	}
 	pwd = ft_strjoin("PWD=", cwd);
-	env_add(pwd, *env);
+	env_add(pwd, env);
+	free(pwd);
 	return (SUCCESS);
 }
 
@@ -73,7 +101,8 @@ int	update_oldpwd(t_env **env)
 		tmp = tmp->next;
 	}
 	oldpwd = ft_strjoin("OLDPWD=", cwd);
-	env_add(oldpwd, *env);
+	env_add(oldpwd, env);
+	free(oldpwd);
 	return (SUCCESS);
 }
 
@@ -96,21 +125,4 @@ int	is_in_env(t_env *env, const char *var)
 		env = env->next;
 	}
 	return (0); // Variable not found in the environment
-}
-
-void	env_add(char *var, t_env *env)
-{
-	t_env	*new_env;
-
-	new_env = malloc(sizeof(t_env));
-	if (!new_env)
-		return ; // Allocation failed
-	new_env->value = ft_strdup(var); // Assuming ft_strdup is your custom strdup
-	if (!new_env->value)
-	{
-		free(new_env); // If strdup fails, free the new env node
-		return ;
-	}
-	new_env->next = env;
-	env = new_env; // Add the new node at the front of the list
 }
