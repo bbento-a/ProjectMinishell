@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:11:18 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/10 16:38:32 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:39:24 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ int	ms_pwd(t_command *cmd)
 		return (SUCCESS);           // Return success code
 	}
 	else
-	{
-		ft_putstr_fd("Error: Unable to get current working directory\n",
-			STDERR);
-		return (ERROR); // Return error code
-	}
+		return (display_err("minishell: pwd:", NULL, \
+			"Unable to get current working directory", 1));
 }

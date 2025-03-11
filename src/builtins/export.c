@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:23:13 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/10 15:57:50 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:36:13 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static int	print_error(char *arg, char *msg)
+static int	print_error(char *arg)
 {
-	ft_putstr_fd("export: not a valid identifier: ", STDERR);
+	ft_putstr_fd("export: ", STDERR);
 	ft_putstr_fd(arg, STDERR);
-	ft_putstr_fd(msg, STDERR);
+	ft_putstr_fd(": invalid name to export", STDERR);
 	ft_putstr_fd("\n", STDERR);
+	data()->exit_code = 1;
 	return (ERROR);
 }
 
@@ -59,7 +60,7 @@ int	update_env(t_env **env, const char *var)
 	{
 		*env = malloc(sizeof(t_env));
 		if (!*env)
-			return (-1);
+			return (display_err(NULL, NULL, "Failed to allocate memory", -1));
 		(*env)->next = NULL;
 		(*env)->value = ft_strdup(var);
 		return (SUCCESS);
@@ -76,7 +77,7 @@ int	update_env(t_env **env, const char *var)
 			free(tmp->value);
 			tmp->value = ft_strdup(var);
 			if (!tmp->value)
-				return (-1);
+				return (display_err(NULL, NULL, "Failed to allocate memory", -1));
 			return (SUCCESS);
 		}
 		tmp = tmp->next;
@@ -89,10 +90,8 @@ int	update_env(t_env **env, const char *var)
 
 	tmp->next = malloc(sizeof(t_env));
 	if (!tmp->next)
-		return (-1);
+		return (display_err(NULL, NULL, "Failed to allocate memory", -1));
 	tmp->next->value = ft_strdup(var);
-	if (!tmp->next->value)
-		return (-1);
 	tmp->next->next = NULL;
 	return (SUCCESS);
 }
@@ -117,6 +116,7 @@ static void	print_env(t_command *cmd, t_env *env)
 		env = env->next;
 	}
 }
+
 /// Changed return values
 /// mini->env is now from the data so it doesn't depend on mini structure
 
@@ -134,14 +134,15 @@ int	ms_export(t_command *cmd, char **args)
 	while (args[i])
 	{
 		if (!is_valid_env(args[i])) // Check if the variable is valid
+			print_error(args[i]);
+		else // Add or update the environment variable
 		{
-			print_error(args[i], ": not a valid identifier");
-			return (1);
+			if (update_env(&data()->env, args[i]) == -1)
+				return (1);
 		}
-		// Add or update the environment variable
-		if (update_env(&data()->env, args[i]) == -1)
-			return (1);
 		i++;
 	}
+	if (data()->exit_code != 0)
+		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:38:32 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/04 15:34:16 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:17:06 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ int	ms_unset(char **cmd)
 	// Iterate through each argument (environment variable to unset)
 	while (*++cmd)
 	{
-		if (!is_valid_identifier(*cmd)) // Ensure the variable is valid
-		{
-			print_error(*cmd, ": not a valid identifier"); ///
-			// mini->ret = 1; ///
-			continue ;
-		}
+		// if (!is_valid_identifier(*cmd)) // Ensure the variable is valid
+		// {
+		// 	print_error(*cmd, ": not a valid identifier"); ///
+		// 	// mini->ret = 1; ///
+		// 	continue ;
+		// }
 		// Traverse the environment linked list
 		while (env)
 		{

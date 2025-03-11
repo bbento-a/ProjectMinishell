@@ -9,8 +9,7 @@ int	display_err(char *local, char *arg, char *error_msg, int err_code)
 		printf("%s: ", local);
 	if (arg)
 		printf("%s: ", arg);
-	printf("%s", error_msg);
-	printf("\n");
+	ft_putendl_fd(error_msg, 2);
 	data()->exit_code = err_code;
 	if (err_code < 0)
 		data()->exit_code = 1;

@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:27:20 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/11 15:24:47 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:27:48 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,12 @@ static int	go_to_path(int option, t_env *env)
 	if (option == 0) // Go to HOME
 	{
 		if (!(env_path = get_env_path(env, "HOME=", 5)))
-			return (ft_putendl_fd("minishell: cd: HOME not set", STDERR),
-				ERROR);
+			return (display_err("minishell: cd:", NULL, "HOME not set", 1));
 	}
 	else if (option == 1) // Go to OLDPWD
 	{
 		if (!(env_path = get_env_path(env, "OLDPWD=", 7)))
-			return (ft_putendl_fd("minishell: cd: OLDPWD not set", STDERR),
-				ERROR);
+			return (display_err("minishell: cd:", NULL, "OLDPWD not set", 1));
 		ft_putendl_fd(env_path, STDOUT); // Print OLDPWD path
 	}
 	update_oldpwd(&data()->env);

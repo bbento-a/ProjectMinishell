@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/10 16:16:49 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:33:21 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,16 +240,10 @@ int	handle_pipes(t_command *cmds, t_env *env)
 	while (cmds)
 	{
 		if (cmds->next && pipe(pipefd) == -1)
-		{
-			perror("minishell: pipe error");
-			return (ERROR);
-		}
+			return (display_err(NULL, NULL, "Failed to open pipe", 1));
 		pid = fork();
 		if (pid == -1)
-		{
-			fprintf(stderr, "minishell: fork error: %s\n", strerror(errno));
-			return (ERROR);
-		}
+			return (display_err(NULL, NULL, "Failed to fork process", 1));
 		if (pid == 0) // Child process
 		{
 			if (prev_fd != -1)
@@ -263,7 +257,6 @@ int	handle_pipes(t_command *cmds, t_env *env)
 				close(pipefd[1]);
 				close(pipefd[0]);
 			}
-			// dup_fds(cmds); // Handle redirections
 			if (is_builtin(cmds->args[0]))
 				exec_builtin(cmds);
 			else
