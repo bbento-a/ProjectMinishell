@@ -6,37 +6,37 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:38:32 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/11 17:17:06 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:38:27 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static int	print_error(const char *arg, const char *msg)
-{
-	ft_putstr_fd("unset: not a valid identifier: ", STDERR);
-	ft_putstr_fd((char *)arg, STDERR);
-	ft_putstr_fd((char *)msg, STDERR);
-	ft_putstr_fd("\n", STDERR);
-	return (ERROR);
-}
+// static int	print_error(const char *arg, const char *msg)
+// {
+// 	ft_putstr_fd("unset: not a valid identifier: ", STDERR);
+// 	ft_putstr_fd((char *)arg, STDERR);
+// 	ft_putstr_fd((char *)msg, STDERR);
+// 	ft_putstr_fd("\n", STDERR);
+// 	return (ERROR);
+// }
 
-static bool	is_valid_identifier(char *s)
-{
-	int	i;
+// static bool	is_valid_identifier(char *s)
+// {
+// 	int	i;
 
-	i = 0;
-	// Check that the first character is valid (letter or underscore)
-	if (!(ft_isalpha(s[i]) || s[i] == '_'))
-		return (false);
-	// Ensure all other characters are alphanumeric or underscores
-	while (s[++i])
-	{
-		if (!(ft_isalnum(s[i]) || s[i] == '_'))
-			return (false);
-	}
-	return (true);
-}
+// 	i = 0;
+// 	// Check that the first character is valid (letter or underscore)
+// 	if (!(ft_isalpha(s[i]) || s[i] == '_'))
+// 		return (false);
+// 	// Ensure all other characters are alphanumeric or underscores
+// 	while (s[++i])
+// 	{
+// 		if (!(ft_isalnum(s[i]) || s[i] == '_'))
+// 			return (false);
+// 	}
+// 	return (true);
+// }
 
 /// Changed variables to be with the env on data
 
