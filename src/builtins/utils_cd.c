@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:33:04 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/10 16:58:12 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:32:33 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,57 @@ char	*get_env_path(t_env *env, const char *var, size_t len)
 	return (NULL);
 }
 
-int	update_oldpwd(t_env *env)
+// Updates "PWD" env variable
+
+int	update_pwd(t_env **env)
+{
+	char	cwd[PATH_MAX];
+	char	*pwd;
+	t_env	*tmp;
+
+	tmp = *env;
+	if (!getcwd(cwd, PATH_MAX))
+		return (ERROR);
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->value, "PWD", 3) == 0)
+		{
+			pwd = ft_strjoin("PWD=", cwd);
+			free(tmp->value);
+			tmp->value = pwd;
+			return (SUCCESS);
+		}
+		tmp = tmp->next;
+	}
+	pwd = ft_strjoin("PWD=", cwd);
+	env_add(pwd, *env);
+	return (SUCCESS);
+}
+
+// Updates "OLDPWD" env variable
+
+int	update_oldpwd(t_env **env)
 {
 	char	cwd[PATH_MAX];
 	char	*oldpwd;
-	char	*oldpwd_copy;
+	t_env	*tmp;
 
 	if (!getcwd(cwd, PATH_MAX))
 		return (ERROR);
-	oldpwd = ft_strjoin("OLDPWD=", cwd);
-	if (!oldpwd)
-		return (ERROR);
-	// Duplicar o oldpwd antes de ir para o env
-	if (!is_in_env(env, "OLDPWD"))
+	tmp = *env;
+	while (tmp) // iterates for env looking for OLDPWD
 	{
-		oldpwd_copy = ft_strdup(oldpwd);
-		if (!oldpwd_copy)
+		if (ft_strncmp(tmp->value, "OLDPWD", 6) == 0)
 		{
-			free(oldpwd);
-			return (ERROR);
+			oldpwd = ft_strjoin("OLDPWD=", cwd);
+			free(tmp->value);
+			tmp->value = oldpwd;
+			return (SUCCESS);
 		}
-		env_add(oldpwd_copy, env);
+		tmp = tmp->next;
 	}
-	free(oldpwd);
+	oldpwd = ft_strjoin("OLDPWD=", cwd);
+	env_add(oldpwd, *env);
 	return (SUCCESS);
 }
 
