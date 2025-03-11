@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/11 18:14:00 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/11 19:04:29 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,7 @@ int	handle_pipes(t_command *cmds, t_env *env)
 	int		prev_fd;
 	int		i;
 	pid_t	pid;
+	int status;
 
 	prev_fd = -1;
 	i = 0;
@@ -245,12 +246,12 @@ int	handle_pipes(t_command *cmds, t_env *env)
 				close(pipefd[0]);
 			}
 			if (is_builtin(cmds->args[0]))
-				exec_builtin(cmds);
+				status = exec_builtin(cmds);
 			else
-				exec_bin(cmds, env);
+				status = exec_bin(cmds, env);
 			clear_memory(data()->cmds);
 			clear_env(data()->env);
-			exit(EXIT_FAILURE);
+			exit(status);
 		}
 		else // Parent process
 		{
@@ -267,9 +268,10 @@ int	handle_pipes(t_command *cmds, t_env *env)
 			i++;
 		}
 	}
-	while (i-- > 0)
+	waitpid(pid, &status, 0);
+	while (--i > 0)
 		wait(NULL);
-	return (SUCCESS);
+	return (status);
 }
 
 // valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=all --suppressions=readline.supp --track-fds=yes ./minishell

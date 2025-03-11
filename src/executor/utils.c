@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:49:24 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/10 16:47:14 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/11 18:58:31 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ void	free_token(t_token *token)
 int	handle_error(char *path, DIR *folder, int fd)
 {
 	if (ft_strchr(path, '/') == NULL)
-		ft_putendl_fd(": command not found", STDERR);
+		ft_putendl_fd(": Command not found", STDERR);
 	else if (fd == -1 && folder == NULL)
 		ft_putendl_fd(": No such file or directory", STDERR);
 	else if (fd == -1 && folder != NULL)
-		ft_putendl_fd(": is a directory", STDERR);
+		ft_putendl_fd(": Is a directory", STDERR);
 	else if (fd != -1 && folder == NULL)
 		ft_putendl_fd(": Permission denied", STDERR);
 	if (ft_strchr(path, '/') == NULL || (fd == -1 && folder == NULL))
