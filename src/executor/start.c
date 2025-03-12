@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:42:40 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/04 19:18:37 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/12 21:09:08 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ int	exec_cmd(t_command *command)
 	int ret_val;
 
 	cmd = command->args;
-	// if (cmd && is_builtin(cmd[0]))
-	// {
-	// 	ret_val = exec_builtin(cmd);
-	// }
 	if (cmd)
 	{
 		if (command->next) // If there's a next command, handle pipes

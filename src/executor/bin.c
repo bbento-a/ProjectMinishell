@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/11 19:04:29 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/12 21:23:20 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int	magic_box(char *path, t_command *cmd, t_env *env)
 	if (WIFSIGNALED(ret)) /// if the process gets terminated by a signal, it returns the value of that signal
 	{
 		write(1, "\n", 1);
-		return (WIFSIGNALED(ret));
+		return (WIFEXITED(ret));
 	}
 	if (WIFEXITED(ret))
 		return (WEXITSTATUS(ret));

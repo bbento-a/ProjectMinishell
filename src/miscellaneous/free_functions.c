@@ -42,7 +42,7 @@ void	free_array(char **mtx)
 	int	i;
 
 	i = 0;
-	if (!mtx)
+	if (!mtx || !mtx[0])
 		return ;
 	while (mtx[i])
 	{

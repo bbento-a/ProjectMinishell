@@ -143,8 +143,13 @@ int	check_redirections(t_command *cmds)
 	cmd = cmds;
 	while (cmd)
 	{
-		check_command_redirections(cmd->files);
+		if (check_command_redirections(cmd->files))
+		{
+			free_array(cmds->args);
+			(cmds->args) = NULL;
+		}
 		cmd = cmd->next;
 	}
+	// printf("exit code: %d\n", data()->exit_code);
 	return (0);
 }

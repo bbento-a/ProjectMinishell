@@ -8,6 +8,7 @@ int	parse_line(char *line, t_command **cmds)
 	prompt = NULL;
 	if (syntax_checker(line, &prompt))
 	{
+		clear_linelst(&prompt);
 		free(line);
 		return (1);
 	}
