@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:42:40 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/13 12:34:56 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:49:51 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**cmd_tab(t_token *start)
 		token = token->next;
 		i++;
 	}
-	if (!(tab = malloc(sizeof(char *) * i)))
+	if (!(tab = my_malloc(sizeof(char *) * i)))
 		return (NULL);
 	token = start->next;
 	tab[0] = start->str;

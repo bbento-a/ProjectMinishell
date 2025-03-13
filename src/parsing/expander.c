@@ -47,7 +47,7 @@ static char	*get_var_name(char *str, int i)
 		len++;
 		i++;
 	}
-	name = malloc(sizeof(char) * len + 1);
+	name = my_malloc(sizeof(char) * len + 1);
 	if (!name)
 	{
 		display_err(NULL, NULL, "Error while allocating expansion name", 2);

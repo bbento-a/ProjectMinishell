@@ -6,7 +6,6 @@ void	heredoc_handler(int sig)
 	write(STDIN_FILENO, "\n", 1);
 	close(STDIN_FILENO);
 	data()->exit_code = 128 + sig;
-	data()->error_parse = true;
 }
 
 void	heredoc_signals(void)

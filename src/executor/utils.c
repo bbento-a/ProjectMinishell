@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:49:24 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/11 18:58:31 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:49:36 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*env_to_str(t_env *env)
 			len += ft_strlen(tmp->value) + 1;
 		tmp = tmp->next;
 	}
-	str = malloc(len + 1);
+	str = my_malloc(len + 1);
 	if (!str)
 		return (NULL);
 	str[0] = '\0'; /// mudei a indent (podia nunca executar e dava o erro)

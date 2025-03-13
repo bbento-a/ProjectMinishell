@@ -8,7 +8,7 @@ static int	create_node(t_line **prompt, char *line, int bgn, int len)
 	t_line	*new_node;
 	t_line	*last_node;
 
-	new_node = malloc(sizeof(t_line));
+	new_node = my_malloc(sizeof(t_line));
 	if (!new_node)
 		return (display_err(NULL, NULL, "Error allocating new node", 1));
 	new_node->content = ft_substr(line, bgn, len);

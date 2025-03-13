@@ -192,6 +192,7 @@ void		ft_freemtx(char **mtx);
 void		define_white_space(t_line *node, char *line, int bgn);
 t_type		define_type(t_line *node);
 int			is_builtin(char *command_name);
+void		*my_malloc(size_t size);
 
 // lst_functions.c
 t_line		*find_lastnode(t_line *lst);
@@ -203,5 +204,7 @@ void		test(t_command *cmds);
 void		print_filenodes(t_files *files);
 void		ft_printfiles(t_files *files);
 void		ft_print_env(t_env *env);
+
+void		heredoc_signals(void);
 
 #endif

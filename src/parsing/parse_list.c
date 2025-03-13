@@ -52,13 +52,13 @@ static int	create_cmd_node(t_command **cmds, t_line *bgn, t_line *last)
 	t_command	*node;
 	int			n_args;
 
-	node = malloc(sizeof(t_command));
+	node = my_malloc(sizeof(t_command));
 	if (!node)
 		return (display_err(NULL, NULL, "Error allocating command node", 1));
 	// node->path = NULL;
 	node->args = NULL;
 	n_args = handle_node_args(bgn, last);
-	node->args = malloc(sizeof(char *) * (n_args + 1));
+	node->args = my_malloc(sizeof(char *) * (n_args + 1));
 	make_cmd_args(node->args, bgn, last, n_args);
 	node->previous = NULL;
 	node->next = NULL;

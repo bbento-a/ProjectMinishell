@@ -26,7 +26,7 @@ t_files	*create_file_node(t_line *node, t_type redir)
 {
 	t_files	*file;
 
-	file = malloc(sizeof(t_files));
+	file = my_malloc(sizeof(t_files));
 	if (!file)
 	{
 		display_err(NULL, NULL, "Failed to allocate file node", 1);

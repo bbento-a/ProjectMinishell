@@ -59,7 +59,10 @@ int	heredocument(char *limiter, bool quotes)
 		close(fd[1]);
 		waitpid(pid, &status, 0);
 		if (WIFSIGNALED(status))
+		{
+			write(1, "\n", 1);
 			data()->exit_code = status;
+		}
 	}
 	// child needs condition to catch signal (global)
 	// child clears all memo from cmds
@@ -91,7 +94,7 @@ int	heredoc_validation(t_files *file)
 	int	fd;
 
 	fd = heredocument(file->file_name, file->hq_limiter);
-	if (data()->error_parse)
+	if (data()->exit_code)
 	{
 		close(fd);
 		return (1);

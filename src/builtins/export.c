@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:23:13 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/11 17:36:13 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:50:19 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	update_env(t_env **env, const char *var)
 	// If there is no env to begin with
 	if (!(*env))
 	{
-		*env = malloc(sizeof(t_env));
+		*env = my_malloc(sizeof(t_env));
 		if (!*env)
 			return (display_err(NULL, NULL, "Failed to allocate memory", -1));
 		(*env)->next = NULL;
@@ -88,7 +88,7 @@ int	update_env(t_env **env, const char *var)
 	while (tmp->next)
 		tmp = tmp->next;
 
-	tmp->next = malloc(sizeof(t_env));
+	tmp->next = my_malloc(sizeof(t_env));
 	if (!tmp->next)
 		return (display_err(NULL, NULL, "Failed to allocate memory", -1));
 	tmp->next->value = ft_strdup(var);

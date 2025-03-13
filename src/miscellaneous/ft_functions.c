@@ -57,3 +57,19 @@ void	ft_freemtx(char **mtx)
 	mtx = NULL;
 	return ;
 }
+void	*my_malloc(size_t size)
+{
+	unsigned char	*aux;
+	size_t			 i;
+
+	i = 0;
+	aux = (unsigned char *)malloc(size);
+	if(!aux)
+		return(NULL);
+	while(i < size)
+	{
+		aux[i] = 0;
+		i++;
+	}
+	return((void *)aux);
+}

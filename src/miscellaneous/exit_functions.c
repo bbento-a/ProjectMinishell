@@ -59,7 +59,9 @@ void	clear_memory(t_command *cmds)
 	while (cmds)
 	{
 		if (cmds->args)
+		{
 			free_array(cmds->args);
+		}
 		clear_cmd_files(&cmds->files);
 		temp = cmds;
 		cmds = cmds->next;

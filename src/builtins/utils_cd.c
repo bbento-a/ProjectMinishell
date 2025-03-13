@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:33:04 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/11 16:36:59 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:50:04 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	env_add(char *var, t_env **env)
 	tmp = *env;
 	while (tmp && tmp->next)
 		tmp = tmp->next;
-	new_env = malloc(sizeof(t_env));
+	new_env = my_malloc(sizeof(t_env));
 	if (!new_env)
 		return ; // Allocation failed
 	new_env->value = ft_strdup(var); // Assuming ft_strdup is your custom strdup

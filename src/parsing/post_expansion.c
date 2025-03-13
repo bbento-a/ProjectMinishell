@@ -8,7 +8,7 @@ static int	create_small_node(t_line **lst, char *str, int bgn, int len)
 	t_line	*node;
 	t_line	*last_node;
 
-	node = malloc(sizeof(t_line));
+	node = my_malloc(sizeof(t_line));
 	if (!node)
 		return (display_err(NULL, NULL,
 				"Error while allocating new node", 1));

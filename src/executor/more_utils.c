@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:09:00 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/04 19:27:43 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:49:58 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_env *parse_envp(char **envp)
 
     while (envp[i])
     {
-        tmp = malloc(sizeof(t_env));
+        tmp = my_malloc(sizeof(t_env));
         tmp->value = ft_strdup(envp[i]);
         tmp->envp = &envp[i];
 		tmp->next = NULL;
