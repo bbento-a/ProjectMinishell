@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/12 21:23:20 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:36:58 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,16 @@ int	magic_box(char *path, t_command *cmd, t_env *env)
 	update_env(&data()->env, shlvl);
 	free(shlvl); */
 
-	int ret = ERROR; // Initialize ret with a default value
+	int ret;
+	ret = ERROR; // Initialize ret with a default value
 	env_array = NULL;
 	if (!path || !cmd->args)
 		return (display_err("minishell: ", NULL, \
 			"Invalid arguments provided to magic_box", 1));
+	child_signals();
 	pid = fork();
 	if (pid == 0)
 	{
-		child_signals();
 		ptr = env_to_str(env);
 		if (!ptr)
 			exit(ERROR);
@@ -131,6 +132,7 @@ int	magic_box(char *path, t_command *cmd, t_env *env)
 	free(path);
 	if (env_array)
 		free_array(env_array);
+	// printf("ret val: %d\n", ret);
 	if (WIFSIGNALED(ret)) /// if the process gets terminated by a signal, it returns the value of that signal
 	{
 		write(1, "\n", 1);
@@ -192,8 +194,9 @@ int	exec_bin(t_command *cmd, t_env *env)
 	t_env	*tmp;
 
 	tmp = env;
+	ret = 0;
 	if (!cmd->args || !cmd->args[0])
-		return (0);
+		return (data()->exit_code);
 	if (cmd->args[0][0] == '.' || cmd->args[0][0] == '/')
 		return (magic_box(ft_strdup(cmd->args[0]), cmd, env));
 	while (tmp && tmp->value && ft_strncmp(tmp->value, "PATH=", 5) != 0)

@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:42:40 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/12 21:09:08 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:34:56 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,13 @@ char	**cmd_tab(t_token *start)
 
 int	exec_cmd(t_command *command)
 {
-	char **cmd;
 	int ret_val;
 
-	cmd = command->args;
-	if (cmd)
+	if (command->next) // If there's a next command, handle pipes
+		ret_val = handle_pipes(command, data()->env);
+	else
 	{
-		if (command->next) // If there's a next command, handle pipes
-			ret_val = handle_pipes(command, data()->env);
-		else
-		{
-			ret_val = exec_bin(command, data()->env);
-		}
+		ret_val = exec_bin(command, data()->env);
 	}
 	return (ret_val);
 }

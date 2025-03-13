@@ -70,14 +70,14 @@ int	check_valid_number(char *str, int spc, int j)
 		while (lng_max[j] && str[i])
 		{
 			if (str[i] > lng_max[j])
-				return (display_err("exit", NULL,
+				return (display_err("exit: ", NULL,
 						"numeric argument is too large", 1));
 			i++;
 			j++;
 		}
 	}
 	if (check_valid_signumber(str, i, j))
-		return (display_err("exit", NULL, "numeric argument is too large", 1));
+		return (display_err("exit: ", NULL, "numeric argument is too large", 1));
 	return (0);
 }
 
@@ -98,9 +98,9 @@ int	check_exit_arg(char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	if (str[i] && (str[i] < '0' || str[i] > '9'))
-		return (display_err("exit", NULL, "numeric argument is required", 2));
+		return (display_err("exit: ", NULL, "numeric argument is required", 2));
 	if (ft_strlen(str) - spaces > 20)
-		return (display_err("exit", NULL, "numeric argument is too large", 1));
+		return (display_err("exit: ", NULL, "numeric argument is too large", 1));
 	if (ft_strlen(str) - spaces <= 18)
 		return (0);
 	if (check_valid_number(str, spaces, 0))
@@ -123,7 +123,7 @@ int	builtin_exit(char **args)
 			else
 				data()->exit_code = (int)exit_code;
 			if (args[2])
-				return (display_err("exit", NULL, "too many arguments", 1));
+				return (display_err("exit: ", NULL, "too many arguments", 1));
 		}
 	}
 	ft_printf("exit\n");

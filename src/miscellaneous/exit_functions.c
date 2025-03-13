@@ -6,9 +6,11 @@
 int	display_err(char *local, char *arg, char *error_msg, int err_code)
 {
 	if (local)
-		printf("%s: ", local);
+		ft_putstr_fd(local, 2);
+		// printf("%s: ", local);
 	if (arg)
-		printf("%s: ", arg);
+		ft_putstr_fd(arg, 2);
+		// printf("%s: ", arg);
 	ft_putendl_fd(error_msg, 2);
 	data()->exit_code = err_code;
 	if (err_code < 0)

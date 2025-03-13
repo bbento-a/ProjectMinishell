@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:30:06 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/12 21:17:27 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:50:34 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check_and_execute(t_command *commands)
 		clear_env(data()->env);
 		return (1);
 	}
-	// data()->exit_code = executor(commands);
-	executor(commands);
+	data()->exit_code = executor(commands);
+	// executor(commands);
 	return (0);
 }

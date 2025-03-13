@@ -81,8 +81,8 @@ int	redirection_validation(t_files *file)
 	else if (file->type == E_APPEND)
 		fd = open(file->file_name, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd == -1)
-		return (display_err("minishell", file->file_name,
-				"No such file or directory", 1));
+		return (display_err("minishell: ", file->file_name,
+				": No such file or directory", 1));
 	close(fd);
 	return (0);
 }
