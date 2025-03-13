@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/13 12:36:58 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:44:46 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,7 @@ int	handle_pipes(t_command *cmds, t_env *env)
 
 	prev_fd = -1;
 	i = 0;
+	status = 1;
 	while (cmds)
 	{
 		if (cmds->next && pipe(pipefd) == -1)
@@ -248,7 +249,7 @@ int	handle_pipes(t_command *cmds, t_env *env)
 				close(pipefd[1]);
 				close(pipefd[0]);
 			}
-			if (is_builtin(cmds->args[0]))
+			if (cmds->args && is_builtin(cmds->args[0]))
 				status = exec_builtin(cmds);
 			else
 				status = exec_bin(cmds, env);
@@ -272,8 +273,13 @@ int	handle_pipes(t_command *cmds, t_env *env)
 		}
 	}
 	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status)) /// if the process gets terminated by a signal, it returns the value of that signal
+		status = WIFEXITED(status);
+	else if (WIFEXITED(status))
+		status = WEXITSTATUS(status);
 	while (--i > 0)
 		wait(NULL);
+	// printf("status value: %d\n", status);
 	return (status);
 }
 
