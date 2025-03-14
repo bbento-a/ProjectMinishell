@@ -76,25 +76,30 @@ int	redirection_validation(t_files *file)
 	DIR	*access_file;
 	int	fd;
 
-	access_file = opendir(file->file_name);
 	if (!file)
 		return (-1);
-	else if (file->type == E_REDIN)
+	access_file = opendir(file->file_name);
+	if (file->type == E_REDIN)
 		fd = open(file->file_name, O_RDONLY);
 	else if (file->type == E_REDOUT)
 		fd = open(file->file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else if (file->type == E_APPEND)
 		fd = open(file->file_name, O_CREAT | O_RDWR | O_APPEND, 0644);
-	if (fd == -1 && access_file)
-		return (display_err("minishell: ", file->file_name,
-				": Permission deniedddddd", 0));
-	else if (fd == -1 && !access_file)
-		return (display_err("minishell: ", file->file_name,
+	if (fd == -1)
+	{
+		if(access(file->file_name, F_OK) < 0)
+			return (display_err("minishell: ", file->file_name,
 				": No such file or directory", 1));
+		else if (access(file->file_name, X_OK) < 0)
+			return (display_err("minishell: ", file->file_name,
+				": Permission denied", 1));
+	}
 	close(fd);
-	closedir(access_file);
+	if (access_file)
+		closedir(access_file);
 	return (0);
 }
+
 int	heredoc_validation(t_files *file)
 {
 	int	fd;

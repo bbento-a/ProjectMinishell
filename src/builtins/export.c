@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:23:13 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/13 16:50:19 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/14 23:08:44 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	print_error(char *arg)
 {
 	ft_putstr_fd("export: ", STDERR);
 	ft_putstr_fd(arg, STDERR);
-	ft_putstr_fd(": invalid name to export", STDERR);
+	ft_putstr_fd(": not a valid identifier", STDERR);
 	ft_putstr_fd("\n", STDERR);
 	data()->exit_code = 1;
 	return (ERROR);
