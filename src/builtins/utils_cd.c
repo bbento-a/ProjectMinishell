@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:33:04 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/13 16:50:04 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:11:09 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,10 @@ int	update_pwd(t_env **env)
 		return (ERROR);
 	while (tmp)
 	{
-		if (ft_strcmp(tmp->value, "PWD") == 0)
+		if (ft_strncmp(tmp->value, "PWD=", 4) == 0)
 		{
-			pwd = ft_strjoin("PWD=", cwd);
 			free(tmp->value);
-			tmp->value = pwd;
+			tmp->value = ft_strjoin("PWD=", cwd);
 			return (SUCCESS);
 		}
 		tmp = tmp->next;
@@ -91,11 +90,10 @@ int	update_oldpwd(t_env **env)
 	tmp = *env;
 	while (tmp) // iterates for env looking for OLDPWD
 	{
-		if (ft_strcmp(tmp->value, "OLDPWD") == 0)
+		if (ft_strncmp(tmp->value, "OLDPWD=", 7) == 0)
 		{
-			oldpwd = ft_strjoin("OLDPWD=", cwd);
 			free(tmp->value);
-			tmp->value = oldpwd;
+			tmp->value = ft_strjoin("OLDPWD=", cwd);
 			return (SUCCESS);
 		}
 		tmp = tmp->next;
