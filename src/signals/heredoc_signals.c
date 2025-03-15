@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_signals.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 07:40:43 by bbento-a          #+#    #+#             */
+/*   Updated: 2025/03/15 07:41:20 by bbento-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
@@ -6,6 +17,7 @@ void	heredoc_handler(int sig)
 	write(STDIN_FILENO, "\n", 1);
 	close(STDIN_FILENO);
 	data()->exit_code = 128 + sig;
+	data()->error_parse = true;
 }
 
 void	heredoc_signals(void)

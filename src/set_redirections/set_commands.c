@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:30:06 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 07:44:15 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:05:00 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	check_and_execute(t_command *commands)
 		return (1);
 	if (check_redirections(commands))
 	{
-		clear_memory(commands);
-		clear_env(data()->env);
 		return (1);
 	}
 	data()->exit_code = executor(commands);

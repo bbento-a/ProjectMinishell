@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bin.c                                              :+:      :+:    :+:   */
+/*   bin_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 07:12:54 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:08:35 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static char	*path_join(const char *s1, const char *s2)
+char	*path_join(const char *s1, const char *s2)
 {
 	char	*tmp;
 	char	*path;
@@ -27,7 +27,7 @@ static char	*path_join(const char *s1, const char *s2)
 	return (path);
 }
 
-static char	*check_dir(char *bin, char *command)
+char	*check_dir(char *bin, char *command)
 {
 	DIR				*folder;
 	struct dirent	*item;

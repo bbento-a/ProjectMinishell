@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:33:04 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 02:47:05 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:00:30 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,19 @@ void	env_add(char *var, t_env **env)
 		return ;
 	}
 	new_env->next = NULL;
-
 	// If env is NULL, initialize it properly
 	if (!(*env))
 	{
 		*env = new_env;
 		return;
 	}
-
 	// Otherwise, append to the end
 	tmp = *env;
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new_env;
 }
+
 char	*get_env_path(t_env *env, const char *var, size_t len)
 {
 	while (env)
@@ -114,15 +113,4 @@ void	ft_memdel(void **ap)
 		free(*ap);  // Free the memory pointed to by *ap
 		*ap = NULL; // Set the pointer to NULL to avoid dangling references
 	}
-}
-
-int	is_in_env(t_env *env, const char *var)
-{
-	while (env)
-	{
-		if (ft_strncmp(env->value, var, ft_strlen(var)) == 0)
-			return (1); // Found the variable in the environment
-		env = env->next;
-	}
-	return (0); // Variable not found in the environment
 }
