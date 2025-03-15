@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:42:40 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 09:17:08 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/15 10:35:35 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	exec_cmd(t_command *command)
 	int	ret_val;
 
 	if (command->next)
-		ret_val = handle_pipes(command, data()->env);
+		ret_val = handle_pipes(command);
 	else
 		ret_val = exec_bin(command, data()->env);
 	return (ret_val);

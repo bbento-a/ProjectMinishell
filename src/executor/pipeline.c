@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:34:52 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 09:17:25 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/15 09:45:57 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	execute_process(pid_t pid, t_command *cmds, int *prev_fd,
 	return (0);
 }
 
-int	handle_pipes(t_command *cmds, t_env *env)
+int	handle_pipes(t_command *cmds)
 {
 	int		pipefd[2];
 	int		prev_fd;
@@ -77,8 +77,6 @@ int	handle_pipes(t_command *cmds, t_env *env)
 	prev_fd = -1;
 	i = 0;
 	status = 1;
-	if (env)
-		printf("Env pointer is valid\n");
 	while (cmds)
 	{
 		if (cmds->next && create_pipe(pipefd))
@@ -86,6 +84,7 @@ int	handle_pipes(t_command *cmds, t_env *env)
 		pid = create_process();
 		if (execute_process(pid, cmds, &prev_fd, pipefd))
 			return (1);
+		cmds = cmds->next;
 		i++;
 	}
 	while (--i > 0)

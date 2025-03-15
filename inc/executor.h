@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:13:07 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 09:18:16 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/15 09:46:19 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		check_redirections(t_command *cmds);
 int		heredocument(char *limiter, bool quotes);
 
 int		exec_bin(t_command *cmd, t_env *env);
-int		handle_pipes(t_command *cmds, t_env *env);
+int		handle_pipes(t_command *cmds);
 
 int		ft_strcmp(const char *s1, const char *s2);
 int		is_builtin(char *command);
@@ -74,7 +74,6 @@ int		handle_error_message(char *path, DIR *folder, int fd);
 int		wait_for_child_process(int pid, char *path,
 			char **env_array);
 int		magic_box(char *path, t_command *cmd, t_env *env);
-int		handle_pipes(t_command *cmds, t_env *env);
 void	handle_parent_process(pid_t pid, int *prev_fd, int pipefd[2],
 			t_command **cmds);
 

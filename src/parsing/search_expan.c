@@ -6,13 +6,13 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:42:28 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 08:20:11 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 10:35:55 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	remove_expanded_node(t_line **head, t_line *node)
+int	remove_expanded_node(t_line **head, t_line *node)
 {
 	t_line	*tmp;
 
@@ -25,6 +25,7 @@ void	remove_expanded_node(t_line **head, t_line *node)
 		if (*head)
 			(*head)->prev = NULL;
 	}
+	return (1);
 }
 
 int	expansion_analyzer(t_line **input, t_line *prompt)
@@ -36,7 +37,7 @@ int	expansion_analyzer(t_line **input, t_line *prompt)
 	{
 		if (prompt->content[i] == '$' && prompt->content[i + 1]
 			&& (ft_isalnum(prompt->content[i + 1]) || prompt->content[i
-				+ 1] == '_' || prompt->content[i + 1] == '?'))
+					+ 1] == '_' || prompt->content[i + 1] == '?'))
 		{
 			prompt->content = expand_token(prompt->content);
 			break ;
@@ -52,44 +53,50 @@ int	expansion_analyzer(t_line **input, t_line *prompt)
 		i++;
 	}
 	if (!prompt->content[0] && !prompt->prev)
+		return (remove_expanded_node(input, prompt));
+	return (0);
+}
+
+int	process_node(t_line **input, t_line **prompt)
+{
+	t_line	*tmp;
+
+	if ((*prompt)->type_q != '\'')
 	{
-		remove_expanded_node(input, prompt);
-		return (1);
+		tmp = (*prompt)->next;
+		if (expansion_analyzer(input, *prompt))
+		{
+			*prompt = tmp;
+			return (0);
+		}
 	}
+	if ((*prompt)->type_q != '\'' && (*prompt)->type_q != '\"')
+	{
+		tmp = (*prompt)->next;
+		if (handle_post_expansion(input, *prompt))
+			return (1);
+		*prompt = tmp;
+		return (0);
+	}
+	*prompt = (*prompt)->next;
 	return (0);
 }
 
 int	search_expansion(t_line **input)
 {
 	t_line	*prompt;
-	t_line	*tmp;
 
 	prompt = *input;
 	while (prompt)
 	{
-		if (prompt->prev && prompt->prev->type_n == E_HERDOC)
+		if (prompt->prev && prompt->prev->type_n == E_HERDOC
+			&& !prompt->content[0])
 		{
 			prompt = prompt->next;
 			continue ;
 		}
-		if (prompt->type_q != '\'')
-		{
-			tmp = prompt->next;
-			if (expansion_analyzer(input, prompt))
-			{
-				prompt = tmp;
-				continue ;
-			}
-		}
-		if (prompt->type_q != '\'' && prompt->type_q != '\"')
-		{
-			tmp = prompt->next;
-			if (handle_post_expansion(input, prompt))
-				return (1);
-			prompt = tmp;
-			continue ;
-		}
-		prompt = prompt->next;
+		if (process_node(input, &prompt))
+			return (1);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 06:03:41 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 08:04:20 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 10:26:32 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	free_array(char **mtx)
 		return ;
 	while (mtx[i])
 	{
-		if (*mtx[i])
+		if (*mtx)
 			free(mtx[i]);
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:39:49 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 07:40:14 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/15 10:34:16 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,11 @@ int	syntax_checker(char *line, t_line **prompt)
 	bgn = 0;
 	while (line[i] && !data()->error_parse)
 	{
-		if (line[i] && (line[i] == ' ' || line[i] == '\t') && line[i++])
+		if (line[i] && symbol_cmp(" \t\n", line[i]) && line[i++])
 			continue ;
 		bgn = i;
 		define_flg(line[i]);
-		if (!line[i] || line[i] == ' ' || line[i] == '\t')
+		if (!line[i] || symbol_cmp(" \t\n", line[i]))
 			i = -1;
 		else if (line[i] && (line[bgn] == '\'' || line[bgn] == '\"'))
 			i = create_quotes(prompt, line, bgn);
