@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 02:13:02 by bbento-a          #+#    #+#             */
+/*   Updated: 2025/03/15 02:13:33 by bbento-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
@@ -37,7 +48,6 @@ typedef struct s_command
 	int				fd_out;
 	t_files			*files;
 
-//	int				exit_status;
 	pid_t			pid;
 
 	t_command		*next;
