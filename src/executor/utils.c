@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:49:24 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/14 23:07:39 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 01:55:23 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,6 @@ void	free_tab(char **array)
 	if (!array)
 		return ;
 	free(array); // Only free the array container, not the strings
-}
-
-void	free_token(t_token *token)
-{
-	t_token	*tmp;
-
-	while (token)
-	{
-		tmp = token->next;
-		free(token->str);
-		free(token);
-		token = tmp;
-	}
 }
 
 int	handle_error(char *path, DIR *folder, int fd)

@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/14 23:48:38 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 01:46:58 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Prototype for duping process
 
-void	dup_fds(t_command *cmd)
+static void	dup_fds(t_command *cmd)
 {
 	t_files	*tmp;
 	t_files	*fd_in;
@@ -59,7 +59,7 @@ void	dup_fds(t_command *cmd)
 	}
 }
 
-int	error_message(char *path)
+static int	error_message(char *path)
 {
 	DIR	*folder;
 	int	fd;
@@ -83,7 +83,7 @@ int	error_message(char *path)
 /// Removed the g_sig global struct for signals and changed its pid to int
 /// Signals now will be caught with WIFSIGNALED()
 
-int	magic_box(char *path, t_command *cmd, t_env *env)
+static int	magic_box(char *path, t_command *cmd, t_env *env)
 {
 	char	**env_array;
 	char	*ptr;
@@ -144,7 +144,7 @@ int	magic_box(char *path, t_command *cmd, t_env *env)
 		return (ERROR);
 }
 
-char	*path_join(const char *s1, const char *s2)
+static char	*path_join(const char *s1, const char *s2)
 {
 	char	*tmp;
 	char	*path;
@@ -159,7 +159,7 @@ char	*path_join(const char *s1, const char *s2)
 	return (path);
 }
 
-char	*check_dir(char *bin, char *command)
+static char	*check_dir(char *bin, char *command)
 {
 	DIR				*folder;
 	struct dirent	*item;

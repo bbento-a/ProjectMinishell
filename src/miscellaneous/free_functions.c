@@ -54,18 +54,18 @@ void	free_array(char **mtx)
 	mtx = NULL;
 }
 
-void	free_builtin_list(t_builtin *builtin_list)
-{
-	int	i;
+// void	free_builtin_list(t_builtin *builtin_list)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < 8)
-	{
-		free(builtin_list[i].name);
-		i++;
-	}
-	free(builtin_list);
-}
+// 	i = 0;
+// 	while (i < 8)
+// 	{
+// 		free(builtin_list[i].name);
+// 		i++;
+// 	}
+// 	free(builtin_list);
+// }
 
 // int	finish_environment(void)
 // {
