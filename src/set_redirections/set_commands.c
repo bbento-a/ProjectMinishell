@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:30:06 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 02:45:56 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 06:19:05 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	check_and_execute(t_command *commands)
 		return (1);
 	if (check_redirections(commands)) // if terminated by SIGINT
 	{
-		clear_memory(commands);
-		clear_env(data()->env);
 		return (1);
 	}
 	data()->exit_code = executor(commands);

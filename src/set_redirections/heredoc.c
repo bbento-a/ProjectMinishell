@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:47:22 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 04:52:57 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 07:28:03 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@ void	heredocument_loop(int write_fd, char *limit, bool quotes)
 	close(write_fd);
 }
 
+int	execute_heredoc(char *limiter, bool quotes, int *fd)
+{
+	close(fd[0]);
+	heredoc_signals();
+	heredocument_loop(fd[1], limiter, quotes);
+	clear_memory(data()->cmds);
+	clear_env(data()->env);
+	close(fd[1]);
+	exit(0);
+}
+
 int	heredocument(char *limiter, bool quotes)
 {
 	pid_t	pid;
@@ -57,15 +68,7 @@ int	heredocument(char *limiter, bool quotes)
 	if (pid == -1)
 		return (display_err(NULL, NULL, "Failed to fork process", 1));
 	else if (pid == 0)
-	{
-		close(fd[0]);
-		heredoc_signals();
-		heredocument_loop(fd[1], limiter, quotes);
-		clear_memory(data()->cmds);
-		clear_env(data()->env);
-		close(fd[1]);
-		exit(0);
-	}
+		execute_heredoc(limiter, quotes, fd);
 	else
 	{
 		close(fd[1]);
@@ -74,6 +77,7 @@ int	heredocument(char *limiter, bool quotes)
 		{
 			write(1, "\n", 1);
 			data()->exit_code = status;
+			data()->error_parse = true;
 		}
 	}
 	return (fd[0]);

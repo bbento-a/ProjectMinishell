@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:49:10 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 02:49:11 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 07:29:04 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	heredoc_validation(t_files *file)
 	int	fd;
 
 	fd = heredocument(file->file_name, file->hq_limiter);
-	if (data()->exit_code)
+	if (data()->error_parse)
 	{
 		close(fd);
 		return (1);
@@ -90,8 +90,7 @@ int	check_redirections(t_command *cmds)
 	cmd = cmds;
 	while (cmd)
 	{
-		check_heredocs(cmd->files);
-		if (data()->error_parse)
+		if (check_heredocs(cmd->files))
 			return (1);
 		cmd = cmd->next;
 	}
@@ -105,6 +104,5 @@ int	check_redirections(t_command *cmds)
 		}
 		cmd = cmd->next;
 	}
-	// printf("exit code: %d\n", data()->exit_code);
 	return (0);
 }
