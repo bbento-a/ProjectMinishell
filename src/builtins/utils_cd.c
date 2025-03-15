@@ -3,41 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:33:04 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/14 16:11:09 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 02:47:05 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
 
 void	env_add(char *var, t_env **env)
 {
 	t_env	*new_env;
 	t_env	*tmp;
 
-	tmp = *env;
-	while (tmp && tmp->next)
-		tmp = tmp->next;
 	new_env = my_malloc(sizeof(t_env));
 	if (!new_env)
 		return ; // Allocation failed
-	new_env->value = ft_strdup(var); // Assuming ft_strdup is your custom strdup
+	new_env->value = ft_strdup(var);
 	if (!new_env->value)
 	{
-		free(new_env); // If strdup fails, free the new env node
+		free(new_env);
 		return ;
 	}
-	if (!env)
-		env = &new_env;
-	else
+	new_env->next = NULL;
+
+	// If env is NULL, initialize it properly
+	if (!(*env))
 	{
-		tmp->next = new_env;
-		new_env->next = NULL;
+		*env = new_env;
+		return;
 	}
-	// new_env->next = env;
-	// env = new_env; // Add the new node at the front of the list
+
+	// Otherwise, append to the end
+	tmp = *env;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new_env;
 }
 char	*get_env_path(t_env *env, const char *var, size_t len)
 {
