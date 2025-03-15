@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:49:24 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 01:55:23 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 02:44:08 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 	free(current_lvl);
 	return (final_lvl);
 } */
+
 char	*env_to_str(t_env *env)
 {
 	char	*str;
@@ -56,7 +57,6 @@ char	*env_to_str(t_env *env)
 	}
 	return (str);
 }
-
 
 void	free_tab(char **array)
 {

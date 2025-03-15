@@ -64,12 +64,14 @@ SRC				=	\
 					\
 					$(MS_SRCS)set_redirections/set_commands.c \
 					$(MS_SRCS)set_redirections/set_redirections.c \
+					$(MS_SRCS)set_redirections/heredoc.c \
 					\
-					$(MS_SRCS)executor/bin.c \
-					$(MS_SRCS)executor/cmd.c \
+					$(MS_SRCS)executor/bin_cmds.c \
+					$(MS_SRCS)executor/bin_utils.c \
+					$(MS_SRCS)executor/builtin_cmds.c \
+					$(MS_SRCS)executor/pipeline.c \
 					$(MS_SRCS)executor/start.c \
 					$(MS_SRCS)executor/utils.c \
-					$(MS_SRCS)executor/more_utils.c \
 					\
 					$(MS_SRCS)builtins/builtin_exit.c \
 					$(MS_SRCS)builtins/cd.c \

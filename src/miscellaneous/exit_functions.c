@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit_functions.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 02:49:29 by bbento-a          #+#    #+#             */
+/*   Updated: 2025/03/15 02:49:30 by bbento-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "../../inc/minishell.h"
 
@@ -7,10 +19,8 @@ int	display_err(char *local, char *arg, char *error_msg, int err_code)
 {
 	if (local)
 		ft_putstr_fd(local, 2);
-		// printf("%s: ", local);
 	if (arg)
 		ft_putstr_fd(arg, 2);
-		// printf("%s: ", arg);
 	ft_putendl_fd(error_msg, 2);
 	data()->exit_code = err_code;
 	if (err_code < 0)

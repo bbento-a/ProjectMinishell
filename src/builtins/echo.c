@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:54:21 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/06 17:35:12 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 02:19:49 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,31 +52,3 @@ int	ms_echo(t_command *cmd, char **args)
 		close(fd_to);
 	return (SUCCESS);
 }
-
-/* int	ft_strcmp(char *s1, char *s2) // Matches header
-{
-	while (*s1 && (*s1 == *s2))
-	{
-		s1++;
-		s2++;
-	}
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
-}
-
-void	ft_putstr_fd(char *s, int fd) // Matches header
-{
-	if (s)
-		write(fd, s, strlen(s));
-}
-
-// Main function
-int	main(int argc, char **argv)
-{
-	// Pass the command-line arguments to ms_echo
-	if (argc > 1)
-		ms_echo(argv);
-	else
-		write(1, "\n", 1); // If no arguments are passed, just output a newline
-
-	return (SUCCESS);
-} */

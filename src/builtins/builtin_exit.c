@@ -1,7 +1,7 @@
 
 #include "../../inc/minishell.h"
 
-long	ft_atol(char *n)
+static long	ft_atol(char *n)
 {
 	long	res;
 	int		sign;
@@ -26,7 +26,7 @@ long	ft_atol(char *n)
 	return (res * sign);
 }
 
-int	check_valid_signumber(char *str, int i, int j)
+static int	check_valid_signumber(char *str, int i, int j)
 {
 	char	*lng_min;
 	char	*lngs_max;
@@ -54,7 +54,7 @@ int	check_valid_signumber(char *str, int i, int j)
 	return (0);
 }
 
-int	check_valid_number(char *str, int spc, int j)
+static int	check_valid_number(char *str, int spc, int j)
 {
 	char	*lng_max;
 	int		i;
@@ -81,7 +81,7 @@ int	check_valid_number(char *str, int spc, int j)
 	return (0);
 }
 
-int	check_exit_arg(char *str)
+static int	check_exit_arg(char *str)
 {
 	int		spaces;
 	int		i;

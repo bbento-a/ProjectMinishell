@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bin.c                                              :+:      :+:    :+:   */
+/*   bin_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 01:46:58 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 02:39:06 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,29 +59,6 @@ static void	dup_fds(t_command *cmd)
 	}
 }
 
-static int	error_message(char *path)
-{
-	DIR	*folder;
-	int	fd;
-	int	ret;
-
-	if (!path)
-		return (display_err("minishell: ", NULL, "NULL path provided", 1));
-	fd = open(path, O_WRONLY);
-	folder = opendir(path);
-	ft_putstr_fd("minishell: ", STDERR);
-	ft_putstr_fd(path, STDERR);
-	ret = handle_error(path, folder, fd);
-	if (folder)
-		closedir(folder);
-	if (fd != -1)
-		close(fd);
-	return (ret);
-}
-
-/// Removed mini
-/// Removed the g_sig global struct for signals and changed its pid to int
-/// Signals now will be caught with WIFSIGNALED()
 
 static int	magic_box(char *path, t_command *cmd, t_env *env)
 {
@@ -132,7 +109,6 @@ static int	magic_box(char *path, t_command *cmd, t_env *env)
 	free(path);
 	if (env_array)
 		free_array(env_array);
-	// printf("ret val: %d\n", ret);
 	if (WIFSIGNALED(ret)) /// if the process gets terminated by a signal, it returns the value of that signal
 	{
 		write(1, "\n", 1);
@@ -144,46 +120,6 @@ static int	magic_box(char *path, t_command *cmd, t_env *env)
 		return (ERROR);
 }
 
-static char	*path_join(const char *s1, const char *s2)
-{
-	char	*tmp;
-	char	*path;
-
-	if (!s1 || !s2)
-		return (NULL);
-	tmp = ft_strjoin(s1, "/");
-	if (!tmp)
-		return (NULL);
-	path = ft_strjoin(tmp, s2);
-	free(tmp);
-	return (path);
-}
-
-static char	*check_dir(char *bin, char *command)
-{
-	DIR				*folder;
-	struct dirent	*item;
-	char			*path;
-
-	if (!bin || !command)
-		return (NULL);
-	folder = opendir(bin);
-	if (!folder)
-		return (NULL);
-	path = NULL;
-	while ((item = readdir(folder)))
-	{
-		if (ft_strncmp(item->d_name, command, ft_strlen(item->d_name)) == 0)
-		{
-			path = path_join(bin, command);
-			break ;
-		}
-	}
-	closedir(folder);
-	return (path);
-}
-
-/// Added a tmp to iterate env so the original doesn't get modified
 
 int	exec_bin(t_command *cmd, t_env *env)
 {
@@ -218,69 +154,5 @@ int	exec_bin(t_command *cmd, t_env *env)
 	return (ret);
 }
 
-int	handle_pipes(t_command *cmds, t_env *env)
-{
-	int		pipefd[2];
-	int		prev_fd;
-	int		i;
-	pid_t	pid;
-	int status;
-
-	prev_fd = -1;
-	i = 0;
-	status = 1;
-	while (cmds)
-	{
-		if (cmds->next && pipe(pipefd) == -1)
-			return (display_err(NULL, NULL, "Failed to open pipe", 1));
-		pid = fork();
-		if (pid == -1)
-			return (display_err(NULL, NULL, "Failed to fork process", 1));
-		if (pid == 0) // Child process
-		{
-			if (prev_fd != -1)
-			{
-				dup2(prev_fd, STDIN_FILENO);
-				close(prev_fd);
-			}
-			if (cmds->next)
-			{
-				dup2(pipefd[1], STDOUT_FILENO);
-				close(pipefd[1]);
-				close(pipefd[0]);
-			}
-			if (cmds->args && is_builtin(cmds->args[0]))
-				status = exec_builtin(cmds);
-			else
-				status = exec_bin(cmds, env);
-			clear_memory(data()->cmds);
-			clear_env(data()->env);
-			exit(status);
-		}
-		else // Parent process
-		{
-			if (prev_fd != -1)
-				close(prev_fd);
-			if (cmds->next)
-			{
-				close(pipefd[1]);
-				prev_fd = pipefd[0];
-			}
-			else
-				close(pipefd[0]);
-			cmds = cmds->next;
-			i++;
-		}
-	}
-	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status)) /// if the process gets terminated by a signal, it returns the value of that signal
-		status = WIFEXITED(status);
-	else if (WIFEXITED(status))
-		status = WEXITSTATUS(status);
-	while (--i > 0)
-		wait(NULL);
-	// printf("status value: %d\n", status);
-	return (status);
-}
 
 // valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=all --suppressions=readline.supp --track-fds=yes ./minishell

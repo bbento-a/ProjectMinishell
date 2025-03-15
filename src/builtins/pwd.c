@@ -6,12 +6,12 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:11:18 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/11 16:39:24 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 02:21:45 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-// update
+
 int	ms_pwd(t_command *cmd)
 {
 	char cwd[PATH_MAX];

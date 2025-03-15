@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:13:02 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 02:13:33 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 02:41:05 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,7 @@ void		make_cmd_args(char **args, t_line *bgn, t_line *last, int size);
 // handle_list_nodes.c
 void		add_cmds_last(t_command **cmds, t_command *node);
 t_files		*make_cmd_files(t_line *bgn, t_line *last);
+
+char		*get_env(char *var);
 
 #endif

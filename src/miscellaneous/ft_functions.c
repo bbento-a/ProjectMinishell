@@ -1,19 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_functions.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 02:49:36 by bbento-a          #+#    #+#             */
+/*   Updated: 2025/03/15 02:49:57 by bbento-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-// int	ft_close(int *fd)
-// {
-// 	int	close_return;
-
-// 	close_return = 0;
-// 	if (*fd > 2)
-// 	{
-// 		close_return = close(*fd);
-// 		*fd = -1;
-// 	}
-// 	return (close_return);
-// }
-// Compares a char c to a str of other chars
 // (if it finds c in *sign, it returns true)
 
 bool	symbol_cmp(char *sign, char c)
@@ -57,6 +55,7 @@ void	ft_freemtx(char **mtx)
 	mtx = NULL;
 	return ;
 }
+
 void	*my_malloc(size_t size)
 {
 	unsigned char	*aux;

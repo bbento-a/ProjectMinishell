@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:13:07 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 02:13:08 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 02:48:51 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_env
 
 int		check_and_execute(t_command *commands);
 int		check_redirections(t_command *cmds);
+int		heredocument(char *limiter, bool quotes);
 
 int		exec_bin(t_command *cmd, t_env *env);
 int		handle_pipes(t_command *cmds, t_env *env);
@@ -56,6 +57,10 @@ int		is_builtin(char *command);
 int		exec_builtin(t_command *cmd);
 
 int		exec_cmd(t_command *commnad);
+
+int		error_message(char *path);
+char	*path_join(const char *s1, const char *s2);
+char	*check_dir(char *bin, char *command);
 
 char 	*env_to_str(t_env *env);
 void	free_tab(char **array);

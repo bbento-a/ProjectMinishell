@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:33:04 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/14 16:11:09 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 02:22:31 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	env_add(char *var, t_env **env)
 		tmp->next = new_env;
 		new_env->next = NULL;
 	}
-	// new_env->next = env;
-	// env = new_env; // Add the new node at the front of the list
 }
 char	*get_env_path(t_env *env, const char *var, size_t len)
 {

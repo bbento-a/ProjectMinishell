@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:23:13 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/14 23:08:44 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 02:21:24 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	is_valid_env(const char *s)
 	return (1);
 }
 
-size_t ft_strlen_equal(const char *str)
+static size_t ft_strlen_equal(const char *str)
 {
 	int i;
 

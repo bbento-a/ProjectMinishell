@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:37:59 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/06 16:16:32 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 02:24:48 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	}
 	return (s1[i] - s2[i]);
 }
+
 int	is_builtin(char *command)
 {
 	if (!command)
