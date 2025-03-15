@@ -1,16 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit_functions.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 06:02:24 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 06:03:33 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-// Prints an error message to the stderr and takes/returns its error code
 
 int	display_err(char *local, char *arg, char *error_msg, int err_code)
 {
 	if (local)
 		ft_putstr_fd(local, 2);
-		// printf("%s: ", local);
 	if (arg)
 		ft_putstr_fd(arg, 2);
-		// printf("%s: ", arg);
 	ft_putendl_fd(error_msg, 2);
 	data()->exit_code = err_code;
 	if (err_code < 0)
@@ -54,7 +61,7 @@ void	clear_cmd_files(t_files **files)
 
 void	clear_memory(t_command *cmds)
 {
-	t_command 	*temp;
+	t_command	*temp;
 
 	while (cmds)
 	{

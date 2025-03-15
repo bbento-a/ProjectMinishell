@@ -1,7 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   post_expansion.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 07:41:31 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 07:42:05 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-// Creates a node with the splitted content
 
 static int	create_small_node(t_line **lst, char *str, int bgn, int len)
 {
@@ -10,8 +19,7 @@ static int	create_small_node(t_line **lst, char *str, int bgn, int len)
 
 	node = my_malloc(sizeof(t_line));
 	if (!node)
-		return (display_err(NULL, NULL,
-				"Error while allocating new node", 1));
+		return (display_err(NULL, NULL, "Error while allocating new node", 1));
 	node->next = NULL;
 	node->content = ft_substr(str, bgn, len);
 	node->type_n = E_OTHER;
@@ -30,8 +38,6 @@ static int	create_small_node(t_line **lst, char *str, int bgn, int len)
 	}
 	return (0);
 }
-// Splits characters separated by white spaces and passes the value
-// of those isolated characters to a function to create nodes
 
 t_line	*split_node(char *str)
 {
@@ -54,9 +60,6 @@ t_line	*split_node(char *str)
 	}
 	return (add_lst);
 }
-// If a new list of tokens is created after the split, the token
-// that had an old value of the expansion will be erased, and replaced
-// by the new list
 
 void	aux_erase_node(t_line *tmp, t_line *prompt, t_line *last, t_line *nl)
 {
@@ -96,10 +99,6 @@ void	erase_lst_node(t_line **head, t_line *prompt, t_line *new_lst)
 	else
 		aux_erase_node(tmp, prompt, last_node, new_lst);
 }
-
-// This function will take the result of expansions and split it, if needed.
-// The split will only happen if the expansion result has white spaces, and it
-// once splitted, the result will be added to the token list
 
 int	handle_post_expansion(t_line **input, t_line *prompt)
 {

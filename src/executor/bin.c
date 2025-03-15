@@ -3,146 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   bin.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 01:46:58 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 07:12:54 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-// Prototype for duping process
-
-static void	dup_fds(t_command *cmd)
-{
-	t_files	*tmp;
-	t_files	*fd_in;
-	t_files	*fd_out;
-	int		fd;
-
-	fd_in = NULL;
-	fd_out = NULL;
-	tmp = cmd->files;
-	while (tmp)
-	{
-		if (tmp->type == E_HERDOC || tmp->type == E_REDIN)
-			fd_in = tmp;
-		tmp = tmp->next;
-	}
-	tmp = cmd->files;
-	while (tmp)
-	{
-		if (tmp->type == E_APPEND || tmp->type == E_REDOUT)
-		{
-			fd_out = tmp;
-		}
-		tmp = tmp->next;
-	}
-	if (fd_in)
-	{
-		if (fd_in->type == E_HERDOC)
-			dup2(fd_in->fd, STDIN_FILENO);
-		else
-		{
-			fd = open(fd_in->file_name, O_RDONLY);
-			dup2(fd, STDIN_FILENO);
-		}
-	}
-	if (fd_out)
-	{
-		if (fd_out->type == E_REDOUT)
-			fd = open(fd_out->file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		else if (fd_out->type == E_APPEND)
-			fd = open(fd_out->file_name, O_CREAT | O_RDWR | O_APPEND, 0644);
-		dup2(fd, STDOUT_FILENO);
-	}
-}
-
-static int	error_message(char *path)
-{
-	DIR	*folder;
-	int	fd;
-	int	ret;
-
-	if (!path)
-		return (display_err("minishell: ", NULL, "NULL path provided", 1));
-	fd = open(path, O_WRONLY);
-	folder = opendir(path);
-	ft_putstr_fd("minishell: ", STDERR);
-	ft_putstr_fd(path, STDERR);
-	ret = handle_error(path, folder, fd);
-	if (folder)
-		closedir(folder);
-	if (fd != -1)
-		close(fd);
-	return (ret);
-}
-
-/// Removed mini
-/// Removed the g_sig global struct for signals and changed its pid to int
-/// Signals now will be caught with WIFSIGNALED()
-
-static int	magic_box(char *path, t_command *cmd, t_env *env)
-{
-	char	**env_array;
-	char	*ptr;
-	int		pid;
-/* 	char *shlvl; */
-
-/* 	shlvl = get_shlvl();
-	update_env(&data()->env, shlvl);
-	free(shlvl); */
-
-	int ret;
-	ret = ERROR; // Initialize ret with a default value
-	env_array = NULL;
-	if (!path || !cmd->args)
-		return (display_err("minishell: ", NULL, \
-			"Invalid arguments provided to magic_box", 1));
-	child_signals();
-	pid = fork();
-	if (pid == 0)
-	{
-		ptr = env_to_str(env);
-		if (!ptr)
-			exit(ERROR);
-		env_array = ft_split(ptr, '\n');
-		free(ptr);
-		if (env_array)
-		{
-			if (ft_strchr(path, '/') != NULL)
-			{
-				dup_fds(cmd);
-				if (execve(path, cmd->args, env_array) != 0)
-				{
-					ret = error_message(cmd->args[0]);
-					clear_fork(path, env_array);
-				} // If execve fails, we will return the error from error_message
-			}
-			else
-			{
-				ret = error_message(path);
-				clear_fork(path, env_array);
-			}
-		}
-		exit(ret); // Now, ret will always have a value when passed to exit()
-	}
-	waitpid(pid, &ret, 0);
-	free(path);
-	if (env_array)
-		free_array(env_array);
-	// printf("ret val: %d\n", ret);
-	if (WIFSIGNALED(ret)) /// if the process gets terminated by a signal, it returns the value of that signal
-	{
-		write(1, "\n", 1);
-		return (WIFEXITED(ret));
-	}
-	if (WIFEXITED(ret))
-		return (WEXITSTATUS(ret));
-	else
-		return (ERROR);
-}
 
 static char	*path_join(const char *s1, const char *s2)
 {
@@ -165,29 +33,41 @@ static char	*check_dir(char *bin, char *command)
 	struct dirent	*item;
 	char			*path;
 
+	path = NULL;
 	if (!bin || !command)
 		return (NULL);
 	folder = opendir(bin);
 	if (!folder)
 		return (NULL);
-	path = NULL;
-	while ((item = readdir(folder)))
+	item = readdir(folder);
+	while (item)
 	{
 		if (ft_strncmp(item->d_name, command, ft_strlen(item->d_name)) == 0)
 		{
 			path = path_join(bin, command);
 			break ;
 		}
+		item = readdir(folder);
 	}
 	closedir(folder);
 	return (path);
 }
 
-/// Added a tmp to iterate env so the original doesn't get modified
+static char	*find_bin_path(t_command *cmd, char **bin)
+{
+	int		i;
+	char	*path;
+
+	i = 0;
+	path = check_dir(bin[i], cmd->args[0]);
+	while (!path && bin[++i])
+		path = check_dir(bin[i], cmd->args[0]);
+	free_array(bin);
+	return (path);
+}
 
 int	exec_bin(t_command *cmd, t_env *env)
 {
-	int		i;
 	char	**bin;
 	char	*path;
 	int		ret;
@@ -206,81 +86,10 @@ int	exec_bin(t_command *cmd, t_env *env)
 	bin = ft_split(tmp->value + 5, ':');
 	if (!bin)
 		return (display_err(NULL, NULL, "Failed to create bin", 1));
-	i = 0;
-	path = check_dir(bin[i], cmd->args[0]);
-	while (!path && bin[++i])
-		path = check_dir(bin[i], cmd->args[0]);
-	free_array(bin);
+	path = find_bin_path(cmd, bin);
 	if (path)
 		ret = magic_box(path, cmd, env);
 	else
 		ret = magic_box(ft_strdup(cmd->args[0]), cmd, env);
 	return (ret);
 }
-
-int	handle_pipes(t_command *cmds, t_env *env)
-{
-	int		pipefd[2];
-	int		prev_fd;
-	int		i;
-	pid_t	pid;
-	int status;
-
-	prev_fd = -1;
-	i = 0;
-	status = 1;
-	while (cmds)
-	{
-		if (cmds->next && pipe(pipefd) == -1)
-			return (display_err(NULL, NULL, "Failed to open pipe", 1));
-		pid = fork();
-		if (pid == -1)
-			return (display_err(NULL, NULL, "Failed to fork process", 1));
-		if (pid == 0) // Child process
-		{
-			if (prev_fd != -1)
-			{
-				dup2(prev_fd, STDIN_FILENO);
-				close(prev_fd);
-			}
-			if (cmds->next)
-			{
-				dup2(pipefd[1], STDOUT_FILENO);
-				close(pipefd[1]);
-				close(pipefd[0]);
-			}
-			if (cmds->args && is_builtin(cmds->args[0]))
-				status = exec_builtin(cmds);
-			else
-				status = exec_bin(cmds, env);
-			clear_memory(data()->cmds);
-			clear_env(data()->env);
-			exit(status);
-		}
-		else // Parent process
-		{
-			if (prev_fd != -1)
-				close(prev_fd);
-			if (cmds->next)
-			{
-				close(pipefd[1]);
-				prev_fd = pipefd[0];
-			}
-			else
-				close(pipefd[0]);
-			cmds = cmds->next;
-			i++;
-		}
-	}
-	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status)) /// if the process gets terminated by a signal, it returns the value of that signal
-		status = WIFEXITED(status);
-	else if (WIFEXITED(status))
-		status = WEXITSTATUS(status);
-	while (--i > 0)
-		wait(NULL);
-	// printf("status value: %d\n", status);
-	return (status);
-}
-
-// valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=all --suppressions=readline.supp --track-fds=yes ./minishell

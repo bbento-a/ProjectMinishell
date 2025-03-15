@@ -1,9 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 07:36:25 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 07:36:40 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-// This is where the replacement of characters happens in the string of token
-// nodes. If there is value, $<name> will be replaced by value, else if there
-// is no value, $<name> will be erased
 
 char	*replace_var(char *str, char *value, int var_bgn, int nvar_len)
 {
@@ -11,25 +18,22 @@ char	*replace_var(char *str, char *value, int var_bgn, int nvar_len)
 	int		val_len;
 
 	val_len = ft_strlen(value);
-	new_str = malloc
-		(sizeof(char) * ((ft_strlen(str) - nvar_len) + val_len + 1));
+	new_str = malloc(sizeof(char) * ((ft_strlen(str) - nvar_len) + val_len
+				+ 1));
 	if (!new_str)
 	{
-		display_err(NULL, NULL,
-			"Error while allocating for expansion value", 2);
+		display_err(NULL, NULL, "Error while allocating for expansion value",
+			2);
 		return (NULL);
 	}
 	ft_strlcpy(new_str, str, var_bgn + 1);
 	ft_strlcat(new_str, value, val_len + var_bgn + 1);
-	ft_strlcpy(&new_str[val_len + var_bgn], &str[var_bgn + nvar_len + 1], \
+	ft_strlcpy(&new_str[val_len + var_bgn], &str[var_bgn + nvar_len + 1],
 		(ft_strlen(str) - var_bgn - nvar_len + 1));
 	free(str);
 	free(value);
 	return (new_str);
 }
-
-// Gets the name of the variable (what comes after a dollar sign and is
-// valid character for name - export rule)
 
 static char	*get_var_name(char *str, int i)
 {
@@ -69,10 +73,10 @@ char	*expand_var(char *str, int *i)
 		i++;
 		return (str);
 	}
-	if (!get_env(var_name)) // Needs to be worked on
+	if (!get_env(var_name))
 		var_value = NULL;
 	else
-		var_value = ft_strdup(get_env(var_name)); // Needs to be worked on
+		var_value = ft_strdup(get_env(var_name));
 	if (!var_value)
 		var_value = ft_strdup("");
 	str = replace_var(str, var_value, *i, ft_strlen(var_name));
@@ -80,12 +84,9 @@ char	*expand_var(char *str, int *i)
 	return (str);
 }
 
-// Main function that takes an expansion and replaces for
-// its (existent or non-existent) value
-
 char	*expand_token(char *str)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (str[i])

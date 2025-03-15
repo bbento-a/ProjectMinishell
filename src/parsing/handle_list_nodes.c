@@ -1,7 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_list_nodes.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 07:37:42 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 07:38:18 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-// This will add command nodes to the list of commands
 
 void	add_cmds_last(t_command **cmds, t_command *node)
 {
@@ -18,9 +27,6 @@ void	add_cmds_last(t_command **cmds, t_command *node)
 	temp->next = node;
 	node->previous = temp;
 }
-
-// Creates and initializes variables of files nodes, giving it the
-// file name (whatever appears after redirections)
 
 t_files	*create_file_node(t_line *node, t_type redir)
 {
@@ -42,7 +48,6 @@ t_files	*create_file_node(t_line *node, t_type redir)
 	file->next = NULL;
 	return (file);
 }
-// Adds files node at the end of the list
 
 void	add_files_to_list(t_files **lst, t_files *file)
 {
@@ -61,7 +66,6 @@ void	add_files_to_list(t_files **lst, t_files *file)
 	tmp->next = file;
 	file->previous = tmp;
 }
-// Loops that creates and adds exitent redirections in in/out files lists
 
 t_files	*make_cmd_files(t_line *bgn, t_line *last)
 {

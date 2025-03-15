@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_wspaces.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 07:39:22 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 07:39:27 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
@@ -33,8 +44,8 @@ int	handle_wspaces(t_line *prompt)
 	{
 		if (prompt->next && prompt->next->white_space == false)
 		{
-			if ((prompt->type_n < E_OTHER)
-				|| (prompt->next && prompt->next->type_n < E_OTHER))
+			if ((prompt->type_n < E_OTHER) || (prompt->next
+					&& prompt->next->type_n < E_OTHER))
 			{
 				prompt = prompt->next;
 				continue ;

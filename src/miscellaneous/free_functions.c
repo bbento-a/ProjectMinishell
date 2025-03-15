@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_functions.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 06:03:41 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 06:04:10 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
@@ -42,7 +53,7 @@ void	free_array(char **mtx)
 	int	i;
 
 	i = 0;
-	if (!mtx)// || !mtx[0])
+	if (!mtx)
 		return ;
 	while (mtx[i])
 	{
@@ -53,24 +64,3 @@ void	free_array(char **mtx)
 	free(mtx);
 	mtx = NULL;
 }
-
-// void	free_builtin_list(t_builtin *builtin_list)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < 8)
-// 	{
-// 		free(builtin_list[i].name);
-// 		i++;
-// 	}
-// 	free(builtin_list);
-// }
-
-// int	finish_environment(void)
-// {
-// 	// free_envp();
-// 	free_builtin_list(data()->builtin_list);
-// 	return (0);
-// }
-

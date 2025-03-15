@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_redirections.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 07:45:05 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 07:46:32 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/minishell.h"
 
 void	heredocument_loop(int write_fd, char *limit, bool quotes)
@@ -64,10 +76,6 @@ int	heredocument(char *limiter, bool quotes)
 			data()->exit_code = status;
 		}
 	}
-	// child needs condition to catch signal (global)
-	// child clears all memo from cmds
-	// main waits from child (heredoc) to finish
-	// return(the read part of the pipe);
 	return (fd[0]);
 }
 
@@ -87,12 +95,12 @@ int	redirection_validation(t_files *file)
 		fd = open(file->file_name, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		if(access(file->file_name, F_OK) < 0)
+		if (access(file->file_name, F_OK) < 0)
 			return (display_err("minishell: ", file->file_name,
-				": No such file or directory", 1));
+					": No such file or directory", 1));
 		else if (access(file->file_name, X_OK) < 0)
 			return (display_err("minishell: ", file->file_name,
-				": Permission denied", 1));
+					": Permission denied", 1));
 	}
 	close(fd);
 	if (access_file)
@@ -122,7 +130,7 @@ int	check_heredocs(t_files *files)
 	while (tmp)
 	{
 		if (tmp->type == E_HERDOC && heredoc_validation(tmp))
-			return (1); // turns command invalid, it doesn't even need to build it's path
+			return (1);
 		tmp = tmp->next;
 	}
 	return (0);
@@ -136,7 +144,7 @@ int	check_command_redirections(t_files *files)
 	while (tmp)
 	{
 		if (tmp->type != E_HERDOC && redirection_validation(tmp))
-			return (1); // turns command invalid, it doesn't even need to build it's path
+			return (1);
 		tmp = tmp->next;
 	}
 	return (0);
@@ -164,6 +172,5 @@ int	check_redirections(t_command *cmds)
 		}
 		cmd = cmd->next;
 	}
-	// printf("exit code: %d\n", data()->exit_code);
 	return (0);
 }

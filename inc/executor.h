@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:13:07 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 02:13:08 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 07:28:48 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,15 @@ void	free_tab(char **array);
 int		handle_error(char *path, DIR *folder, int fd);
 
 int		look_for_fds(t_command *cmd);
+
+void	dup_fds(t_command *cmd);
+void	dup_out_fd(t_files *fd_out);
+void	dup_in_fd(t_files *fd_in);
+int		fork_and_exec(char *path, t_command *cmd, char **env_array);
+int		error_message(char *path);
+int	handle_error_message(char *path, DIR *folder, int fd);
+int wait_for_child_process(int pid, char *path, char **env_array);
+int magic_box(char *path, t_command *cmd, t_env *env);
+int	handle_pipes(t_command *cmds, t_env *env);
 
 #endif

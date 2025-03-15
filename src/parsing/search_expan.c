@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   search_expan.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 07:42:28 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 07:43:29 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
@@ -16,8 +27,6 @@ void	remove_expanded_node(t_line **head, t_line *node)
 	}
 }
 
-// This function will search for any expansions to be done, and if they're valid
-
 int	expansion_analyzer(t_line **input, t_line *prompt)
 {
 	int	i;
@@ -26,9 +35,8 @@ int	expansion_analyzer(t_line **input, t_line *prompt)
 	while (prompt->content[i])
 	{
 		if (prompt->content[i] == '$' && prompt->content[i + 1]
-			&& (ft_isalnum(prompt->content[i + 1])
-				|| prompt->content[i + 1] == '_'
-				|| prompt->content[i + 1] == '?'))
+			&& (ft_isalnum(prompt->content[i + 1]) || prompt->content[i
+					+ 1] == '_' || prompt->content[i + 1] == '?'))
 		{
 			prompt->content = expand_token(prompt->content);
 			break ;
@@ -50,9 +58,6 @@ int	expansion_analyzer(t_line **input, t_line *prompt)
 	}
 	return (0);
 }
-
-// Searches expansions. It will skip the heredoc delimiter so the delimiter
-// won't get expanded
 
 int	search_expansion(t_line **input)
 {

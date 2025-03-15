@@ -3,39 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:49:24 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 01:55:23 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 04:45:08 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-/* char	*get_shlvl()
-{
-	char	*final_lvl;
-	char	*current_lvl;
-	int		lvl_nbr;
-
-	current_lvl = data()->shlvl;
-	printf ("Current Shell Level: %s\n", current_lvl);
-	lvl_nbr = atoi(current_lvl);
-	lvl_nbr += 1;
-	current_lvl = ft_itoa(lvl_nbr);
-	final_lvl = ft_strjoin("SHLVL=", current_lvl);
-	printf ("New shell level: %s\n", current_lvl);
-	free(current_lvl);
-	return (final_lvl);
-} */
 char	*env_to_str(t_env *env)
 {
 	char	*str;
 	size_t	len;
 	t_env	*tmp;
+
 	len = 0;
 	tmp = env;
-
 	while (tmp)
 	{
 		if (tmp->value)
@@ -45,9 +29,7 @@ char	*env_to_str(t_env *env)
 	str = my_malloc(len + 1);
 	if (!str)
 		return (NULL);
-	str[0] = '\0'; /// mudei a indent (podia nunca executar e dava o erro)
-
-	while (env)
+	str[0] = '\0';
 	{
 		if (env->value)
 			ft_strlcat(str, env->value, len + 1);
@@ -57,12 +39,11 @@ char	*env_to_str(t_env *env)
 	return (str);
 }
 
-
 void	free_tab(char **array)
 {
 	if (!array)
 		return ;
-	free(array); // Only free the array container, not the strings
+	free(array);
 }
 
 int	handle_error(char *path, DIR *folder, int fd)
@@ -84,7 +65,7 @@ int	look_for_fds(t_command *cmd)
 {
 	t_files	*file;
 	t_files	*tmp;
-	int 	fd;
+	int		fd;
 
 	file = NULL;
 	tmp = cmd->files;

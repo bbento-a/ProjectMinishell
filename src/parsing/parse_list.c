@@ -1,8 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_list.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 07:40:32 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 07:41:03 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-// Checks for any syntax errors before parsing into lists and creating command
-// nodes. If there is an error, then the list won't be created in parse_list()
 
 void	print_redir_syntax(t_line *token)
 {
@@ -44,8 +52,6 @@ void	check_token_syntax(t_line *tokens)
 		tokens = tokens->next;
 	}
 }
-// Creates a command node, initializes all variables, and creates an array for
-// arguments, and creates lists for in/out_files (redirections)
 
 static int	create_cmd_node(t_command **cmds, t_line *bgn, t_line *last)
 {
@@ -55,7 +61,6 @@ static int	create_cmd_node(t_command **cmds, t_line *bgn, t_line *last)
 	node = my_malloc(sizeof(t_command));
 	if (!node)
 		return (display_err(NULL, NULL, "Error allocating command node", 1));
-	// node->path = NULL;
 	node->args = NULL;
 	n_args = handle_node_args(bgn, last);
 	node->args = my_malloc(sizeof(char *) * (n_args + 1));
@@ -65,16 +70,14 @@ static int	create_cmd_node(t_command **cmds, t_line *bgn, t_line *last)
 	node->fd_in = STDIN_FILENO;
 	node->fd_out = STDOUT_FILENO;
 	node->files = make_cmd_files(bgn, last);
-	// node->exit_status = -1;
 	node->pid = -1;
 	add_cmds_last(cmds, node);
 	return (0);
 }
-// Creates a list with nodes based on pipes in the line
 
 int	create_cmd_list(t_line *tokens, t_command **cmds)
 {
-	t_line		*last_token;
+	t_line	*last_token;
 
 	while (tokens)
 	{
@@ -89,7 +92,6 @@ int	create_cmd_list(t_line *tokens, t_command **cmds)
 	}
 	return (0);
 }
-// Main function of the parsing for commands lists.
 
 int	parse_list(t_line *tokens, t_command **cmds)
 {

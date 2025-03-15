@@ -66,6 +66,9 @@ SRC				=	\
 					$(MS_SRCS)set_redirections/set_redirections.c \
 					\
 					$(MS_SRCS)executor/bin.c \
+					$(MS_SRCS)executor/magic_bin.c \
+					$(MS_SRCS)executor/bin_utils.c \
+					$(MS_SRCS)executor/bin_error_handler.c \
 					$(MS_SRCS)executor/cmd.c \
 					$(MS_SRCS)executor/start.c \
 					$(MS_SRCS)executor/utils.c \

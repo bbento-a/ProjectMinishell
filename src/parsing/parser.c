@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 07:41:20 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 07:41:25 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 int	parse_line(char *line, t_command **cmds)
 {
-	t_line *prompt;
+	t_line	*prompt;
 
 	prompt = NULL;
 	if (syntax_checker(line, &prompt))

@@ -1,7 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_functions.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 06:05:59 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 06:06:23 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-// Auxiliar func. for the lexer
 
 t_line	*find_lastnode(t_line *lst)
 {
@@ -11,8 +20,6 @@ t_line	*find_lastnode(t_line *lst)
 		lst = lst->next;
 	return (lst);
 }
-
-// Defines quoted nodes in lexer
 
 void	define_flg(char c)
 {
@@ -40,11 +47,10 @@ void	clear_linelst(t_line **lst)
 	}
 	lst = NULL;
 }
-// Defines node type
 
 t_type	define_type(t_line *node)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (node->type_q != '0')
@@ -64,7 +70,6 @@ t_type	define_type(t_line *node)
 	else
 		return (node->type_n = E_OTHER);
 }
-// Defines white spaces befores the contents on the input line
 
 void	define_white_space(t_line *node, char *line, int bgn)
 {

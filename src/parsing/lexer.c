@@ -1,7 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 07:39:49 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 07:40:14 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-// Creates nodes for the token list
 
 static int	create_node(t_line **prompt, char *line, int bgn, int len)
 {
@@ -31,12 +40,10 @@ static int	create_node(t_line **prompt, char *line, int bgn, int len)
 	return (0);
 }
 
-// Creates nodes only for pipes and redirections
-
 static int	create_redir_pipe(t_line **prompt, char *line, int bgn)
 {
-	if ((line[bgn] == '>' && line[bgn + 1] == '>')
-		|| (line[bgn] == '<' && line[bgn + 1] == '<'))
+	if ((line[bgn] == '>' && line[bgn + 1] == '>') || (line[bgn] == '<'
+			&& line[bgn + 1] == '<'))
 	{
 		if (create_node(prompt, line, bgn, 2))
 			return (data()->error_parse = true);
@@ -51,8 +58,6 @@ static int	create_redir_pipe(t_line **prompt, char *line, int bgn)
 	return (bgn);
 }
 
-// Checks for unclosed quotes and creates nodes for content in quotes
-
 static int	create_quotes(t_line **prompt, char *line, int bgn)
 {
 	int	i;
@@ -60,7 +65,7 @@ static int	create_quotes(t_line **prompt, char *line, int bgn)
 
 	i = bgn;
 	end = 0;
-	if (line[bgn] == '\'' || line [bgn] == '\"')
+	if (line[bgn] == '\'' || line[bgn] == '\"')
 	{
 		i++;
 		while (line[i] && line[i] != data()->hld_flag)
@@ -96,9 +101,6 @@ static int	create_default(t_line **prompt, char *line, int i)
 		return (data()->error_parse = true);
 	return (i);
 }
-
-// Main function of the lexer, checks for syntax and then send a list with
-// the contents for the AST to parse
 
 int	syntax_checker(char *line, t_line **prompt)
 {

@@ -1,9 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_cmd_args.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 07:36:56 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 07:37:08 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-// This function returns the number of arguments that will be given
-// to a command, ignoring files names (everything that is followed
-// by a redirection)
 
 int	handle_node_args(t_line *bgn, t_line *last)
 {
@@ -25,10 +32,6 @@ int	handle_node_args(t_line *bgn, t_line *last)
 	}
 	return (nb);
 }
-
-// Attributes arguments to the array of the command node and closes
-// it with a NULL pointer. This happens because the execve must receive
-// arrays of arguments that ends with NULL pointer
 
 void	make_cmd_args(char **args, t_line *bgn, t_line *last, int size)
 {

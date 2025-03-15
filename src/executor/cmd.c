@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:37:59 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/06 16:16:32 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 04:42:35 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	}
 	return (s1[i] - s2[i]);
 }
+
 int	is_builtin(char *command)
 {
 	if (!command)
@@ -51,7 +52,7 @@ int	is_builtin(char *command)
 
 int	exec_builtin(t_command *cmd)
 {
-	char **args;
+	char	**args;
 
 	args = cmd->args;
 	if (ft_strcmp(args[0], "echo") == 0)

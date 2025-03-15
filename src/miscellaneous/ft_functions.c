@@ -1,20 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_functions.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 06:04:25 by mde-maga          #+#    #+#             */
+/*   Updated: 2025/03/15 06:05:12 by mde-maga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-// int	ft_close(int *fd)
-// {
-// 	int	close_return;
-
-// 	close_return = 0;
-// 	if (*fd > 2)
-// 	{
-// 		close_return = close(*fd);
-// 		*fd = -1;
-// 	}
-// 	return (close_return);
-// }
-// Compares a char c to a str of other chars
-// (if it finds c in *sign, it returns true)
 
 bool	symbol_cmp(char *sign, char c)
 {
@@ -29,8 +25,6 @@ bool	symbol_cmp(char *sign, char c)
 	return (false);
 }
 
-// Sizes an 2d array
-
 int	ft_mtxlen(char **mtx)
 {
 	int	i;
@@ -43,7 +37,7 @@ int	ft_mtxlen(char **mtx)
 
 void	ft_freemtx(char **mtx)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (!mtx)
@@ -57,19 +51,20 @@ void	ft_freemtx(char **mtx)
 	mtx = NULL;
 	return ;
 }
+
 void	*my_malloc(size_t size)
 {
 	unsigned char	*aux;
-	size_t			 i;
+	size_t			i;
 
 	i = 0;
 	aux = (unsigned char *)malloc(size);
-	if(!aux)
-		return(NULL);
-	while(i < size)
+	if (!aux)
+		return (NULL);
+	while (i < size)
 	{
 		aux[i] = 0;
 		i++;
 	}
-	return((void *)aux);
+	return ((void *)aux);
 }
