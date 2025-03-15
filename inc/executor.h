@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:13:07 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 08:25:34 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 09:18:16 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ int		wait_for_child_process(int pid, char *path,
 			char **env_array);
 int		magic_box(char *path, t_command *cmd, t_env *env);
 int		handle_pipes(t_command *cmds, t_env *env);
+void	handle_parent_process(pid_t pid, int *prev_fd, int pipefd[2],
+			t_command **cmds);
 
 #endif

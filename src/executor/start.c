@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:42:40 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 08:02:52 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 09:17:08 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,20 @@ int	exec_cmd(t_command *command)
 	else
 		ret_val = exec_bin(command, data()->env);
 	return (ret_val);
+}
+
+void	handle_parent_process(pid_t pid, int *prev_fd, int pipefd[2],
+		t_command **cmds)
+{
+	waitpid(pid, NULL, 0);
+	if (*prev_fd != -1)
+		close(*prev_fd);
+	if ((*cmds)->next)
+	{
+		close(pipefd[1]);
+		*prev_fd = pipefd[0];
+	}
+	else
+		close(pipefd[0]);
+	*cmds = (*cmds)->next;
 }
