@@ -6,14 +6,11 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:40:35 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 07:41:25 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:14:01 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-//	TEST PHARES
-// "This is a test" to see if the 'handle quotes' is working
 
 void	ft_printmtx(char **mtx)
 {
@@ -92,23 +89,23 @@ void	ft_print_env(t_env *env)
 	}
 }
 
-void	test(t_command *cmds)
-{
-	int	i;
+// void	test(t_command *cmds)
+// {
+// 	int	i;
 
-	i = 0;
-	if (!cmds)
-		ft_printf("No commands received\n");
-	while (cmds)
-	{
-		ft_printf("\n###################\n\n");
-		ft_printf("COMMAND %d\n", ++i);
-		ft_printf("\nArguments:\n");
-		ft_printmtx(cmds->args);
-		ft_printf("\n---------------\n");
-		ft_printf("\nfiles:\n");
-		print_filenodes(cmds->files);
-		cmds = cmds->next;
-	}
-	ft_printf("\n###################\n");
-}
+// 	i = 0;
+// 	if (!cmds)
+// 		ft_printf("No commands received\n");
+// 	while (cmds)
+// 	{
+// 		ft_printf("\n###################\n\n");
+// 		ft_printf("COMMAND %d\n", ++i);
+// 		ft_printf("\nArguments:\n");
+// 		ft_printmtx(cmds->args);
+// 		ft_printf("\n---------------\n");
+// 		ft_printf("\nfiles:\n");
+// 		print_filenodes(cmds->files);
+// 		cmds = cmds->next;
+// 	}
+// 	ft_printf("\n###################\n");
+// }

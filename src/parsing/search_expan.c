@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_expan.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:42:28 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 07:43:29 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:20:11 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	expansion_analyzer(t_line **input, t_line *prompt)
 	{
 		if (prompt->content[i] == '$' && prompt->content[i + 1]
 			&& (ft_isalnum(prompt->content[i + 1]) || prompt->content[i
-					+ 1] == '_' || prompt->content[i + 1] == '?'))
+				+ 1] == '_' || prompt->content[i + 1] == '?'))
 		{
 			prompt->content = expand_token(prompt->content);
 			break ;

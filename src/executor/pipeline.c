@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:34:52 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 02:38:46 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:19:22 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	handle_pipes(t_command *cmds, t_env *env)
 	int		prev_fd;
 	int		i;
 	pid_t	pid;
-	int status;
+	int		status;
 
 	prev_fd = -1;
 	i = 0;
@@ -30,7 +30,7 @@ int	handle_pipes(t_command *cmds, t_env *env)
 		pid = fork();
 		if (pid == -1)
 			return (display_err(NULL, NULL, "Failed to fork process", 1));
-		if (pid == 0) // Child process
+		if (pid == 0)
 		{
 			if (prev_fd != -1)
 			{
@@ -51,7 +51,7 @@ int	handle_pipes(t_command *cmds, t_env *env)
 			clear_env(data()->env);
 			exit(status);
 		}
-		else // Parent process
+		else
 		{
 			if (prev_fd != -1)
 				close(prev_fd);
@@ -67,7 +67,7 @@ int	handle_pipes(t_command *cmds, t_env *env)
 		}
 	}
 	waitpid(pid, &status, 0);
-	if (WIFSIGNALED(status)) /// if the process gets terminated by a signal, it returns the value of that signal
+	if (WIFSIGNALED(status))
 		status = WIFEXITED(status);
 	else if (WIFEXITED(status))
 		status = WEXITSTATUS(status);

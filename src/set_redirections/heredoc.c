@@ -6,13 +6,13 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:47:22 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 07:35:55 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:23:12 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static void write_to_heredoc(int write_fd, bool quotes, char *line)
+static void	write_to_heredoc(int write_fd, bool quotes, char *line)
 {
 	if (quotes == true)
 		line = expand_token(line);

@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 06:02:15 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 08:10:47 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:13:37 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ t_env	*parse_envp(char **envp)
 	}
 	return (new_env);
 }
-
-// Initiates the variables so we're not working wiith uninitialized values
 
 void	init_data(char **envp)
 {

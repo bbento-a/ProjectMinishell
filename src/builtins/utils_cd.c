@@ -6,12 +6,11 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:33:04 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 08:00:30 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:20:54 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
 
 void	env_add(char *var, t_env **env)
 {
@@ -20,7 +19,7 @@ void	env_add(char *var, t_env **env)
 
 	new_env = my_malloc(sizeof(t_env));
 	if (!new_env)
-		return ; // Allocation failed
+		return ;
 	new_env->value = ft_strdup(var);
 	if (!new_env->value)
 	{
@@ -28,13 +27,11 @@ void	env_add(char *var, t_env **env)
 		return ;
 	}
 	new_env->next = NULL;
-	// If env is NULL, initialize it properly
 	if (!(*env))
 	{
 		*env = new_env;
-		return;
+		return ;
 	}
-	// Otherwise, append to the end
 	tmp = *env;
 	while (tmp->next)
 		tmp = tmp->next;
@@ -51,8 +48,6 @@ char	*get_env_path(t_env *env, const char *var, size_t len)
 	}
 	return (NULL);
 }
-
-// Updates "PWD" env variable
 
 int	update_pwd(t_env **env)
 {
@@ -79,8 +74,6 @@ int	update_pwd(t_env **env)
 	return (SUCCESS);
 }
 
-// Updates "OLDPWD" env variable
-
 int	update_oldpwd(t_env **env)
 {
 	char	cwd[PATH_MAX];
@@ -90,7 +83,7 @@ int	update_oldpwd(t_env **env)
 	if (!getcwd(cwd, PATH_MAX))
 		return (ERROR);
 	tmp = *env;
-	while (tmp) // iterates for env looking for OLDPWD
+	while (tmp)
 	{
 		if (ft_strncmp(tmp->value, "OLDPWD=", 7) == 0)
 		{
@@ -110,7 +103,7 @@ void	ft_memdel(void **ap)
 {
 	if (ap && *ap)
 	{
-		free(*ap);  // Free the memory pointed to by *ap
-		*ap = NULL; // Set the pointer to NULL to avoid dangling references
+		free(*ap);
+		*ap = NULL;
 	}
 }

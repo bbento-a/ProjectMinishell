@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:49:10 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 08:05:50 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:23:31 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	check_heredocs(t_files *files)
 	{
 		if (tmp->type == E_HERDOC && heredoc_validation(tmp))
 			return (1);
-		// turns command invalid, it doesn't even need to build it's path
 		tmp = tmp->next;
 	}
 	return (0);
@@ -79,7 +78,6 @@ int	check_command_redirections(t_files *files)
 	{
 		if (tmp->type != E_HERDOC && redirection_validation(tmp))
 			return (1);
-		// turns command invalid, it doesn't even need to build it's path
 		tmp = tmp->next;
 	}
 	return (0);

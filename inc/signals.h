@@ -6,10 +6,9 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:13:10 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 02:13:11 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:24:38 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef SIGNALS_H
 # define SIGNALS_H

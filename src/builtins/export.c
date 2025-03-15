@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:23:13 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 04:25:24 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:15:01 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	search_env_variable(t_env *env, const char *var)
 	t_env	*tmp;
 
 	tmp = env;
-	while (tmp) // Search for the variable in the environment
+	while (tmp)
 	{
 		if (ft_strncmp(tmp->value, var, ft_strlen_equal(var)) == 0)
 		{
@@ -63,7 +63,7 @@ static int	search_env_variable(t_env *env, const char *var)
 
 int	update_env(t_env **env, const char *var)
 {
-	if (!(*env)) // If there is no env to begin with
+	if (!(*env))
 	{
 		*env = my_malloc(sizeof(t_env));
 		if (!*env)
@@ -79,19 +79,17 @@ int	ms_export(t_command *cmd, char **args)
 {
 	int	i;
 
-	// If no arguments, print the sorted environment
 	if (!args[1])
 	{
 		print_env(cmd, data()->env);
 		return (0);
 	}
 	i = 1;
-	// Iterate through arguments and process them
 	while (args[i])
 	{
-		if (!is_valid_env(args[i])) // Check if the variable is valid
+		if (!is_valid_env(args[i]))
 			print_error(args[i]);
-		else // Add or update the environment variable
+		else
 		{
 			if (update_env(&data()->env, args[i]) == -1)
 				return (1);

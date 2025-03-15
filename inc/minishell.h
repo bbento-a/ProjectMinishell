@@ -6,10 +6,9 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:12:37 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 02:13:54 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:25:57 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H

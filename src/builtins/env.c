@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:54:39 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 04:41:47 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 08:14:35 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	is_in_env(t_env *env, const char *var)
 	while (env)
 	{
 		if (ft_strncmp(env->value, var, ft_strlen(var)) == 0)
-			return (1); // Found the variable in the environment
+			return (1);
 		env = env->next;
 	}
-	return (0); // Variable not found in the environment
+	return (0);
 }
 
 int	is_valid_env(const char *s)
@@ -28,11 +28,9 @@ int	is_valid_env(const char *s)
 	int	i;
 
 	i = 0;
-	// Check that the first character is a valid start of an identifier (letter or underscore)
 	if (!(ft_isalpha(s[i]) || s[i] == '_'))
 		return (0);
 	i++;
-	// Check that the rest of the characters are valid (alphanumeric or underscore)
 	while (s[i] != '=' && s[i])
 	{
 		if (!(ft_isalnum(s[i]) || s[i] == '_'))
@@ -71,12 +69,11 @@ int	ms_env(t_command *cmd, t_env *env)
 	while (env)
 	{
 		if (ft_strchr(env->value, '=') != NULL)
-		// Check if '=' exists in the string
 		{
-			ft_putstr_fd(env->value, fd_to); // Print the variable
+			ft_putstr_fd(env->value, fd_to);
 			ft_putstr_fd("\n", fd_to);
 		}
-		env = env->next; // Move to the next node
+		env = env->next;
 	}
 	return (0);
 }
