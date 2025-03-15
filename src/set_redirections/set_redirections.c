@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:49:10 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 07:29:04 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 07:43:15 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int	redirection_validation(t_files *file)
 		fd = open(file->file_name, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		if(access(file->file_name, F_OK) < 0)
+		if (access(file->file_name, F_OK) < 0)
 			return (display_err("minishell: ", file->file_name,
-				": No such file or directory", 1));
+					": No such file or directory", 1));
 		else if (access(file->file_name, X_OK) < 0)
 			return (display_err("minishell: ", file->file_name,
-				": Permission denied", 1));
+					": Permission denied", 1));
 	}
 	close(fd);
 	if (access_file)
@@ -63,7 +63,8 @@ int	check_heredocs(t_files *files)
 	while (tmp)
 	{
 		if (tmp->type == E_HERDOC && heredoc_validation(tmp))
-			return (1); // turns command invalid, it doesn't even need to build it's path
+			return (1);
+		// turns command invalid, it doesn't even need to build it's path
 		tmp = tmp->next;
 	}
 	return (0);
@@ -77,7 +78,8 @@ int	check_command_redirections(t_files *files)
 	while (tmp)
 	{
 		if (tmp->type != E_HERDOC && redirection_validation(tmp))
-			return (1); // turns command invalid, it doesn't even need to build it's path
+			return (1);
+		// turns command invalid, it doesn't even need to build it's path
 		tmp = tmp->next;
 	}
 	return (0);

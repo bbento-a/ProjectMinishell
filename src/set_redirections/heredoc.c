@@ -6,11 +6,20 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:47:22 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 07:28:03 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 07:35:55 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+static void write_to_heredoc(int write_fd, bool quotes, char *line)
+{
+	if (quotes == true)
+		line = expand_token(line);
+	write(write_fd, line, ft_strlen(line));
+	write(write_fd, "\n", 1);
+	free(line);
+}
 
 void	heredocument_loop(int write_fd, char *limit, bool quotes)
 {
@@ -36,11 +45,7 @@ void	heredocument_loop(int write_fd, char *limit, bool quotes)
 			free(line);
 			break ;
 		}
-		if (quotes == true)
-			line = expand_token(line);
-		write(write_fd, line, ft_strlen(line));
-		write(write_fd, "\n", 1);
-		free(line);
+		write_to_heredoc(write_fd, quotes, line);
 	}
 	close(write_fd);
 }
