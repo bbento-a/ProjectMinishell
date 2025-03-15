@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:12:29 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 02:12:30 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 04:41:57 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int		ms_pwd(t_command *cmd);
 int		ms_export(t_command *cmd, char **args);
 int		ms_unset(char **cmd);
 
+int		is_in_env(t_env *env, const char *var);
+int		is_valid_env(const char *s);
+void	print_env(t_command *cmd, t_env *env);
 int		update_env(t_env **env, const char *var);
 char	*get_env_path(t_env *env, const char *var, size_t len);
 int		update_oldpwd(t_env **env);

@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:33:04 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 02:22:31 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 04:44:59 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	env_add(char *var, t_env **env)
 		tmp = tmp->next;
 	new_env = my_malloc(sizeof(t_env));
 	if (!new_env)
-		return ; // Allocation failed
+		return ;                      // Allocation failed
 	new_env->value = ft_strdup(var); // Assuming ft_strdup is your custom strdup
 	if (!new_env->value)
 	{
@@ -37,6 +37,7 @@ void	env_add(char *var, t_env **env)
 		new_env->next = NULL;
 	}
 }
+
 char	*get_env_path(t_env *env, const char *var, size_t len)
 {
 	while (env)
@@ -109,15 +110,4 @@ void	ft_memdel(void **ap)
 		free(*ap);  // Free the memory pointed to by *ap
 		*ap = NULL; // Set the pointer to NULL to avoid dangling references
 	}
-}
-
-int	is_in_env(t_env *env, const char *var)
-{
-	while (env)
-	{
-		if (ft_strncmp(env->value, var, ft_strlen(var)) == 0)
-			return (1); // Found the variable in the environment
-		env = env->next;
-	}
-	return (0); // Variable not found in the environment
 }

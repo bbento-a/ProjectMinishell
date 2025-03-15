@@ -77,14 +77,15 @@ static int	check_valid_number(char *str, int spc, int j)
 		}
 	}
 	if (check_valid_signumber(str, i, j))
-		return (display_err("exit: ", NULL, "numeric argument is too large", 1));
+		return (display_err("exit: ", NULL, "numeric argument is too large",
+				1));
 	return (0);
 }
 
 static int	check_exit_arg(char *str)
 {
-	int		spaces;
-	int		i;
+	int	spaces;
+	int	i;
 
 	i = 0;
 	spaces = 0;
@@ -100,7 +101,8 @@ static int	check_exit_arg(char *str)
 	if (str[i] && (str[i] < '0' || str[i] > '9'))
 		return (display_err("exit: ", NULL, "numeric argument is required", 2));
 	if (ft_strlen(str) - spaces > 20)
-		return (display_err("exit: ", NULL, "numeric argument is too large", 1));
+		return (display_err("exit: ", NULL, "numeric argument is too large",
+				1));
 	if (ft_strlen(str) - spaces <= 18)
 		return (0);
 	if (check_valid_number(str, spaces, 0))

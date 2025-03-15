@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:47:22 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 02:48:22 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 04:52:57 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,5 @@ int	heredocument(char *limiter, bool quotes)
 			data()->exit_code = status;
 		}
 	}
-	// child needs condition to catch signal (global)
-	// child clears all memo from cmds
-	// main waits from child (heredoc) to finish
-	// return(the read part of the pipe);
 	return (fd[0]);
 }

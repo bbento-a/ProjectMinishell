@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:38:32 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 02:22:14 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 04:41:04 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	free_node(t_env *env)
 	if (data()->env == env && env->next == NULL)
 	{
 		ft_memdel((void **)&data()->env->value);
-			// Pass the address of the pointer
+		// Pass the address of the pointer
 		data()->env->value = NULL;
 		data()->env->next = NULL;
 		free(env);
@@ -39,31 +39,20 @@ int	ms_unset(char **cmd)
 	t_env	*env;
 	t_env	*prev;
 
-	// If no argument is passed, do nothing
-	if (!cmd[1])
-		return (0);
-	env = data()->env;
 	prev = NULL;
-	// Iterate through each argument (environment variable to unset)
-	while (*++cmd)
+	while (*++cmd) // Iterate through each argument (environment variable to unset)
 	{
-		// Traverse the environment linked list
-		while (env)
+		env = data()->env;
+		while (env) // Traverse the environment linked list
 		{
 			// If we find the matching variable, we delete it
 			if (ft_strncmp(env->value, *cmd, ft_strlen(*cmd)) == 0)
 			{
 				// If previous is null, we're deleting the first node
-				if (!prev)
-				{
+				if (!prev) // Update head if it's the first node
 					data()->env = env->next;
-						// Update head if it's the first node
-				}
-				else
-				{
-					// If not, just link previous to the next node
+				else // If not, just link previous to the next node
 					prev->next = env->next;
-				}
 				free_node(env); // Free the node
 				break ;          // Stop searching as we found and deleted it
 			}
@@ -71,6 +60,5 @@ int	ms_unset(char **cmd)
 			env = env->next;
 		}
 	}
-	// If no errors, set the return status to 0 (successful)
 	return (0);
 }

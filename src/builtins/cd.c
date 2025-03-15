@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:27:20 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 02:19:27 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/15 04:07:22 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ int	ms_cd(char **args, t_env *env)
 		return (display_err("minishell: cd: ", NULL, "too many arguments", 1));
 	if (ft_strncmp(args[1], "-", 1) == 0)
 		return (go_to_path(1, env)); // Argument "-" -> Go to OLDPWD
-	update_oldpwd(&data()->env); // Update OLDPWD
+	update_oldpwd(&data()->env);     // Update OLDPWD
 	if (chdir(args[1]) < 0)
-		return (display_err("minishell: cd: ", NULL, "No such file or directory", 1));
+		return (display_err("minishell: cd: ", NULL,
+				"No such file or directory", 1));
 	update_pwd(&data()->env);
 	return (SUCCESS);
 }
