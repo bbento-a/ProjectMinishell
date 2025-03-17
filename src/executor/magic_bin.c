@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   magic_bin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 06:15:01 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 07:34:46 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:42:04 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	fork_and_exec(char *path, t_command *cmd, char **env_array)
 	int	ret;
 
 	pid = fork();
+	ret = 1;
 	if (pid == 0)
 	{
 		if (env_array)

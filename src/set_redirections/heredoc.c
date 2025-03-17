@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:47:22 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 08:23:12 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:17:34 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,14 @@ void	heredocument_loop(int write_fd, char *limit, bool quotes)
 int	execute_heredoc(char *limiter, bool quotes, int *fd)
 {
 	close(fd[0]);
+	disable_signals();
 	heredoc_signals();
 	heredocument_loop(fd[1], limiter, quotes);
 	clear_memory(data()->cmds);
 	clear_env(data()->env);
 	close(fd[1]);
+	if (data()->error_parse)
+		exit(data()->exit_code);
 	exit(0);
 }
 
@@ -73,17 +76,17 @@ int	heredocument(char *limiter, bool quotes)
 	if (pid == -1)
 		return (display_err(NULL, NULL, "Failed to fork process", 1));
 	else if (pid == 0)
-		execute_heredoc(limiter, quotes, fd);
+		status = execute_heredoc(limiter, quotes, fd);
 	else
 	{
 		close(fd[1]);
 		waitpid(pid, &status, 0);
-		if (WIFSIGNALED(status))
-		{
-			write(1, "\n", 1);
-			data()->exit_code = status;
+	}
+	if (WIFEXITED(status))
+	{
+		data()->exit_code = WEXITSTATUS(status);
+		if (data()->exit_code)
 			data()->error_parse = true;
-		}
 	}
 	return (fd[0]);
 }

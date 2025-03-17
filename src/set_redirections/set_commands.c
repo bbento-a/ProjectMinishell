@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:30:06 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 08:05:00 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:17:54 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ int	check_and_execute(t_command *commands)
 	if (!commands)
 		return (1);
 	if (check_redirections(commands))
-	{
 		return (1);
-	}
 	data()->exit_code = executor(commands);
 	return (0);
 }
