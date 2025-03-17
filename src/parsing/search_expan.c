@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:42:28 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 10:35:55 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:51:42 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int	search_expansion(t_line **input)
 	prompt = *input;
 	while (prompt)
 	{
-		if (prompt->prev && prompt->prev->type_n == E_HERDOC
-			&& !prompt->content[0])
+		if ((prompt->prev && prompt->prev->type_n == E_HERDOC)
+			|| !prompt->content[0])
 		{
 			prompt = prompt->next;
 			continue ;
