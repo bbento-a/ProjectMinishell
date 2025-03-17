@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:42:40 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 10:35:35 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:49:03 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ int	exec_cmd(t_command *command)
 	return (ret_val);
 }
 
-void	handle_parent_process(pid_t pid, int *prev_fd, int pipefd[2],
+void	handle_parent_process(int *prev_fd, int pipefd[2],
 		t_command **cmds)
 {
-	waitpid(pid, NULL, 0);
 	if (*prev_fd != -1)
 		close(*prev_fd);
 	if ((*cmds)->next)

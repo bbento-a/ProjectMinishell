@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:34:52 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 09:45:57 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:49:08 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,18 @@ static int	execute_process(pid_t pid, t_command *cmds, int *prev_fd,
 	if (pid == 0)
 		handle_child_process(cmds, *prev_fd, pipefd, data()->env);
 	else
-		handle_parent_process(pid, prev_fd, pipefd, &cmds);
+		handle_parent_process(prev_fd, pipefd, &cmds);
 	return (0);
+}
+
+int	wait_cmds(pid_t pid, int status)
+{
+	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status)) /// if the process gets terminated by a signal, it returns the value of that signal
+		status = WIFEXITED(status);
+	else if (WIFEXITED(status))
+		status = WEXITSTATUS(status);
+	return (status);
 }
 
 int	handle_pipes(t_command *cmds)
@@ -87,6 +97,7 @@ int	handle_pipes(t_command *cmds)
 		cmds = cmds->next;
 		i++;
 	}
+	status = wait_cmds(pid, status);
 	while (--i > 0)
 		wait(NULL);
 	return (status);

@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:13:07 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 09:46:19 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:47:29 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		handle_error_message(char *path, DIR *folder, int fd);
 int		wait_for_child_process(int pid, char *path,
 			char **env_array);
 int		magic_box(char *path, t_command *cmd, t_env *env);
-void	handle_parent_process(pid_t pid, int *prev_fd, int pipefd[2],
+void	handle_parent_process(int *prev_fd, int pipefd[2],
 			t_command **cmds);
 
 #endif
