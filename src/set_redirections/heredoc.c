@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:47:22 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/17 13:17:34 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/18 14:18:18 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	heredocument_loop(int write_fd, char *limit, bool quotes)
 int	execute_heredoc(char *limiter, bool quotes, int *fd)
 {
 	close(fd[0]);
-	disable_signals();
 	heredoc_signals();
 	heredocument_loop(fd[1], limiter, quotes);
 	clear_memory(data()->cmds);
@@ -72,6 +71,7 @@ int	heredocument(char *limiter, bool quotes)
 
 	if (pipe(fd) == -1)
 		return (display_err(NULL, NULL, "Failed to create pipe", 1));
+	disable_signals();
 	pid = fork();
 	if (pid == -1)
 		return (display_err(NULL, NULL, "Failed to fork process", 1));
