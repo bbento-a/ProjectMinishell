@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   magic_bin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 06:15:01 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/18 14:04:46 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/19 19:12:24 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,10 @@ int	fork_and_exec(char *path, t_command *cmd, char **env_array)
 	ret = 1;
 	if (pid == 0)
 	{
-		// if (env_array)
-		// {
-			dup_fds(cmd);
-			if (execve(path, cmd->args, env_array) != 0)
-				ret = error_message(cmd->args[0]);
-			clear_fork(path, env_array);
-		// }
+		dup_fds(cmd);
+		if (execve(path, cmd->args, env_array) != 0)
+			ret = error_message(cmd->args[0]);
+		clear_fork(path, env_array);
 		exit(ret);
 	}
 	return (pid);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:23:13 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 08:15:01 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/19 19:49:15 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	print_error(char *arg)
 	return (ERROR);
 }
 
-static size_t	ft_strlen_equal(const char *str)
+size_t	ft_strlen_equal(const char *str)
 {
 	int	i;
 
@@ -32,20 +32,18 @@ static size_t	ft_strlen_equal(const char *str)
 	return (i);
 }
 
-static int	search_env_variable(t_env *env, const char *var)
+static int	search_env_variable(t_env *env, const char *name, const char *value)
 {
 	t_env	*tmp;
 
 	tmp = env;
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->value, var, ft_strlen_equal(var)) == 0)
+		if (ft_strncmp(tmp->value, name, ft_strlen_equal(name)) == 0)
 		{
 			free(tmp->value);
-			tmp->value = ft_strdup(var);
-			if (!tmp->value)
-				return (display_err(NULL, NULL, "Failed to allocate memory",
-						-1));
+			tmp->value = ft_strjoin(name, "=");
+			tmp->value = ft_strjoin(tmp->value, value);
 			return (SUCCESS);
 		}
 		tmp = tmp->next;
@@ -56,24 +54,41 @@ static int	search_env_variable(t_env *env, const char *var)
 	tmp->next = my_malloc(sizeof(t_env));
 	if (!tmp->next)
 		return (display_err(NULL, NULL, "Failed to allocate memory", -1));
-	tmp->next->value = ft_strdup(var);
+	tmp->next->value = ft_strjoin(name, "=");
+	tmp->next->value = ft_strjoin(tmp->next->value, value);
 	tmp->next->next = NULL;
 	return (SUCCESS);
 }
 
 int	update_env(t_env **env, const char *var)
 {
-	if (!(*env))
+	char	*equals_pos;
+	char	*name;
+	char	*value;
+
+	// Find the position of '=' in the variable
+	equals_pos = ft_strchr(var, '=');
+	if (equals_pos)
 	{
-		*env = my_malloc(sizeof(t_env));
+		// Split the variable into name and value
+		name = ft_strndup(var, equals_pos - var);
+		value = ft_strdup(equals_pos + 1);
 		if (!*env)
-			return (display_err(NULL, NULL, "Failed to allocate memory", -1));
-		(*env)->next = NULL;
-		(*env)->value = ft_strdup(var);
-		return (SUCCESS);
+		{
+			*env = my_malloc(sizeof(t_env));
+			(*env)->value = ft_strjoin(name, "=");
+			(*env)->value = ft_strjoin((*env)->value, value);
+			(*env)->next = NULL;
+			free(name);
+			free(value);
+			return (SUCCESS);
+		}
+		else
+			return (search_env_variable(*env, name, value));
 	}
-	return (search_env_variable(*env, var));
+	return (ERROR);
 }
+
 
 int	ms_export(t_command *cmd, char **args)
 {

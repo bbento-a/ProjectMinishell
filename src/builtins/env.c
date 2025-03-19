@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:54:39 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 08:14:35 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/19 21:00:41 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,32 @@ int	is_valid_env(const char *s)
 
 void	print_env(t_command *cmd, t_env *env)
 {
-	int	fd_to;
+	int		fd_to;
+	char	*equals_pos;
+	size_t	name_len;
 
 	fd_to = look_for_fds(cmd);
 	while (env)
 	{
 		ft_putstr_fd("declare -x ", fd_to);
-		ft_putstr_fd(env->value, fd_to);
-		if (ft_strchr(env->value, '='))
+		equals_pos = ft_strchr(env->value, '=');
+		if (equals_pos)
 		{
+			name_len = equals_pos - env->value;
+			write(fd_to, env->value, name_len);
 			ft_putstr_fd("=\"", fd_to);
-			ft_putstr_fd(env->value, fd_to);
+			ft_putstr_fd(equals_pos + 1, fd_to);
 			ft_putstr_fd("\"\n", fd_to);
 		}
 		else
+		{
+			ft_putstr_fd(env->value, fd_to);
 			ft_putstr_fd("\n", fd_to);
+		}
 		env = env->next;
 	}
 }
+
 
 int	ms_env(t_command *cmd, t_env *env)
 {

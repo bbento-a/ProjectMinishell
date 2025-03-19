@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 13:42:40 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/17 15:49:03 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/19 19:11:15 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,14 @@ void	handle_parent_process(int *prev_fd, int pipefd[2],
 	else
 		close(pipefd[0]);
 	*cmds = (*cmds)->next;
+}
+
+int	wait_cmds(pid_t pid, int status)
+{
+	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status))
+		status = WIFEXITED(status);
+	else if (WIFEXITED(status))
+		status = WEXITSTATUS(status);
+	return (status);
 }

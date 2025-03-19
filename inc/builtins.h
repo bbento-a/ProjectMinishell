@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:12:29 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 08:24:21 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/19 19:14:46 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int			update_oldpwd(t_env **env);
 int			update_pwd(t_env **env);
 void		ft_memdel(void **ap);
 int			is_in_env(t_env *env, const char *var);
+char		*ft_strndup(const char *s, size_t len);
 
 #endif
