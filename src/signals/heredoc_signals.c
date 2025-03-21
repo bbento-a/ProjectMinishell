@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:40:43 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/18 14:14:10 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:59:22 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	heredoc_handler(int sig)
 {
 	write(STDIN_FILENO, "\n", 1);
 	close(STDIN_FILENO);
-	// rl_replace_line("", 0);
-	// rl_on_new_line();
 	data()->exit_code = 128 + sig;
 	data()->error_parse = true;
 }

@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 06:02:15 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 11:02:39 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:00:21 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_env	*parse_envp(char **envp)
 
 	i = 0;
 	new_env = NULL;
-	if(!envp || !envp[0])
+	if (!envp || !envp[0])
 		return (new_env);
 	while (envp[i])
 	{

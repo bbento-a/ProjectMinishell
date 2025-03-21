@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:54:39 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/19 21:00:41 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:59:38 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	print_env(t_command *cmd, t_env *env)
 		env = env->next;
 	}
 }
-
 
 int	ms_env(t_command *cmd, t_env *env)
 {
