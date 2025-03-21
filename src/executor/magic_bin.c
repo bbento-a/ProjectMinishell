@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   magic_bin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 06:15:01 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/19 19:12:24 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:54:02 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ static int	copy_env_variables(t_env *env, char **env_array)
 	return (1);
 }
 
-static int	handle_magic_box_errors(char *path, t_command *cmd)
+static int	handle_launcher_errors(char *path, t_command *cmd)
 {
 	if (!path || !cmd->args)
 		return (display_err("minishell: ", NULL,
-				"Invalid arguments provided to magic_box", 1));
+				"Invalid arguments provided to launch_process", 1));
 	return (0);
 }
 
@@ -76,7 +76,7 @@ int	fork_and_exec(char *path, t_command *cmd, char **env_array)
 	return (pid);
 }
 
-int	magic_box(char *path, t_command *cmd, t_env *env)
+int	launch_process(char *path, t_command *cmd, t_env *env)
 {
 	char	**env_array;
 	int		ret;
@@ -91,7 +91,7 @@ int	magic_box(char *path, t_command *cmd, t_env *env)
 			return (display_err("minishell: ", NULL, "Memory allocation failed",
 					1));
 	}
-	if (handle_magic_box_errors(path, cmd))
+	if (handle_launcher_errors(path, cmd))
 		return (ret);
 	child_signals();
 	pid = fork_and_exec(path, cmd, env_array);

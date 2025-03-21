@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:13:07 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/19 19:13:06 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:53:29 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int					error_message(char *path);
 int					handle_error_message(char *path, DIR *folder, int fd);
 int					wait_for_child_process(int pid, char *path,
 						char **env_array);
-int					magic_box(char *path, t_command *cmd, t_env *env);
+int					launch_process(char *path, t_command *cmd, t_env *env);
 void				handle_parent_process(int *prev_fd, int pipefd[2],
 						t_command **cmds);
 

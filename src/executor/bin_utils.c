@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 04:45:38 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 08:02:47 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:45:46 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ void	dup_in_fd(t_files *fd_in)
 	int	fd;
 
 	if (fd_in->type == E_HERDOC)
-		dup2(fd_in->fd, STDIN_FILENO);
+	{
+		fd = fd_in->fd;
+		dup2(fd, STDIN_FILENO);
+	}
 	else
 	{
 		fd = open(fd_in->file_name, O_RDONLY);
 		dup2(fd, STDIN_FILENO);
 	}
+	close(fd);
 }
 
 void	dup_out_fd(t_files *fd_out)
@@ -34,6 +38,7 @@ void	dup_out_fd(t_files *fd_out)
 	else if (fd_out->type == E_APPEND)
 		fd = open(fd_out->file_name, O_CREAT | O_RDWR | O_APPEND, 0644);
 	dup2(fd, STDOUT_FILENO);
+	close(fd);
 }
 
 void	dup_fds(t_command *cmd)

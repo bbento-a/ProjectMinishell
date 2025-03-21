@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:04:34 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 08:08:35 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:53:29 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,18 @@ int	exec_bin(t_command *cmd, t_env *env)
 	if (!cmd->args || !cmd->args[0])
 		return (data()->exit_code);
 	if (cmd->args[0][0] == '.' || cmd->args[0][0] == '/')
-		return (magic_box(ft_strdup(cmd->args[0]), cmd, env));
+		return (launch_process(ft_strdup(cmd->args[0]), cmd, env));
 	while (tmp && tmp->value && ft_strncmp(tmp->value, "PATH=", 5) != 0)
 		tmp = tmp->next;
 	if (!tmp || !tmp->value)
-		return (magic_box(ft_strdup(cmd->args[0]), cmd, env));
+		return (launch_process(ft_strdup(cmd->args[0]), cmd, env));
 	bin = ft_split(tmp->value + 5, ':');
 	if (!bin)
 		return (display_err(NULL, NULL, "Failed to create bin", 1));
 	path = find_bin_path(cmd, bin);
 	if (path)
-		ret = magic_box(path, cmd, env);
+		ret = launch_process(path, cmd, env);
 	else
-		ret = magic_box(ft_strdup(cmd->args[0]), cmd, env);
+		ret = launch_process(ft_strdup(cmd->args[0]), cmd, env);
 	return (ret);
 }
