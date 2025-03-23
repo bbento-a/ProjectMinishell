@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:12:37 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 08:25:57 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/23 13:11:56 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,9 @@
 typedef struct s_minishell
 {
 	char		hld_flag; // hold flag for quotes
-	char		*shlvl;
 	int			exit_code;
-	int			last_exit_status;
-	bool		prompt_flag; // signals flag
 	bool		error_parse;
 
-	t_line		*prompt;
 	t_command	*cmds;
 	t_env		*env;
 
