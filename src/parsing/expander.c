@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:36:25 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 07:36:40 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/23 16:41:18 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,9 @@ char	*expand_var(char *str, int *i)
 		return (str);
 	}
 	if (!get_env(var_name))
-		var_value = NULL;
+		var_value = ft_strdup("");
 	else
 		var_value = ft_strdup(get_env(var_name));
-	if (!var_value)
-		var_value = ft_strdup("");
 	str = replace_var(str, var_value, *i, ft_strlen(var_name));
 	free(var_name);
 	return (str);

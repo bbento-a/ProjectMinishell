@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:39:49 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 10:34:16 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/23 13:53:36 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	create_default(t_line **prompt, char *line, int i)
 
 	bgn = i;
 	end = 0;
-	while (line[i] && !symbol_cmp("|<> '\"\t", line[i]))
+	while (line[i] && !symbol_cmp("|<> '\"\t\n", line[i]))
 	{
 		i++;
 		end++;

@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 06:05:59 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 08:04:49 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/23 13:48:13 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,14 @@ void	define_white_space(t_line *node, char *line, int bgn)
 		return ;
 	else if (node->type_q != '0')
 	{
-		if (line[bgn - 2] == ' ' || line[bgn - 2] == '\t')
+		if (line[bgn - 2] == ' ' || line[bgn - 2] == '\t'
+				|| line[bgn - 2] == '\n')
 			node->white_space = true;
 	}
 	else
 	{
-		if (line[bgn - 1] == ' ' || line[bgn - 1] == '\t')
+		if (line[bgn - 1] == ' ' || line[bgn - 1] == '\t'
+				|| line[bgn - 2] == '\t')
 			node->white_space = true;
 	}
 }

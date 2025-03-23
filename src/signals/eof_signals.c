@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:40:47 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 07:40:56 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/23 13:23:45 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_input(char *line)
 	{
 		rl_clear_history();
 		clear_env(data()->env);
-		ft_printf("exit\n");
+		ft_putstr_fd("exit\n", 1);
 		exit(0);
 	}
 	else if (ft_strlen(line) == 0)
