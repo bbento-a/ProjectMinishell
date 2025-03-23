@@ -79,6 +79,7 @@ SRC				=	\
 					$(MS_SRCS)builtins/cd.c \
 					$(MS_SRCS)builtins/echo.c \
 					$(MS_SRCS)builtins/env.c \
+					$(MS_SRCS)builtins/export_utils.c \
 					$(MS_SRCS)builtins/export.c \
 					$(MS_SRCS)builtins/pwd.c \
 					$(MS_SRCS)builtins/unset.c \
