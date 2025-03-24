@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 04:45:38 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/21 16:45:46 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/24 10:50:20 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	dup_out_fd(t_files *fd_out)
 {
 	int	fd;
 
+	fd = -1;
 	if (fd_out->type == E_REDOUT)
 		fd = open(fd_out->file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else if (fd_out->type == E_APPEND)

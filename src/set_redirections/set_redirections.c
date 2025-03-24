@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirections.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:49:10 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/15 08:23:31 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/24 10:50:04 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 int	redirection_validation(t_files *file)
 {
-	DIR	*access_file;
 	int	fd;
 
+	fd = -1;
 	if (!file)
 		return (-1);
-	access_file = opendir(file->file_name);
 	if (file->type == E_REDIN)
 		fd = open(file->file_name, O_RDONLY);
 	else if (file->type == E_REDOUT)
@@ -36,8 +35,6 @@ int	redirection_validation(t_files *file)
 					": Permission denied", 1));
 	}
 	close(fd);
-	if (access_file)
-		closedir(access_file);
 	return (0);
 }
 

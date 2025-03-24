@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mde-maga <mde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 06:05:59 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/23 13:48:13 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/24 10:54:12 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ void	define_white_space(t_line *node, char *line, int bgn)
 	else if (node->type_q != '0')
 	{
 		if (line[bgn - 2] == ' ' || line[bgn - 2] == '\t'
-				|| line[bgn - 2] == '\n')
+			|| line[bgn - 2] == '\n')
 			node->white_space = true;
 	}
 	else
 	{
 		if (line[bgn - 1] == ' ' || line[bgn - 1] == '\t'
-				|| line[bgn - 2] == '\t')
+			|| line[bgn - 2] == '\t')
 			node->white_space = true;
 	}
 }

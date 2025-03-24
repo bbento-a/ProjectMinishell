@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-maga <mtmpfb@gmail.com>                +#+  +:+       +#+        */
+/*   By: mde-maga <mde-maga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:40:32 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 07:41:03 by mde-maga         ###   ########.fr       */
+/*   Updated: 2025/03/24 10:54:23 by mde-maga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,7 @@ static int	create_cmd_node(t_command **cmds, t_line *bgn, t_line *last)
 	make_cmd_args(node->args, bgn, last, n_args);
 	node->previous = NULL;
 	node->next = NULL;
-	node->fd_in = STDIN_FILENO;
-	node->fd_out = STDOUT_FILENO;
 	node->files = make_cmd_files(bgn, last);
-	node->pid = -1;
 	add_cmds_last(cmds, node);
 	return (0);
 }
