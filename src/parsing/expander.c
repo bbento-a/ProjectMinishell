@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:36:25 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/23 16:41:18 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/24 11:53:39 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ char	*expand_var(char *str, int *i)
 	var_name = get_var_name(str, *i);
 	if (!var_name)
 	{
-		str[*i] = 17;
 		i++;
 		return (str);
 	}
