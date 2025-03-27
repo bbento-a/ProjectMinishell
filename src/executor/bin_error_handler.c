@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_error_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:15:27 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/18 14:08:26 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:39:51 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int	wait_for_child_process(int pid, char *path, char **env_array)
 	if (env_array)
 		free_array(env_array);
 	if (WIFSIGNALED(ret))
+	{
+		write(2, "\n", 1);
 		return (data()->exit_code);
+	}
 	if (WIFEXITED(ret))
 		return (WEXITSTATUS(ret));
 	return (ERROR);

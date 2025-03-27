@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_signals.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:41:50 by bbento-a          #+#    #+#             */
-/*   Updated: 2025/03/18 14:09:32 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:40:02 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	child_handler(int sig)
 {
-	write(1, "\n", 1);
 	data()->exit_code = 128 + sig;
 }
 

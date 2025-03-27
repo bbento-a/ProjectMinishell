@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <bbento-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:54:21 by mde-maga          #+#    #+#             */
-/*   Updated: 2025/03/15 04:04:55 by bbento-a         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:38:57 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ms_echo(t_command *cmd, char **args)
 		while (args[i])
 		{
 			ft_putstr_fd(args[i], fd_to);
-			if (args[i + 1] && args[i][0] != '\0')
+			if (args[i + 1])
 				ft_putchar_fd(' ', fd_to);
 			i++;
 		}
